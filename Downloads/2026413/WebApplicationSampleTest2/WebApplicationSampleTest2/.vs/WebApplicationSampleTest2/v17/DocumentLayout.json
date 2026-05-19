@@ -1,0 +1,117 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|c:\\users\\suruse vaibhav\\downloads\\2026413\\webapplicationsampletest2\\webapplicationsampletest2\\webapplicationsampletest2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|solutionrelative:webapplicationsampletest2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|c:\\users\\suruse vaibhav\\downloads\\2026413\\webapplicationsampletest2\\webapplicationsampletest2\\webapplicationsampletest2\\repository\\hospitalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|solutionrelative:webapplicationsampletest2\\repository\\hospitalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|c:\\users\\suruse vaibhav\\downloads\\2026413\\webapplicationsampletest2\\webapplicationsampletest2\\webapplicationsampletest2\\views\\ipdadmission\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|solutionrelative:webapplicationsampletest2\\views\\ipdadmission\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|c:\\users\\suruse vaibhav\\downloads\\2026413\\webapplicationsampletest2\\webapplicationsampletest2\\webapplicationsampletest2\\repository\\ipdoperationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|solutionrelative:webapplicationsampletest2\\repository\\ipdoperationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|c:\\users\\suruse vaibhav\\downloads\\2026413\\webapplicationsampletest2\\webapplicationsampletest2\\webapplicationsampletest2\\controllers\\ipddashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|solutionrelative:webapplicationsampletest2\\controllers\\ipddashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|c:\\users\\suruse vaibhav\\downloads\\2026413\\webapplicationsampletest2\\webapplicationsampletest2\\webapplicationsampletest2\\controllers\\ipdpharmacyqueuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{98AFD2B5-50FB-45D8-830D-CF59EF0CD81F}|WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj|solutionrelative:webapplicationsampletest2\\controllers\\ipdpharmacyqueuecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HospitalRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Repository\\HospitalRepository.cs",
+              "RelativeDocumentMoniker": "WebApplicationSampleTest2\\Repository\\HospitalRepository.cs",
+              "ToolTip": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Repository\\HospitalRepository.cs",
+              "RelativeToolTip": "WebApplicationSampleTest2\\Repository\\HospitalRepository.cs",
+              "ViewState": "AgIAAO0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-29T15:38:08.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\appsettings.json",
+              "RelativeDocumentMoniker": "WebApplicationSampleTest2\\appsettings.json",
+              "ToolTip": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\appsettings.json",
+              "RelativeToolTip": "WebApplicationSampleTest2\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-04-29T15:17:53.628Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Views\\IPDAdmission\\Index.cshtml",
+              "RelativeDocumentMoniker": "WebApplicationSampleTest2\\Views\\IPDAdmission\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Views\\IPDAdmission\\Index.cshtml",
+              "RelativeToolTip": "WebApplicationSampleTest2\\Views\\IPDAdmission\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-24T09:03:35.058Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IPDOperationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Repository\\IPDOperationRepository.cs",
+              "RelativeDocumentMoniker": "WebApplicationSampleTest2\\Repository\\IPDOperationRepository.cs",
+              "ToolTip": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Repository\\IPDOperationRepository.cs",
+              "RelativeToolTip": "WebApplicationSampleTest2\\Repository\\IPDOperationRepository.cs",
+              "ViewState": "AgIAAK4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T09:03:04.618Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IPDDashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Controllers\\IPDDashboardController.cs",
+              "RelativeDocumentMoniker": "WebApplicationSampleTest2\\Controllers\\IPDDashboardController.cs",
+              "ToolTip": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Controllers\\IPDDashboardController.cs",
+              "RelativeToolTip": "WebApplicationSampleTest2\\Controllers\\IPDDashboardController.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T09:01:02.119Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IPDPharmacyQueueController.cs",
+              "DocumentMoniker": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Controllers\\IPDPharmacyQueueController.cs",
+              "RelativeDocumentMoniker": "WebApplicationSampleTest2\\Controllers\\IPDPharmacyQueueController.cs",
+              "ToolTip": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\Controllers\\IPDPharmacyQueueController.cs",
+              "RelativeToolTip": "WebApplicationSampleTest2\\Controllers\\IPDPharmacyQueueController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-24T09:00:54.63Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
