@@ -1,0 +1,883 @@
+﻿@model WebApplicationSampleTest2.Models.DischargeModel
+
+<div class="container-fluid">
+
+    @* ── TOP BAR ── *@
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">
+            <i class="fas fa-file-medical-alt me-2 text-primary"></i>
+            Discharge Summary
+        </h4>
+        <div class="d-flex gap-2">
+            <a asp-controller="IPDAdmission"
+               asp-action="Details"
+               asp-route-id="@Model.IPDId"
+               class="btn btn-secondary btn-sm">
+                ← Back to IPD
+            </a>
+            <a asp-controller="Discharge"
+               asp-action="PrintSummary"
+               asp-route-ipdId="@Model.IPDId"
+               target="_blank"
+               class="btn btn-primary btn-sm">
+                <i class="fas fa-print me-1"></i> Print Summary
+            </a>
+        </div>
+    </div>
+
+    @* ── STATUS BANNER ── *@
+    <div class="alert @(Model.Status == "Discharged" ? "alert-success" : "alert-info") py-2 mb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <i class="fas fa-check-circle me-1"></i>
+                <strong>IPD No: @Model.AdmissionNumber</strong>
+                &nbsp;|&nbsp; Status:
+                <span class="badge @(Model.Status == "Discharged" ? "bg-success" : "bg-info")">@Model.Status</span>
+                &nbsp;|&nbsp; Stay: <strong>@Model.TotalDaysStayed days</strong>
+            </div>
+            <div>
+                Admitted: <strong>@Model.AdmissionDateTime.ToString("dd-MM-yyyy")</strong>
+                @if (Model.ActualDischargeDateTime.HasValue)
+                {
+                    <span>&nbsp;→&nbsp; Discharged: <strong>@Model.ActualDischargeDateTime.Value.ToString("dd-MM-yyyy")</strong></span>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+
+        @* ── PATIENT INFO ── *@
+        <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-user me-2"></i><strong>Patient Information</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="mb-2"><span class="text-muted small">Name</span><br /><strong>@Model.PatientName</strong></p>
+                            <p class="mb-2"><span class="text-muted small">Gender</span><br /><strong>@Model.Gender</strong></p>
+                            <p class="mb-0"><span class="text-muted small">Age</span><br /><strong>@Model.Age years</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-2"><span class="text-muted small">Phone</span><br /><strong>@(Model.PhoneNumber ?? "-")</strong></p>
+                            <p class="mb-0"><span class="text-muted small">Address</span><br /><strong>@(Model.Address ?? "-")</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* ── ADMISSION DETAILS ── *@
+        <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-hospital me-2"></i><strong>Admission Details</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="mb-2"><span class="text-muted small">Doctor</span><br /><strong>Dr. @Model.PrimaryDoctorName</strong></p>
+                            <p class="mb-2"><span class="text-muted small">Ward / Bed</span><br /><strong>@(Model.WardName ?? "-") / @(Model.BedNumber ?? "-")</strong></p>
+                            <p class="mb-0"><span class="text-muted small">Total Days</span><br /><span class="badge bg-primary fs-6">@Model.TotalDaysStayed days</span></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-2"><span class="text-muted small">Admitted On</span><br /><strong>@Model.AdmissionDateTime.ToString("dd-MM-yyyy HH:mm")</strong></p>
+                            <p class="mb-2"><span class="text-muted small">Discharged On</span><br /><strong>@(Model.ActualDischargeDateTime?.ToString("dd-MM-yyyy HH:mm") ?? "Not yet")</strong></p>
+                            <p class="mb-0"><span class="text-muted small">Reason for Admission</span><br /><strong>@(Model.ReasonForAdmission ?? "-")</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-3 mb-3">
+
+        @* ── DISCHARGE INFO ── *@
+        <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-sign-out-alt me-2"></i><strong>Discharge Information</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="mb-2">
+                                <span class="text-muted small">Discharge Type</span><br />
+                                <span class="badge @(Model.DischargeType == "Death" ? "bg-danger" : Model.DischargeType == "LAMA" ? "bg-warning text-dark" : Model.DischargeType == "Referral" ? "bg-info" : "bg-success") fs-6">
+                                    @(Model.DischargeType ?? "-")
+                                </span>
+                            </p>
+                            <p class="mb-0"><span class="text-muted small">Discharging Doctor</span><br /><strong>@(Model.DischargeDoctorName ?? "-")</strong></p>
+                        </div>
+                        <div class="col-6">
+                            <p class="mb-2">
+                                <span class="text-muted small">Condition at Discharge</span><br />
+                                <span class="badge @(Model.DischargeCondition == "Good" ? "bg-success" : Model.DischargeCondition == "Fair" ? "bg-warning text-dark" : Model.DischargeCondition == "Poor" ? "bg-danger" : "bg-dark") fs-6">
+                                    @(Model.DischargeCondition ?? "-")
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* ── FOLLOW UP ── *@
+        <div class="col-md-6">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-calendar-check me-2"></i><strong>Follow-up</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <span class="text-muted small">Follow-up Date</span><br />
+                        <strong>@(Model.FollowUpDate.HasValue? Model.FollowUpDate.Value.ToString("dd-MM-yyyy") : "Not scheduled")</strong>
+                    </p>
+                    <p class="mb-0">
+                        <span class="text-muted small">Follow-up Doctor</span><br />
+                        <strong>@(string.IsNullOrEmpty(Model.FollowUpDoctorName) ? "N/A" : Model.FollowUpDoctorName)</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* ── DIAGNOSIS & TREATMENT ── *@
+    <div class="row g-3 mb-3">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-stethoscope me-2"></i><strong>Final Diagnosis</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">@(string.IsNullOrEmpty(Model.FinalDiagnosis) ? "N/A" : Model.FinalDiagnosis)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-notes-medical me-2"></i><strong>Treatment Summary</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0">@(string.IsNullOrEmpty(Model.TreatmentSummary) ? "N/A" : Model.TreatmentSummary)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* ── INSTRUCTIONS ── *@
+    <div class="row g-3 mb-3">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-clipboard-list me-2"></i><strong>Discharge Instructions</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0 text-muted">@(string.IsNullOrEmpty(Model.DischargeInstructions) ? "N/A" : Model.DischargeInstructions)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-utensils me-2"></i><strong>Diet Instructions</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0 text-muted">@(string.IsNullOrEmpty(Model.DietInstructions) ? "N/A" : Model.DietInstructions)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-running me-2"></i><strong>Activity Restrictions</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0 text-muted">@(string.IsNullOrEmpty(Model.ActivityRestrictions) ? "N/A" : Model.ActivityRestrictions)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-primary text-white py-2">
+                    <i class="fas fa-sticky-note me-2"></i><strong>Special Notes</strong>
+                </div>
+                <div class="card-body">
+                    <p class="mb-0 text-muted">@(string.IsNullOrEmpty(Model.SpecialNotes) ? "N/A" : Model.SpecialNotes)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* ── DISCHARGE MEDICINES ── *@
+    @if (Model.DischargeMedicines != null && Model.DischargeMedicines.Any())
+    {
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-primary text-white py-2">
+                <i class="fas fa-pills me-2"></i><strong>Discharge Medicines</strong>
+            </div>
+            <div class="card-body p-2">
+                <table class="table table-bordered table-sm mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Medicine</th>
+                            <th>Dosage</th>
+                            <th class="text-center">M</th>
+                            <th class="text-center">A</th>
+                            <th class="text-center">E</th>
+                            <th>Days</th>
+                            <th>Route</th>
+                            <th>Instructions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int mi = 1;
+                        }
+                        @foreach (var med in Model.DischargeMedicines)
+                        {
+                            <tr>
+                                <td>@mi</td>
+                                <td><strong>@med.MedicineName</strong></td>
+                                <td>@(med.Dosage ?? "-")</td>
+                                <td class="text-center">@(med.Morning ? "✔" : "-")</td>
+                                <td class="text-center">@(med.Afternoon ? "✔" : "-")</td>
+                                <td class="text-center">@(med.Evening ? "✔" : "-")</td>
+                                <td>@(med.Days.HasValue? med.Days + " days" : "-")</td>
+                                <td>@(med.Route ?? "-")</td>
+                                <td>@(med.Instructions ?? "-")</td>
+                            </tr>
+                            mi++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    @* ── DAILY VITALS ── *@
+    @{
+        var vitals = ViewBag.Vitals as List<WebApplicationSampleTest2.Models.IPDNurseVitals>
+        ?? new List<WebApplicationSampleTest2.Models.IPDNurseVitals>();
+    }
+    @if (vitals.Any())
+    {
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-primary text-white py-2">
+                <i class="fas fa-heartbeat me-2"></i>
+                <strong>Daily Vitals</strong>
+                <small class="ms-2 fw-normal opacity-75">(@vitals.Count records)</small>
+            </div>
+            <div class="card-body p-2">
+                <table class="table table-bordered table-sm mb-0">
+                    <thead class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Date & Time</th>
+                            <th>Temp</th>
+                            <th>Pulse</th>
+                            <th>BP</th>
+                            <th>Resp</th>
+                            <th>SpO₂</th>
+                            <th>Notes</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int vi = 1;
+                        }
+                        @foreach (var v in vitals)
+                        {
+                            <tr class="@(v.IsAbnormal ? "table" : "")">
+                                <td>@vi</td>
+                                <td>@v.RecordedDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@(v.Temperature.HasValue? v.Temperature + "°" : "-")</td>
+                                <td>@(v.Pulse.HasValue? v.Pulse.ToString() : "-")</td>
+                                <td>@(v.Systolic.HasValue && v.Diastolic.HasValue ? $"{v.Systolic}/{v.Diastolic}" : "-")</td>
+                                <td>@(v.RespirationRate.HasValue? v.RespirationRate.ToString() : "-")</td>
+                                <td>@(v.OxygenSaturation.HasValue? v.OxygenSaturation + "%" : "-")</td>
+                                <td>@(string.IsNullOrEmpty(v.Notes) ? "-" : v.Notes)</td>
+                                <td>
+                                    @if (v.IsAbnormal)
+                                    {
+                                        <span class="badge bg-warning text-dark">⚠ Abnormal</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Normal</span>
+                                    }
+                                </td>
+                            </tr>
+                            vi++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+
+    @* ── DOCTOR ROUNDS ── *@
+    @{
+        var rounds = ViewBag.Rounds as List<WebApplicationSampleTest2.Models.IPDRoundPrintVM>
+        ?? new List<WebApplicationSampleTest2.Models.IPDRoundPrintVM>();
+    }
+    @if (rounds.Any())
+    {
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-primary text-white py-2">
+                <i class="fas fa-user-md me-2"></i>
+                <strong>Doctor Rounds Summary</strong>
+                <small class="ms-2 fw-normal opacity-75">(@rounds.Count rounds)</small>
+            </div>
+            <div class="card-body p-2">
+                @{
+                    int roundNo = 1;
+                }
+                @foreach (var round in rounds)
+                {
+                    <div class="card border mb-2">
+                        <div class="card-header d-flex justify-content-between py-2"
+                             style="background:#1f4e79; color:white;">
+                            <span>
+                                <strong>Round @roundNo</strong> —
+                                @round.RoundType | @round.RoundDateTime.ToString("dd-MM-yyyy HH:mm")
+                            </span>
+                            <span>Dr. @round.DoctorName (@round.Specialization)</span>
+                        </div>
+                        <div class="card-body py-2">
+                            @if (!string.IsNullOrEmpty(round.PatientCondition) || !string.IsNullOrEmpty(round.Diagnosis))
+                            {
+                                <p class="mb-2">
+                                    @if (!string.IsNullOrEmpty(round.PatientCondition))
+                                    {
+                                        <span><strong>Condition:</strong> @round.PatientCondition</span>
+                                        <span class="mx-2">|</span>
+                                    }
+                                    @if (!string.IsNullOrEmpty(round.Diagnosis))
+                                    {
+                                        <span><strong>Diagnosis:</strong> @round.Diagnosis</span>
+                                    }
+                                </p>
+                            }
+                            @if (round.Symptoms != null && round.Symptoms.Any())
+                            {
+                                <p class="mb-2">
+                                    <strong>Symptoms:</strong>
+                                    @string.Join(", ", round.Symptoms.Select(s =>
+                                    string.IsNullOrEmpty(s.SubName) ? s.SymptomName : s.SymptomName + " (" + s.SubName + ")"))
+                    </p>
+                                        }
+                            @if (round.Medicines != null && round.Medicines.Any())
+                            {
+                                <h6 class="text-primary mt-2">Medicines</h6>
+                                <table class="table table-bordered table-sm">
+                                    <thead class="table-light">
+                                        <tr><th>#</th><th>Medicine</th><th>Type</th><th>Dosage</th><th>M</th><th>A</th><th>E</th><th>Days</th><th>Route</th><th>Instructions</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int rm = 1;
+                                        }
+                                        @foreach (var med in round.Medicines)
+                                        {
+                                            <tr>
+                                                <td>@rm</td>
+                                                <td><strong>@med.MedicineName</strong></td>
+                                                <td>@med.MedicineType</td>
+                                                <td>@(med.Dosage ?? "-")</td>
+                                                <td>@(med.Morning ? "✔" : "–")</td>
+                                                <td>@(med.Afternoon ? "✔" : "–")</td>
+                                                <td>@(med.Evening ? "✔" : "–")</td>
+                                                <td>@(med.Days.HasValue? med.Days + "d" : "-")</td>
+                                                <td>@(med.Route ?? "-")</td>
+                                                <td>@(med.MedicineInstructions ?? "-")</td>
+                                            </tr>
+                                            rm++;
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            @if (round.Investigations != null && round.Investigations.Any())
+                            {
+                                <h6 class="text-primary mt-2">Investigations</h6>
+                                <table class="table table-bordered table-sm">
+                                    <thead class="table-light">
+                                        <tr><th>#</th><th>Type</th><th>Test Name</th><th>Priority</th><th>Status</th><th>Instructions</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int ri = 1;
+                                        }
+                                        @foreach (var inv in round.Investigations)
+                                        {
+                                            <tr>
+                                                <td>@ri</td>
+                                                <td>@inv.InvestigationType</td>
+                                                <td><strong>@inv.TestName</strong></td>
+                                                <td>
+                                                    <span class="badge @(inv.Priority == "Emergency" ? "bg-danger" : inv.Priority == "Urgent" ? "bg-warning" : "bg-success")">
+                                                        @inv.Priority
+                                                    </span>
+                                                </td>
+                                                <td>@inv.Status</td>
+                                                <td>@(inv.InvInstructions ?? "-")</td>
+                                            </tr>
+                                            ri++;
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            @if (!string.IsNullOrEmpty(round.Instructions) || !string.IsNullOrEmpty(round.Notes))
+                            {
+                                <p class="mt-2 mb-0 text-muted small">
+                                    @if (!string.IsNullOrEmpty(round.Instructions))
+                                    {
+                                        <span><strong>Instructions:</strong> @round.Instructions</span>
+                                    }
+                                    @if (!string.IsNullOrEmpty(round.Notes))
+                                    {
+                                        <span class="ms-3"><strong>Notes:</strong> @round.Notes</span>
+                                    }
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    roundNo++;
+                }
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    <script>
+        @if (TempData["Success"] != null)
+        {
+                <text>toastr.success("@TempData["Success"]");</text>
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model WebApplicationSampleTest2.Models.DischargeModel
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between mb-3">
+                <h4>Discharge Summary</h4>
+                <div>
+                    <a asp-controller="IPDAdmission"
+                       asp-action="Index"
+                       class="btn btn-secondary btn-sm me-2">
+                        Back to IPD List
+                    </a>
+                    <a asp-controller="Discharge"
+                       asp-action="PrintSummary"
+                       asp-route-ipdId="@Model.IPDId"
+                       target="_blank"
+                       class="btn btn-primary btn-sm">
+                        <i class="fas fa-print me-1"></i> Print Summary
+                    </a>
+                </div>
+            </div>
+            <hr />
+
+            @* PATIENT + ADMISSION INFO 
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="text-primary">Patient Information</h5>
+                    <table class="table table-sm table-borderless">
+                        <tr><td><strong>Name:</strong></td><td>@Model.PatientName</td></tr>
+                        <tr><td><strong>Gender:</strong></td><td>@Model.Gender</td></tr>
+                        <tr><td><strong>Phone:</strong></td><td>@Model.PhoneNumber</td></tr>
+                        <tr><td><strong>Address:</strong></td><td>@Model.Address</td></tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-primary">Admission Information</h5>
+                    <table class="table table-sm table-borderless">
+                        <tr><td><strong>IPD No:</strong></td><td>@Model.AdmissionNumber</td></tr>
+                        <tr><td><strong>Admitted On:</strong></td><td>@Model.AdmissionDateTime.ToString("dd-MM-yyyy HH:mm")</td></tr>
+                        <tr><td><strong>Discharged On:</strong></td><td>@Model.ActualDischargeDateTime?.ToString("dd-MM-yyyy HH:mm")</td></tr>
+                        <tr>
+                            <td><strong>Total Stay:</strong></td>
+                            <td><span class="badge bg-info">@Model.TotalDaysStayed days</span></td>
+                        </tr>
+                        <tr><td><strong>Ward / Bed:</strong></td><td>@Model.WardName / @Model.BedNumber</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            @* DISCHARGE INFO *
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="text-primary">Discharge Information</h5>
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <td><strong>Discharge Type:</strong></td>
+                            <td>
+                                <span class="badge @(Model.DischargeType == "Death" ? "bg-danger" :
+                                                                          Model.DischargeType == "LAMA" ? "bg-warning" :
+                                                                          Model.DischargeType == "Referral" ? "bg-info" : "bg-success")">
+                                    @Model.DischargeType
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Condition:</strong></td>
+                            <td>
+                                <span class="badge @(Model.DischargeCondition == "Good" ? "bg-success" :
+                                                                          Model.DischargeCondition == "Fair" ? "bg-warning" :
+                                                                          Model.DischargeCondition == "Poor" ? "bg-danger" : "bg-dark")">
+                                    @Model.DischargeCondition
+                                </span>
+                            </td>
+                        </tr>
+                        <tr><td><strong>Discharge Doctor:</strong></td><td>@Model.DischargeDoctorName</td></tr>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-primary">Follow-up</h5>
+                    <table class="table table-sm table-borderless">
+                        <tr>
+                            <td><strong>Follow-up Date:</strong></td>
+                            <td>@(Model.FollowUpDate.HasValue? Model.FollowUpDate.Value.ToString("dd-MM-yyyy") : "Not scheduled")</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Follow-up Doctor:</strong></td>
+                            <td>@(string.IsNullOrEmpty(Model.FollowUpDoctorName) ? "N/A" : Model.FollowUpDoctorName)</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            @* MEDICAL SUMMARY *
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="text-primary">Final Diagnosis</h5>
+                    <p class="text-muted">@(string.IsNullOrEmpty(Model.FinalDiagnosis) ? "N/A" : Model.FinalDiagnosis)</p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-primary">Treatment Summary</h5>
+                    <p class="text-muted">@(string.IsNullOrEmpty(Model.TreatmentSummary) ? "N/A" : Model.TreatmentSummary)</p>
+                </div>
+            </div>
+
+            @* DISCHARGE MEDICINES *
+            @if (Model.DischargeMedicines != null && Model.DischargeMedicines.Any())
+            {
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h5 class="text-primary">Discharge Medicines</h5>
+                        <table class="table table-bordered table-sm">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Medicine</th>
+                                    <th>Dosage</th>
+                                    <th>Morning</th>
+                                    <th>Afternoon</th>
+                                    <th>Evening</th>
+                                    <th>Days</th>
+                                    <th>Route</th>
+                                    <th>Instructions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int mi = 1;
+                                }
+                                @foreach (var med in Model.DischargeMedicines)
+                                {
+                                    <tr>
+                                        <td>@mi</td>
+                                        <td><strong>@med.MedicineName</strong></td>
+                                        <td>@(med.Dosage ?? "-")</td>
+                                        <td>@(med.Morning ? "✔" : "-")</td>
+                                        <td>@(med.Afternoon ? "✔" : "-")</td>
+                                        <td>@(med.Evening ? "✔" : "-")</td>
+                                        <td>@(med.Days.HasValue? med.Days + " days" : "-")</td>
+                                        <td>@(med.Route ?? "-")</td>
+                                        <td>@(med.Instructions ?? "-")</td>
+                                    </tr>
+                                    mi++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+
+            @* INSTRUCTIONS *
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5 class="text-primary">Discharge Instructions</h5>
+                    <p class="text-muted">@(string.IsNullOrEmpty(Model.DischargeInstructions) ? "N/A" : Model.DischargeInstructions)</p>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="text-primary">Diet Instructions</h5>
+                    <p class="text-muted">@(string.IsNullOrEmpty(Model.DietInstructions) ? "N/A" : Model.DietInstructions)</p>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <h5 class="text-primary">Activity Restrictions</h5>
+                    <p class="text-muted">@(string.IsNullOrEmpty(Model.ActivityRestrictions) ? "N/A" : Model.ActivityRestrictions)</p>
+                </div>
+                <div class="col-md-6 mt-3">
+                    <h5 class="text-primary">Special Notes</h5>
+                    <p class="text-muted">@(string.IsNullOrEmpty(Model.SpecialNotes) ? "N/A" : Model.SpecialNotes)</p>
+                </div>
+            </div>
+
+            @* ===== DAILY VITALS ===== *
+            @{
+                var vitals = ViewBag.Vitals as List<WebApplicationSampleTest2.Models.IPDNurseVitals>
+                ?? new List<WebApplicationSampleTest2.Models.IPDNurseVitals>();
+            }
+            @if (vitals.Any())
+            {
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h5 class="text-primary">
+                            Daily Vitals
+                            <small class="text-muted fs-6 fw-normal">(@vitals.Count records during stay)</small>
+                        </h5>
+                        <table class="table table-bordered table-sm">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date &amp; Time</th>
+                                    <th>Temp (°C)</th>
+                                    <th>Pulse (bpm)</th>
+                                    <th>BP (mmHg)</th>
+                                    <th>Resp Rate</th>
+                                    <th>SpO₂ (%)</th>
+                                    <th>Notes</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int vi = 1;
+                                }
+                                @foreach (var v in vitals)
+                                {
+                                    <tr class="@(v.IsAbnormal ? "table-warning" : "")">
+                                        <td>@vi</td>
+                                        <td>@v.RecordedDateTime.ToString("dd-MM-yyyy HH:mm")</td>
+                                        <td>@(v.Temperature.HasValue? v.Temperature + "°" : "-")</td>
+                                        <td>@(v.Pulse.HasValue? v.Pulse.ToString() : "-")</td>
+                                        <td>
+                                            @if (v.Systolic.HasValue && v.Diastolic.HasValue)
+                                            {
+                                                @($"{v.Systolic}/{v.Diastolic}")
+                                            }
+                                            else
+                                            {
+
+                                                @("-")
+                                            }
+                                        </td>
+                                        <td>@(v.RespirationRate.HasValue? v.RespirationRate.ToString() : "-")</td>
+                                        <td>@(v.OxygenSaturation.HasValue? v.OxygenSaturation + "%" : "-")</td>
+                                        <td>@(string.IsNullOrEmpty(v.Notes) ? "-" : v.Notes)</td>
+                                        <td>
+                                            @if (v.IsAbnormal)
+                                            {
+                                                <span class="badge bg-warning text-dark">⚠ Abnormal</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-success">Normal</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                    vi++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+
+            @* DOCTOR ROUNDS *
+            @{
+                var rounds = ViewBag.Rounds as List<WebApplicationSampleTest2.Models.IPDRoundPrintVM>
+                ?? new List<WebApplicationSampleTest2.Models.IPDRoundPrintVM>();
+            }
+            @if (rounds.Any())
+            {
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h5 class="text-primary">
+                            Doctor Rounds Summary
+                            <small class="text-muted fs-6 fw-normal">(@rounds.Count rounds during stay)</small>
+                        </h5>
+                        @{
+                            int roundNo = 1;
+                        }
+                        @foreach (var round in rounds)
+                        {
+                            <div class="card border mb-3">
+                                <div class="card-header d-flex justify-content-between"
+                                     style="background:#1f4e79; color:white;">
+                                    <span>
+                                        <strong>Round @roundNo</strong> —
+                                        @round.RoundType | @round.RoundDateTime.ToString("dd-MM-yyyy HH:mm")
+                                    </span>
+                                    <span>Dr. @round.DoctorName (@round.Specialization)</span>
+                                </div>
+                                <div class="card-body">
+                                    @if (!string.IsNullOrEmpty(round.PatientCondition) || !string.IsNullOrEmpty(round.Diagnosis))
+                                    {
+                                        <p class="mb-2">
+                                            @if (!string.IsNullOrEmpty(round.PatientCondition))
+                                            {
+                                                <span><strong>Condition:</strong> @round.PatientCondition</span>
+                                                <span class="mx-2">|</span>
+                                            }
+                                            @if (!string.IsNullOrEmpty(round.Diagnosis))
+                                            {
+                                                <span><strong>Diagnosis:</strong> @round.Diagnosis</span>
+                                            }
+                                        </p>
+                                    }
+                                    @if (round.Symptoms != null && round.Symptoms.Any())
+                                    {
+                                        <p class="mb-2">
+                                            <strong>Symptoms:</strong>
+                                            @string.Join(", ", round.Symptoms.Select(s =>
+                                            string.IsNullOrEmpty(s.SubName) ? s.SymptomName
+                                            : s.SymptomName + " (" + s.SubName + ")"))
+                            </p>
+                                                        }
+                                    @if (round.Medicines != null && round.Medicines.Any())
+                                    {
+                                        <h6 class="text-primary mt-2">Medicines</h6>
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Medicine</th>
+                                                    <th>Type</th>
+                                                    <th>Dosage</th>
+                                                    <th>M</th>
+                                                    <th>A</th>
+                                                    <th>E</th>
+                                                    <th>Days</th>
+                                                    <th>Route</th>
+                                                    <th>Instructions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int rm = 1;
+                                                }
+                                                @foreach (var med in round.Medicines)
+                                                {
+                                                    <tr>
+                                                        <td>@rm</td>
+                                                        <td><strong>@med.MedicineName</strong></td>
+                                                        <td>@med.MedicineType</td>
+                                                        <td>@(med.Dosage ?? "-")</td>
+                                                        <td>@(med.Morning ? "✔" : "–")</td>
+                                                        <td>@(med.Afternoon ? "✔" : "–")</td>
+                                                        <td>@(med.Evening ? "✔" : "–")</td>
+                                                        <td>@(med.Days.HasValue? med.Days + "d" : "-")</td>
+                                                        <td>@(med.Route ?? "-")</td>
+                                                        <td>@(med.MedicineInstructions ?? "-")</td>
+                                                    </tr>
+                                                    rm++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    @if (round.Investigations != null && round.Investigations.Any())
+                                    {
+                                        <h6 class="text-primary mt-2">Investigations</h6>
+                                        <table class="table table-bordered table-sm">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Type</th>
+                                                    <th>Test Name</th>
+                                                    <th>Priority</th>
+                                                    <th>Status</th>
+                                                    <th>Instructions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{
+                                                    int ri = 1;
+                                                }
+                                                @foreach (var inv in round.Investigations)
+                                                {
+                                                    <tr>
+                                                        <td>@ri</td>
+                                                        <td>@inv.InvestigationType</td>
+                                                        <td><strong>@inv.TestName</strong></td>
+                                                        <td>
+                                                            <span class="badge @(inv.Priority == "Emergency" ? "bg-danger" : inv.Priority == "Urgent" ? "bg-warning" : "bg-success")">
+                                                                @inv.Priority
+                                                            </span>
+                                                        </td>
+                                                        <td>@inv.Status</td>
+                                                        <td>@(inv.InvInstructions ?? "-")</td>
+                                                    </tr>
+                                                    ri++;
+                                                }
+                                            </tbody>
+                                        </table>
+                                    }
+                                    @if (!string.IsNullOrEmpty(round.Instructions) || !string.IsNullOrEmpty(round.Notes))
+                                    {
+                                        <p class="mt-2 mb-0 text-muted" style="font-size:13px;">
+                                            @if (!string.IsNullOrEmpty(round.Instructions))
+                                            {
+                                                <span><strong>Instructions:</strong> @round.Instructions</span>
+                                            }
+                                            @if (!string.IsNullOrEmpty(round.Notes))
+                                            {
+                                                <span class="ms-3"><strong>Notes:</strong> @round.Notes</span>
+                                            }
+                                        </p>
+                                    }
+                                </div>
+                            </div>
+                            roundNo++;
+                        }
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        @if (TempData["Success"] != null)
+        {
+                <text>toastr.success("@TempData["Success"]");</text>
+        }
+    </script>
+} *@

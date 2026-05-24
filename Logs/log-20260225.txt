@@ -1,0 +1,276 @@
+2026-02-25 08:09:26.992 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-9-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-25 08:09:27.151 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-9-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 182
+2026-02-25 08:10:03.279 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-9-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-25 08:10:03.311 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-9-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 182
+2026-02-25 18:47:31.949 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'WebApplicationSampleTest2.Repository.IReferenceDoctor' while attempting to activate 'WebApplicationSampleTest2.Controllers.ReferenceDoctorController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean hasDefaultValue, Object key)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-25 18:53:42.497 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 18:53:42.857 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 18:53:45.060 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 18:53:45.150 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 18:53:45.754 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 18:53:45.852 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 18:53:45.938 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 18:53:46.009 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 18:53:46.122 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 18:53:46.210 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 18:53:46.311 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 18:53:46.371 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 19:36:19.886 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 19:36:19.967 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 19:36:20.064 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 19:36:20.130 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 20:10:51.070 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 20:10:51.405 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 20:10:52.350 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 20:10:52.443 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134
+2026-02-25 20:10:53.910 +05:30 [ERR] Error in GetById ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+2026-02-25 20:10:53.987 +05:30 [ERR] Error in Edit ReferenceDoctor
+System.ArgumentException: Parameter 'p_ParentHospitalId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.ReferenceDoctorRepository.GetById(Int32 referenceDoctorId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\ReferenceDoctorRepository.cs:line 190
+   at WebApplicationSampleTest2.Controllers.ReferenceDoctorController.Edit(Int32 id) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\ReferenceDoctorController.cs:line 134

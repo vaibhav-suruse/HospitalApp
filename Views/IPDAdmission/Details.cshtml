@@ -1,0 +1,1652 @@
+﻿@model WebApplicationSampleTest2.Models.IPDDetailsViewModel
+
+<div class="d-flex flex-wrap gap-2 mb-3 justify-content-end">
+    <a asp-controller="IPDBilling"
+       asp-action="GenerateBill"
+       asp-route-ipdId="@Model.Admission.IPDId"
+       class="btn btn-success">
+        <i class="fas fa-file-invoice-dollar me-1"></i> Generate Bill
+    </a>
+    <a asp-controller="IPDBilling"
+       asp-action="PatientBillingSummary"
+       asp-route-ipdId="@Model.Admission.IPDId"
+       class="btn btn-info btn-sm">
+        📊 Billing Summary
+    </a>
+    @if (Model.Admission.Status == "Admitted")
+    {
+        <a asp-controller="Discharge"
+           asp-action="Discharge"
+           asp-route-ipdId="@Model.Admission.IPDId"
+           class="btn btn-danger">
+            <i class="fas fa-sign-out-alt me-1"></i> Discharge Patient
+        </a>
+    }
+    else
+    {
+        <a asp-controller="Discharge"
+           asp-action="Summary"
+           asp-route-ipdId="@Model.Admission.IPDId"
+           class="btn btn-outline-secondary">
+            <i class="fas fa-file-alt me-1"></i> View Discharge Summary
+        </a>
+    }
+
+    @if (Model.Admission.Status == "Admitted")
+    {
+        <a asp-controller="IPDBedAllocation"
+           asp-action="ShiftBed"
+           asp-route-ipdId="@Model.Admission.IPDId"
+           class="btn btn-warning">
+            <i class="fas fa-exchange-alt me-1"></i> Shift Bed
+        </a>
+    }
+
+    <a asp-controller="DoctorRound"
+       asp-action="PrintAllPrescriptions"
+       asp-route-ipdId="@Model.Admission.IPDId"
+       target="_blank"
+       class="btn btn-outline-primary ">
+        🖨 Print All Prescriptions
+    </a>
+</div>
+
+<div class="container-fluid">
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4>Patient IPD Details</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Patient Information</h5>
+                    <p><strong>Name:</strong> @Model.Patient?.FirstName @Model.Patient?.LastName</p>
+                    <p><strong>Gender:</strong> @Model.Patient?.Gender</p>
+                    <p><strong>Phone:</strong> @Model.Patient?.PhoneNumber</p>
+                    <p><strong>Address:</strong> @Model.Patient?.Address</p>
+                </div>
+                <div class="col-md-6">
+                    <h5>Admission Information</h5>
+                    <p><strong>Admission No:</strong> @Model.Admission.AdmissionNumber</p>
+                    <p><strong>Type:</strong> @Model.Admission.AdmissionType</p>
+                    <p><strong>Status:</strong> @Model.Admission.Status</p>
+                    <p><strong>Date:</strong> @Model.Admission.AdmissionDateTime</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <h5>Vitals History</h5>
+                <div>
+                    <a asp-controller="NurseVitals"
+                       asp-action="Create"
+                       asp-route-ipdId="@Model.Admission.IPDId"
+                       class="btn btn-primary btn-sm">
+                        + Add Vitals
+                    </a>
+                    <a asp-action="Index"
+                       asp-controller="IPDAdmission"
+                       class="btn btn-secondary btn-sm">
+                        Back
+                    </a>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Temp</th>
+                        <th>Pulse</th>
+                        <th>BP</th>
+                        <th>Resp.</th>
+                        <th>O2</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.VitalsList != null && Model.VitalsList.Any())
+                    {
+                        foreach (var v in Model.VitalsList)
+                        {
+                            <tr>
+                                <td>@v.RecordedDateTime</td>
+                                <td>@v.Temperature</td>
+                                <td>@v.Pulse</td>
+                                <td>@v.Systolic / @v.Diastolic</td>
+                                <td>@v.RespirationRate</td>
+                                <td>@v.OxygenSaturation</td>
+                                <td>@v.Notes</td>
+                                <td>
+                                    <a asp-controller="NurseVitals"
+                                       asp-action="Edit"
+                                       asp-route-id="@v.VitalsId"
+                                       class="btn btn-sm btn-warning">Edit</a>
+                                    <form asp-controller="NurseVitals"
+                                          asp-action="Delete"
+                                          method="post"
+                                          style="display:inline;"
+                                          onsubmit="return confirm('Are you sure?');">
+                                        <input type="hidden" name="vitalsId" value="@v.VitalsId" />
+                                        <input type="hidden" name="ipdId" value="@Model.Admission.IPDId" />
+                                        <input type="hidden" name="hospitalId" value="@Model.Admission.ParentHospitalId" />
+                                        <input type="hidden" name="subHospitalId" value="@Model.Admission.SubHospitalId" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="8" class="text-center">No vitals recorded</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+    @* ── NURSING PROCEDURES SECTION ── *@
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <h5>
+                    <i class="fas fa-user-nurse me-2"></i>
+                    Nursing Procedures
+                </h5>
+                <a asp-controller="NurseVitals"
+                   asp-action="AddNursingProcedure"
+                   asp-route-ipdId="@Model.Admission.IPDId"
+                   class="btn btn-primary btn-sm">
+                    + Add Nursing Procedure
+                </a>
+            </div>
+
+            @if (Model.NursingCharges != null && Model.NursingCharges.Any())
+            {
+                <table class="table table-bordered table-sm">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Procedure</th>
+                            <th>Type</th>
+                            <th>Nurse</th>
+                            <th class="text-center">Qty</th>
+                            <th class="text-end">Unit (₹)</th>
+                            <th class="text-end">Total (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var n in Model.NursingCharges)
+                        {
+                            <tr>
+                                <td>@n.ChargeDate.ToString("dd-MM-yyyy")</td>
+                                <td><strong>@n.ChargeName</strong></td>
+                                <td>
+                                    <span class="badge @(n.ChargeType == "PerDay" ? "bg-info" : "bg-secondary")">
+                                        @n.ChargeType
+                                    </span>
+                                </td>
+                                <td>@(n.NurseName ?? "-")</td>
+                                <td class="text-center">@n.Quantity</td>
+                                <td class="text-end">₹@n.UnitCharge.ToString("0.00")</td>
+                                <td class="text-end"><strong>₹@n.TotalCharge.ToString("0.00")</strong></td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot class="table-light">
+                        <tr>
+                            <td colspan="6" class="text-end"><strong>Total Nursing Charges:</strong></td>
+                            <td class="text-end">
+                                <strong class="text-success">
+                                    ₹@Model.NursingCharges.Sum(n => n.TotalCharge).ToString("0.00")
+                                </strong>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+            else
+            {
+                <div class="text-center text-muted py-3">
+                    <i class="fas fa-user-nurse fa-2x mb-2 d-block"></i>
+                    No nursing procedures recorded yet.
+                    <br />
+                    <small>Add vitals to record nursing procedures.</small>
+                </div>
+            }
+        </div>
+    </div>
+
+
+
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <h5>Doctor Rounds</h5>
+                <div>
+                    <a asp-controller="DoctorRound"
+                       asp-action="Create"
+                       asp-route-ipdId="@Model.Admission.IPDId"
+                       class="btn btn-primary btn-sm">
+                        + Add Round
+                    </a>
+                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Doctor</th>
+                        <th>Round Type</th>
+                        <th>Condition</th>
+                        <th>Diagnosis</th>
+                        <th>Abnormal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.RoundsList != null && Model.RoundsList.Any())
+                    {
+                        foreach (var r in Model.RoundsList)
+                        {
+                            <tr>
+                                <td>@r.RoundDateTime</td>
+                                <td>@r.DoctorName</td>
+                                <td>
+                                    <span class="badge @(r.RoundType == "Emergency" ? "bg-danger" : r.RoundType == "ICU" ? "bg-warning" : "bg-info")">
+                                        @(string.IsNullOrEmpty(r.RoundType) ? "N/A" : r.RoundType)
+                                    </span>
+                                </td>
+                                <td>@r.PatientCondition</td>
+                                <td>@r.Diagnosis</td>
+                                <td>
+                                    @if (r.IsAbnormal)
+                                    {
+                                        <span class="badge bg-danger">Abnormal</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Normal</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-controller="DoctorRound"
+                                       asp-action="Detail"
+                                       asp-route-roundId="@r.RoundId"
+                                       asp-route-ipdId="@Model.Admission.IPDId"
+                                       class="btn btn-sm btn-info">View</a>
+                                    <form asp-controller="DoctorRound"
+                                          asp-action="Delete"
+                                          method="post"
+                                          style="display:inline;"
+                                          onsubmit="return confirm('Are you sure?');">
+                                        <input type="hidden" name="roundId" value="@r.RoundId" />
+                                        <input type="hidden" name="ipdId" value="@Model.Admission.IPDId" />
+                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="7" class="text-center">No rounds recorded</td></tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @* ── OPERATIONS SECTION ── *@
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <h5><i class="fas fa-procedures me-2"></i>Operations / OT</h5>
+                @if (Model.Admission.Status == "Admitted")
+                {
+                    <button class="btn btn-primary btn-sm" onclick="showOperationModal()">
+                        + Add Operation
+                    </button>
+                }
+            </div>
+
+            <table class="table table-bordered table-sm">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Operation</th>
+                        <th>Staff</th>
+                        <th class="text-end">OT Charge</th>
+                        <th class="text-end">Other</th>
+                        <th class="text-end">Staff Total</th>
+                        <th class="text-end">Grand Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="operationsTableBody">
+                    <tr><td colspan="8" class="text-center text-muted">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @* ── ADD OPERATION MODAL ── *@
+    <div class="modal fade" id="operationModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-procedures me-2"></i> Add Operation
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    @* Row 1: Operation + Date *@
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label">Operation <span class="text-danger">*</span></label>
+                            <select id="ddlOperation" class="form-control" onchange="loadDefaultCharges()">
+                                <option value="">-- Select Operation --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Date & Time <span class="text-danger">*</span></label>
+                            <input type="datetime-local" id="txtOpDate" class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Notes</label>
+                            <input type="text" id="txtOpNotes" class="form-control" placeholder="Any notes" />
+                        </div>
+                    </div>
+
+                    @* Row 2: Charges — OT + Other only *@
+                    <div class="card border-primary mb-3">
+                        <div class="card-header bg-primary text-white py-1">
+                            <small>
+                                <i class="fas fa-rupee-sign me-1"></i>
+                                Charge Breakdown (auto-filled from master, you can change)
+                            </small>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">OT Charge (₹)</label>
+                                    <input type="number" id="txtOTCharge" class="form-control"
+                                           value="0" min="0" step="0.01" onchange="calcOpTotal()" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Other Charge (₹)</label>
+                                    <input type="number" id="txtActualCharge" class="form-control"
+                                           value="0" min="0" step="0.01" onchange="calcOpTotal()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Row 3: OT Staff *@
+                    <div class="card border-warning mb-3">
+                        <div class="card-header bg-primary py-1">
+                            <small>
+                                <i class="fas fa-users me-1"></i>
+                                OT Staff (add surgeon, nurses, anesthetist etc)
+                            </small>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-2 mb-2">
+                                <div class="col-md-3">
+                                    <label class="form-label">Role</label>
+                                    <select id="ddlStaffType" class="form-control" onchange="toggleStaffInput()">
+                                        <option value="Surgeon">Surgeon</option>
+                                        <option value="AssistantSurgeon">Assistant Surgeon</option>
+                                        <option value="Anesthetist">Anesthetist</option>
+                                        <option value="ScrubNurse">Scrub Nurse</option>
+                                        <option value="CirculatingNurse">Circulating Nurse</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3" id="divDoctorDrop">
+                                    <label class="form-label">Doctor</label>
+                                    <select id="ddlStaffDoctor" class="form-control">
+                                        <option value="">-- Select Doctor --</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3" id="divNurseDrop" style="display:none;">
+                                    <label class="form-label">Nurse</label>
+                                    <select id="ddlStaffNurse" class="form-control">
+                                        <option value="">-- Select Nurse --</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Charge (₹)</label>
+                                    <input type="number" id="txtStaffCharge" class="form-control"
+                                           value="0" min="0" step="0.01" onchange="calcOpTotal()" />
+                                </div>
+                                <div class="col-md-1 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary w-100" onclick="addStaff()">+Add</button>
+                                </div>
+                            </div>
+
+                            <table class="table table-sm table-bordered">
+                                <thead class="table-light">
+                                    <tr><th>Role</th><th>Name</th><th class="text-end">Charge</th><th></th></tr>
+                                </thead>
+                                <tbody id="staffTableBody">
+                                    <tr id="noStaffRow">
+                                        <td colspan="4" class="text-center text-muted">No staff added yet</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger text-end mb-0">
+                        <strong>Total Operation Cost: ₹<span id="opGrandTotal">0.00</span></strong>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveOperation()">
+                        <i class="fas fa-save me-1"></i> Save Operation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        @if (TempData["Success"] != null)
+        {
+                <text>toastr.success("@TempData["Success"]");</text>
+        }
+        @if (TempData["Error"] != null)
+        {
+                <text>toastr.error("@TempData["Error"]");</text>
+        }
+
+        var ipdId        = @Model.Admission.IPDId;
+        var staffList    = [];
+        var staffCounter = 0;
+        var masterData   = { operations: [], doctors: [], nurses: [] };
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadOperations();
+            loadMasterData();
+        });
+
+        function loadMasterData() {
+            fetch('/IPDOperation/GetMasterData')
+                .then(r => r.json())
+                .then(data => {
+                    masterData = data;
+
+                    var opSel = document.getElementById('ddlOperation');
+                    data.operations.forEach(op => {
+                        opSel.innerHTML +=
+                            `<option value="${op.OperationId}"
+                                data-ot="${op.OTCharge}"
+                                data-def="${op.DefaultCharge}">
+                                ${op.OperationName}
+                                ${op.Category ? '(' + op.Category + ')' : ''}
+                            </option>`;
+                    });
+
+                    var docSel = document.getElementById('ddlStaffDoctor');
+                    data.doctors.forEach(d => {
+                        docSel.innerHTML +=
+                            `<option value="${d.Doctor_Id}">
+                                Dr. ${d.FirstName} ${d.LastName}
+                                ${d.Specialization ? ' - ' + d.Specialization : ''}
+                            </option>`;
+                    });
+
+                    var nurseSel = document.getElementById('ddlStaffNurse');
+                    data.nurses.forEach(n => {
+                        nurseSel.innerHTML +=
+                            `<option value="${n.NurseId}">${n.FirstName} ${n.LastName || ''}</option>`;
+                    });
+                })
+                .catch(err => console.error('Error loading master data:', err));
+        }
+
+        function loadOperations() {
+            fetch('/IPDOperation/GetByIPDId?ipdId=' + ipdId)
+                .then(r => r.json())
+                .then(ops => {
+                    var body = document.getElementById('operationsTableBody');
+                    if (!ops || ops.length === 0) {
+                        body.innerHTML = `<tr><td colspan="8" class="text-center text-muted">No operations recorded</td></tr>`;
+                        return;
+                    }
+                    body.innerHTML = '';
+                    ops.forEach(op => {
+                        var staffTotal = op.Staff
+                            ? op.Staff.reduce((a, s) => a + s.Charge, 0) : 0;
+                        var staffNames = op.Staff && op.Staff.length > 0
+                            ? op.Staff.map(s =>
+                                `<small class="badge bg-secondary me-1">${s.StaffType}: ${s.StaffName}</small>`
+                              ).join('') : '-';
+                        // GrandTotal = OTCharge + ActualCharge + Staff only
+                        var grandTotal = op.OTCharge + op.ActualCharge + staffTotal;
+
+                        body.innerHTML += `
+                            <tr>
+                                <td>${new Date(op.OperationDate).toLocaleDateString('en-IN')}</td>
+                                <td><strong>${op.OperationName}</strong></td>
+                                <td>${staffNames}</td>
+                                <td class="text-end">₹${op.OTCharge.toFixed(2)}</td>
+                                <td class="text-end">₹${op.ActualCharge.toFixed(2)}</td>
+                                <td class="text-end">₹${staffTotal.toFixed(2)}</td>
+                                <td class="text-end"><strong class="text-danger">₹${grandTotal.toFixed(2)}</strong></td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger"
+                                        onclick="deleteOperation(${op.IPDOperationId})">Del</button>
+                                </td>
+                            </tr>`;
+                    });
+                })
+                .catch(err => console.error('Error loading operations:', err));
+        }
+
+        function showOperationModal() {
+            staffList    = [];
+            staffCounter = 0;
+            document.getElementById('ddlOperation').value = '';
+            document.getElementById('txtOpDate').value = new Date().toISOString().slice(0, 16);
+            document.getElementById('txtOpNotes').value = '';
+            ['txtOTCharge', 'txtActualCharge', 'txtStaffCharge'].forEach(id => {
+                document.getElementById(id).value = '0';
+            });
+            document.getElementById('staffTableBody').innerHTML = `
+                <tr id="noStaffRow">
+                    <td colspan="4" class="text-center text-muted">No staff added yet</td>
+                </tr>`;
+            calcOpTotal();
+            new bootstrap.Modal(document.getElementById('operationModal')).show();
+        }
+
+        function loadDefaultCharges() {
+            var sel = document.getElementById('ddlOperation');
+            var opt = sel.options[sel.selectedIndex];
+            if (opt && opt.value) {
+                document.getElementById('txtOTCharge').value    = opt.dataset.ot  || 0;
+                document.getElementById('txtActualCharge').value = opt.dataset.def || 0;
+                calcOpTotal();
+            }
+        }
+
+        function toggleStaffInput() {
+            var type    = document.getElementById('ddlStaffType').value;
+            var isNurse = type === 'ScrubNurse' || type === 'CirculatingNurse';
+            document.getElementById('divDoctorDrop').style.display = isNurse ? 'none' : '';
+            document.getElementById('divNurseDrop').style.display  = isNurse ? ''     : 'none';
+        }
+
+        function addStaff() {
+            var type    = document.getElementById('ddlStaffType').value;
+            var isNurse = type === 'ScrubNurse' || type === 'CirculatingNurse';
+            var charge  = parseFloat(document.getElementById('txtStaffCharge').value) || 0;
+            var docSel   = document.getElementById('ddlStaffDoctor');
+            var nurseSel = document.getElementById('ddlStaffNurse');
+            var docId   = !isNurse && docSel.value   ? parseInt(docSel.value)   : null;
+            var nurseId = isNurse  && nurseSel.value ? parseInt(nurseSel.value) : null;
+            var name    = isNurse
+                ? (nurseSel.options[nurseSel.selectedIndex]?.text || '')
+                : (docSel.options[docSel.selectedIndex]?.text    || '');
+
+            if (!docId && !nurseId) { alert('Please select a doctor or nurse'); return; }
+
+            staffCounter++;
+            staffList.push({ id: staffCounter, staffType: type, doctorId: docId, nurseId: nurseId, staffName: name, charge: charge });
+
+            var noRow = document.getElementById('noStaffRow');
+            if (noRow) noRow.remove();
+
+            document.getElementById('staffTableBody').insertAdjacentHTML('beforeend', `
+                <tr id="staffRow_${staffCounter}">
+                    <td><span class="badge bg-secondary">${type}</span></td>
+                    <td>${name}</td>
+                    <td class="text-end">₹${charge.toFixed(2)}</td>
+                    <td><button type="button" class="btn btn-sm btn-danger" onclick="removeStaff(${staffCounter})">✕</button></td>
+                </tr>`);
+
+            document.getElementById('txtStaffCharge').value = '0';
+            calcOpTotal();
+        }
+
+        function removeStaff(id) {
+            staffList = staffList.filter(x => x.id !== id);
+            document.getElementById('staffRow_' + id)?.remove();
+            if (staffList.length === 0) {
+                document.getElementById('staffTableBody').innerHTML = `
+                    <tr id="noStaffRow"><td colspan="4" class="text-center text-muted">No staff added yet</td></tr>`;
+            }
+            calcOpTotal();
+        }
+
+        function calcOpTotal() {
+            var ot     = parseFloat(document.getElementById('txtOTCharge').value)     || 0;
+            var actual = parseFloat(document.getElementById('txtActualCharge').value) || 0;
+            var staffT = staffList.reduce((a, s) => a + s.charge, 0);
+            document.getElementById('opGrandTotal').innerText = (ot + actual + staffT).toFixed(2);
+        }
+
+        function saveOperation() {
+            var opSel = document.getElementById('ddlOperation');
+            if (!opSel.value) { alert('Please select an operation'); return; }
+            var opDate = document.getElementById('txtOpDate').value;
+            if (!opDate) { alert('Please enter operation date'); return; }
+
+            var surgeonStaff = staffList.find(s => s.staffType === 'Surgeon');
+            var anesStaff    = staffList.find(s => s.staffType === 'Anesthetist');
+
+            var payload = {
+                ipdId:            ipdId,
+                operationId:      parseInt(opSel.value),
+                operationDate:    opDate,
+                surgeonId:        surgeonStaff?.doctorId || null,
+                anesthesistId:    anesStaff?.doctorId    || null,
+                otCharge:         parseFloat(document.getElementById('txtOTCharge').value)     || 0,
+                surgeonCharge:    0,
+                anesthesiaCharge: 0,
+                actualCharge:     parseFloat(document.getElementById('txtActualCharge').value) || 0,
+                notes:            document.getElementById('txtOpNotes').value,
+                staff: staffList.map(s => ({
+                    staffType: s.staffType,
+                    doctorId:  s.doctorId,
+                    nurseId:   s.nurseId,
+                    staffName: s.staffName,
+                    charge:    s.charge
+                }))
+            };
+
+            fetch('/IPDOperation/SaveOperation', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    bootstrap.Modal.getInstance(document.getElementById('operationModal')).hide();
+                    loadOperations();
+                    toastr.success('Operation saved successfully!');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(err => alert('Error: ' + err));
+        }
+
+        function deleteOperation(id) {
+            if (!confirm('Delete this operation?')) return;
+            fetch('/IPDOperation/DeleteOperation', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ id: id, ipdId: ipdId })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) { loadOperations(); toastr.success('Operation deleted.'); }
+                else { alert('Error: ' + data.message); }
+            });
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model WebApplicationSampleTest2.Models.IPDDetailsViewModel
+
+<div class="d-flex flex-column align-items-end gap-2">
+    <a asp-controller="IPDBilling"
+       asp-action="GenerateBill"
+       asp-route-ipdId="@Model.Admission.IPDId"
+       class="btn btn-success">
+        <i class="fas fa-file-invoice-dollar me-1"></i> Generate Bill
+    </a>
+    <a asp-controller="IPDBilling"
+       asp-action="PatientBillingSummary"
+       asp-route-ipdId="@Model.Admission.IPDId"
+       class="btn btn-info btn-sm">
+        📊 Billing Summary
+    </a>
+    @if (Model.Admission.Status == "Admitted")
+    {
+        <a asp-controller="Discharge"
+           asp-action="Discharge"
+           asp-route-ipdId="@Model.Admission.IPDId"
+           class="btn btn-danger">
+            <i class="fas fa-sign-out-alt me-1"></i> Discharge Patient
+        </a>
+    }
+    else
+    {
+        <a asp-controller="Discharge"
+           asp-action="Summary"
+           asp-route-ipdId="@Model.Admission.IPDId"
+           class="btn btn-outline-secondary">
+            <i class="fas fa-file-alt me-1"></i> View Discharge Summary
+        </a>
+    }
+
+    @*  Discharge Patient button — only show if Admitted 
+    @if (Model.Admission.Status == "Admitted")
+    {
+        <a asp-controller="IPDBedAllocation"
+           asp-action="ShiftBed"
+           asp-route-ipdId="@Model.Admission.IPDId"
+           class="btn btn-warning">
+            <i class="fas fa-exchange-alt me-1"></i> Shift Bed
+        </a>
+    }
+
+    <a asp-controller="DoctorRound"
+       asp-action="PrintAllPrescriptions"
+       asp-route-ipdId="@Model.Admission.IPDId"
+       target="_blank"
+       class="btn  btn-outline-primary mb-3">
+        🖨 Print All Prescriptions
+    </a>
+
+</div>
+<div class="container-fluid">
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4>Patient IPD Details</h4>
+            <hr />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Patient Information</h5>
+                    <p><strong>Name:</strong> @Model.Patient?.FirstName @Model.Patient?.LastName</p>
+                    <p><strong>Gender:</strong> @Model.Patient?.Gender</p>
+                    <p><strong>Phone:</strong> @Model.Patient?.PhoneNumber</p>
+                    <p><strong>Address:</strong> @Model.Patient?.Address</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h5>Admission Information</h5>
+                    <p><strong>Admission No:</strong> @Model.Admission.AdmissionNumber</p>
+                    <p><strong>Type:</strong> @Model.Admission.AdmissionType</p>
+                    <p><strong>Status:</strong> @Model.Admission.Status</p>
+                    <p><strong>Date:</strong> @Model.Admission.AdmissionDateTime</p>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+ 
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between mb-3">
+                <h5>Vitals History</h5>
+
+                <div>
+                    <a asp-controller="NurseVitals"
+                       asp-action="Create"
+                       asp-route-ipdId="@Model.Admission.IPDId"
+                       class="btn btn-primary btn-sm">
+                        + Add Vitals
+                    </a>
+
+                    <a asp-action="Index"
+                       asp-controller="IPDAdmission"
+                       class="btn btn-secondary btn-sm">
+                        Back
+                    </a>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Temp</th>
+                        <th>Pulse</th>
+                        <th>BP</th>
+                        <th>Resp.</th>
+                        <th>O2</th>
+                        <th>Notes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.VitalsList != null && Model.VitalsList.Any())
+                    {
+                        foreach (var v in Model.VitalsList)
+                        {
+                            <tr>
+                                <td>@v.RecordedDateTime</td>
+                                <td>@v.Temperature</td>
+                                <td>@v.Pulse</td>
+                                <td>@v.Systolic / @v.Diastolic</td>
+                                <td>@v.RespirationRate</td>
+                                <td>@v.OxygenSaturation</td>
+                                <td>@v.Notes</td>
+                                <td>
+                                    <a asp-controller="NurseVitals"
+                                       asp-action="Edit"
+                                       asp-route-id="@v.VitalsId"
+                                       class="btn btn-sm btn-warning">
+                                        Edit
+                                    </a>
+
+                                    <form asp-controller="NurseVitals"
+                                          asp-action="Delete"
+                                          method="post"
+                                          style="display:inline;"
+                                          onsubmit="return confirm('Are you sure you want to delete this record?');">
+
+                                        <input type="hidden" name="vitalsId" value="@v.VitalsId" />
+                                        <input type="hidden" name="ipdId" value="@Model.Admission.IPDId" />
+                                        <input type="hidden" name="hospitalId" value="@Model.Admission.ParentHospitalId" />
+                                        <input type="hidden" name="subHospitalId" value="@Model.Admission.SubHospitalId" />
+
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="8" class="text-center">No vitals recorded</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+   
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <div class="d-flex justify-content-between mb-3">
+                <h5>Doctor Rounds</h5>
+
+                <div>
+                    <a asp-controller="DoctorRound"
+                       asp-action="Create"
+                       asp-route-ipdId="@Model.Admission.IPDId"
+                       class="btn btn-primary btn-sm">
+                        + Add Round
+                    </a>
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Doctor</th>
+                        <th>Round Type</th>
+                        <th>Condition</th>
+                        <th>Diagnosis</th>
+                        <th>Abnormal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.RoundsList != null && Model.RoundsList.Any())
+                    {
+                        foreach (var r in Model.RoundsList)
+                        {
+                            <tr>
+                                <td>@r.RoundDateTime</td>
+                                <td>@r.DoctorName</td>
+                                <td>
+                            @*         <span class="badge
+                                                @(r.RoundType == "Emergency" ? "badge-danger" :
+                                                                                    r.RoundType == "ICU" ? "badge-warning" :
+                                                                                    "badge-info")">
+                                @r.RoundType
+                            </span> *@
+
+
+
+                                    @* {{!-- Round Type --}} 
+                                    <span class="badge
+            @(r.RoundType == "Emergency" ? "bg-danger" :
+                                                r.RoundType == "ICU" ? "bg-warning" :
+                                                "bg-info")">
+                                @(string.IsNullOrEmpty(r.RoundType) ? "N/A" : r.RoundType)
+                            </span>
+
+                                   
+                        </td>
+                        <td>@r.PatientCondition</td>
+                        <td>@r.Diagnosis</td>
+                        <td>
+                            @* @if (r.IsAbnormal)
+                                    {
+                                        <span class="badge badge-danger">Abnormal</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-success">Normal</span>
+                                    } 
+
+                                    @* {{!-- Abnormal --}} 
+                            @if (r.IsAbnormal)
+                                    {
+                                        <span class="badge bg-danger">Abnormal</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-success">Normal</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-controller="DoctorRound"
+                                       asp-action="Detail"
+                                       asp-route-roundId="@r.RoundId"
+                                       asp-route-ipdId="@Model.Admission.IPDId"
+                                       class="btn btn-sm btn-info">
+                                        View
+                                    </a>
+
+                                    <form asp-controller="DoctorRound"
+                                          asp-action="Delete"
+                                          method="post"
+                                          style="display:inline;"
+                                          onsubmit="return confirm('Are you sure you want to delete this round?');">
+
+                                        <input type="hidden" name="roundId" value="@r.RoundId" />
+                                        <input type="hidden" name="ipdId" value="@Model.Admission.IPDId" />
+
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            Delete
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">No rounds recorded</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    @* ── OPERATIONS SECTION — paste after Doctor Rounds card ── 
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="d-flex justify-content-between mb-3">
+                <h5>
+                    <i class="fas fa-procedures me-2"></i>
+                    Operations / OT
+                </h5>
+                @if (Model.Admission.Status == "Admitted")
+                {
+                    <button class="btn btn-primary btn-sm"
+                            onclick="showOperationModal()">
+                        + Add Operation
+                    </button>
+                }
+            </div>
+
+            <table class="table table-bordered table-sm">
+                <thead >
+                    <tr>
+                        <th>Date</th>
+                        <th>Operation</th>
+                        <th>Surgeon</th>
+                        <th>Anesthetist</th>
+                        <th>Staff</th>
+                        <th class="text-end">OT</th>
+                        <th class="text-end">Surgeon</th>
+                        <th class="text-end">Anesthesia</th>
+                        <th class="text-end">Staff</th>
+                        <th class="text-end">Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="operationsTableBody">
+                    <tr>
+                        <td colspan="11"
+                            class="text-center text-muted">
+                            Loading...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @* ── ADD OPERATION MODAL ── 
+    <div class="modal fade" id="operationModal" tabindex="-1"
+         data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-procedures me-2"></i>
+                        Add Operation
+                    </h5>
+                    <button type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    @* Row 1: Operation + Date 
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label">
+                                Operation <span class="text-danger">*</span>
+                            </label>
+                            <select id="ddlOperation" class="form-control"
+                                    onchange="loadDefaultCharges()">
+                                <option value="">-- Select Operation --</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">
+                                Date & Time <span class="text-danger">*</span>
+                            </label>
+                            <input type="datetime-local" id="txtOpDate"
+                                   class="form-control" />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">Notes</label>
+                            <input type="text" id="txtOpNotes"
+                                   class="form-control"
+                                   placeholder="Any notes" />
+                        </div>
+                    </div>
+
+                    @* Row 2: Charges 
+                    <div class="card border-primary mb-3">
+                        <div class="card-header bg-primary text-white py-1">
+                            <small>
+                                <i class="fas fa-rupee-sign me-1"></i>
+                                Charge Breakdown
+                                (auto-filled from master, you can change)
+                            </small>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <label class="form-label">OT Charge (₹)</label>
+                                    <input type="number" id="txtOTCharge"
+                                           class="form-control"
+                                           value="0" min="0" step="0.01"
+                                           onchange="calcOpTotal()" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">
+                                        Surgeon Charge (₹)
+                                    </label>
+                                    <input type="number" id="txtSurgCharge"
+                                           class="form-control"
+                                           value="0" min="0" step="0.01"
+                                           onchange="calcOpTotal()" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">
+                                        Anesthesia Charge (₹)
+                                    </label>
+                                    <input type="number" id="txtAnesCharge"
+                                           class="form-control"
+                                           value="0" min="0" step="0.01"
+                                           onchange="calcOpTotal()" />
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">
+                                        Other Charge (₹)
+                                    </label>
+                                    <input type="number" id="txtActualCharge"
+                                           class="form-control"
+                                           value="0" min="0" step="0.01"
+                                           onchange="calcOpTotal()" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @* Row 3: OT Staff *
+                    <div class="card border-warning mb-3">
+                        <div class="card-header bg-primary py-1">
+                            <small>
+                                <i class="fas fa-users me-1"></i>
+                                OT Staff
+                                (add surgeon, nurses, anesthetist etc)
+                            </small>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-2 mb-2">
+                                <div class="col-md-3">
+                                    <label class="form-label">Role</label>
+                                    <select id="ddlStaffType"
+                                            class="form-control"
+                                            onchange="toggleStaffInput()">
+                                        <option value="Surgeon">Surgeon</option>
+                                        <option value="AssistantSurgeon">
+                                            Assistant Surgeon
+                                        </option>
+                                        <option value="Anesthetist">
+                                            Anesthetist
+                                        </option>
+                                        <option value="ScrubNurse">
+                                            Scrub Nurse
+                                        </option>
+                                        <option value="CirculatingNurse">
+                                            Circulating Nurse
+                                        </option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                @* Doctor dropdown 
+                                <div class="col-md-3" id="divDoctorDrop">
+                                    <label class="form-label">Doctor</label>
+                                    <select id="ddlStaffDoctor"
+                                            class="form-control">
+                                        <option value="">-- Select Doctor --</option>
+                                    </select>
+                                </div>
+
+                                @* Nurse dropdown 
+                                <div class="col-md-3" id="divNurseDrop"
+                                     style="display:none;">
+                                    <label class="form-label">Nurse</label>
+                                    <select id="ddlStaffNurse"
+                                            class="form-control">
+                                        <option value="">-- Select Nurse --</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="form-label">Charge (₹)</label>
+                                    <input type="number" id="txtStaffCharge"
+                                           class="form-control"
+                                           value="0" min="0" step="0.01"
+                                           onchange="calcOpTotal()" />
+                                </div>
+                                <div class="col-md-1 d-flex align-items-end">
+                                    <button type="button"
+                                            class="btn btn-primary w-100"
+                                            onclick="addStaff()">
+                                        +Add
+                                    </button>
+                                </div>
+                            </div>
+
+                            <table class="table table-sm table-bordered">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Role</th>
+                                        <th>Name</th>
+                                        <th class="text-end">Charge</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="staffTableBody">
+                                    <tr id="noStaffRow">
+                                        <td colspan="4"
+                                            class="text-center text-muted">
+                                            No staff added yet
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* Grand total 
+                    <div class="alert alert-danger text-end mb-0">
+                        <strong>
+                            Total Operation Cost:
+                            ₹<span id="opGrandTotal">0.00</span>
+                        </strong>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Cancel
+                    </button>
+                    <button type="button" class="btn btn-primary"
+                            onclick="saveOperation()">
+                        <i class="fas fa-save me-1"></i>
+                        Save Operation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        @if (TempData["Success"] != null)
+        {
+                    <text>
+                        toastr.success("@TempData["Success"]");
+                    </text>
+        }
+
+        @if (TempData["Error"] != null)
+        {
+                    <text>
+                        toastr.error("@TempData["Error"]");
+                    </text>
+        }
+
+
+                // ── OPERATION VARIABLES ──────────────────────────────────────────
+        var ipdId        = @Model.Admission.IPDId;
+        var staffList    = [];
+        var staffCounter = 0;
+        var masterData   = { operations: [], doctors: [], nurses: [] };
+
+        // ── LOAD ON PAGE READY ───────────────────────────────────────────
+        document.addEventListener('DOMContentLoaded', function () {
+            loadOperations();
+            loadMasterData();
+        });
+
+        // ── LOAD MASTER DATA FOR DROPDOWNS ──────────────────────────────
+        function loadMasterData() {
+            fetch('/IPDOperation/GetMasterData')
+                .then(r => r.json())
+                .then(data => {
+                    masterData = data;
+
+                    // Fill operations dropdown
+                    var opSel = document.getElementById('ddlOperation');
+                    data.operations.forEach(op => {
+                        opSel.innerHTML +=
+                            `<option value="${op.OperationId}"
+                                data-ot="${op.OTCharge}"
+                                data-surg="${op.SurgeonCharge}"
+                                data-anes="${op.AnesthesiaCharge}"
+                                data-def="${op.DefaultCharge}">
+                                ${op.OperationName}
+                                ${op.Category ? '(' + op.Category + ')' : ''}
+                            </option>`;
+                    });
+
+                    // Fill doctor dropdown
+                    var docSel = document.getElementById('ddlStaffDoctor');
+                    data.doctors.forEach(d => {
+                        docSel.innerHTML +=
+                            `<option value="${d.Doctor_Id}">
+                                Dr. ${d.FirstName} ${d.LastName}
+                                ${d.Specialization
+                                    ? ' - ' + d.Specialization : ''}
+                            </option>`;
+                    });
+
+                    // Fill nurse dropdown
+                    var nurseSel = document.getElementById('ddlStaffNurse');
+                    data.nurses.forEach(n => {
+                        nurseSel.innerHTML +=
+                            `<option value="${n.NurseId}">
+                                ${n.FirstName} ${n.LastName || ''}
+                            </option>`;
+                    });
+                })
+                .catch(err => console.error('Error loading master data:', err));
+        }
+
+        // ── LOAD OPERATIONS TABLE ────────────────────────────────────────
+        function loadOperations() {
+            fetch('/IPDOperation/GetByIPDId?ipdId=' + ipdId)
+                .then(r => r.json())
+                .then(ops => {
+                    var body = document.getElementById('operationsTableBody');
+
+                    if (!ops || ops.length === 0) {
+                        body.innerHTML = `
+                            <tr>
+                                <td colspan="11"
+                                    class="text-center text-muted">
+                                    No operations recorded
+                                </td>
+                            </tr>`;
+                        return;
+                    }
+
+                    body.innerHTML = '';
+                    ops.forEach(op => {
+                        var staffTotal = op.Staff
+                            ? op.Staff.reduce((a, s) => a + s.Charge, 0)
+                            : 0;
+                        var staffNames = op.Staff && op.Staff.length > 0
+                            ? op.Staff.map(s =>
+                                `<small class="badge bg-secondary me-1">
+                                    ${s.StaffType}: ${s.StaffName}
+                                </small>`).join('')
+                            : '-';
+                        var grandTotal = op.OTCharge
+                            + op.SurgeonCharge
+                            + op.AnesthesiaCharge
+                            + op.ActualCharge
+                            + staffTotal;
+
+                        body.innerHTML += `
+                            <tr>
+                                <td>
+                                    ${new Date(op.OperationDate)
+                                        .toLocaleDateString('en-IN')}
+                                </td>
+                                <td><strong>${op.OperationName}</strong></td>
+                                <td>${op.SurgeonName || '-'}</td>
+                                <td>${op.AnesthesistName || '-'}</td>
+                                <td>${staffNames}</td>
+                                <td class="text-end">
+                                    ₹${op.OTCharge.toFixed(2)}
+                                </td>
+                                <td class="text-end">
+                                    ₹${op.SurgeonCharge.toFixed(2)}
+                                </td>
+                                <td class="text-end">
+                                    ₹${op.AnesthesiaCharge.toFixed(2)}
+                                </td>
+                                <td class="text-end">
+                                    ₹${staffTotal.toFixed(2)}
+                                </td>
+                                <td class="text-end">
+                                    <strong class="text-danger">
+                                        ₹${grandTotal.toFixed(2)}
+                                    </strong>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger"
+                                        onclick="deleteOperation(
+                                            ${op.IPDOperationId})">
+                                        Del
+                                    </button>
+                                </td>
+                            </tr>`;
+                    });
+                })
+                .catch(err => console.error('Error loading operations:', err));
+        }
+
+        // ── SHOW MODAL ───────────────────────────────────────────────────
+        function showOperationModal() {
+            // Reset everything
+            staffList    = [];
+            staffCounter = 0;
+            document.getElementById('ddlOperation').value = '';
+            document.getElementById('txtOpDate').value    =
+                new Date().toISOString().slice(0, 16);
+            document.getElementById('txtOpNotes').value   = '';
+            ['txtOTCharge', 'txtSurgCharge',
+             'txtAnesCharge', 'txtActualCharge',
+             'txtStaffCharge'].forEach(id => {
+                document.getElementById(id).value = '0';
+            });
+            document.getElementById('staffTableBody').innerHTML = `
+                <tr id="noStaffRow">
+                    <td colspan="4" class="text-center text-muted">
+                        No staff added yet
+                    </td>
+                </tr>`;
+            calcOpTotal();
+            new bootstrap.Modal(
+                document.getElementById('operationModal')).show();
+        }
+
+        // ── AUTO FILL CHARGES FROM MASTER ───────────────────────────────
+        function loadDefaultCharges() {
+            var sel = document.getElementById('ddlOperation');
+            var opt = sel.options[sel.selectedIndex];
+            if (opt && opt.value) {
+                document.getElementById('txtOTCharge').value =
+                    opt.dataset.ot   || 0;
+                document.getElementById('txtSurgCharge').value =
+                    opt.dataset.surg || 0;
+                document.getElementById('txtAnesCharge').value =
+                    opt.dataset.anes || 0;
+                document.getElementById('txtActualCharge').value =
+                    opt.dataset.def  || 0;
+                calcOpTotal();
+            }
+        }
+
+        // ── TOGGLE DOCTOR / NURSE DROPDOWN ──────────────────────────────
+        function toggleStaffInput() {
+            var type    = document.getElementById('ddlStaffType').value;
+            var isNurse = type === 'ScrubNurse'
+                       || type === 'CirculatingNurse';
+            document.getElementById('divDoctorDrop').style.display =
+                isNurse ? 'none' : '';
+            document.getElementById('divNurseDrop').style.display  =
+                isNurse ? ''     : 'none';
+        }
+
+        // ── ADD STAFF ROW ────────────────────────────────────────────────
+        function addStaff() {
+            var type    = document.getElementById('ddlStaffType').value;
+            var isNurse = type === 'ScrubNurse'
+                       || type === 'CirculatingNurse';
+            var charge  = parseFloat(
+                document.getElementById('txtStaffCharge').value) || 0;
+
+            var docSel   = document.getElementById('ddlStaffDoctor');
+            var nurseSel = document.getElementById('ddlStaffNurse');
+
+            var docId   = !isNurse && docSel.value
+                ? parseInt(docSel.value) : null;
+            var nurseId = isNurse && nurseSel.value
+                ? parseInt(nurseSel.value) : null;
+
+            var name = isNurse
+                ? (nurseSel.options[nurseSel.selectedIndex]?.text || '')
+                : (docSel.options[docSel.selectedIndex]?.text    || '');
+
+            if (!docId && !nurseId) {
+                alert('Please select a doctor or nurse');
+                return;
+            }
+
+            staffCounter++;
+            staffList.push({
+                id:        staffCounter,
+                staffType: type,
+                doctorId:  docId,
+                nurseId:   nurseId,
+                staffName: name,
+                charge:    charge
+            });
+
+            var noRow = document.getElementById('noStaffRow');
+            if (noRow) noRow.remove();
+
+            document.getElementById('staffTableBody')
+                .insertAdjacentHTML('beforeend', `
+                    <tr id="staffRow_${staffCounter}">
+                        <td>
+                            <span class="badge bg-secondary">${type}</span>
+                        </td>
+                        <td>${name}</td>
+                        <td class="text-end">₹${charge.toFixed(2)}</td>
+                        <td>
+                            <button type="button"
+                                    class="btn btn-sm btn-danger"
+                                    onclick="removeStaff(${staffCounter})">
+                                ✕
+                            </button>
+                        </td>
+                    </tr>`);
+
+            document.getElementById('txtStaffCharge').value = '0';
+            calcOpTotal();
+        }
+
+        // ── REMOVE STAFF ROW ─────────────────────────────────────────────
+        function removeStaff(id) {
+            staffList = staffList.filter(x => x.id !== id);
+            document.getElementById('staffRow_' + id)?.remove();
+            if (staffList.length === 0) {
+                document.getElementById('staffTableBody').innerHTML = `
+                    <tr id="noStaffRow">
+                        <td colspan="4" class="text-center text-muted">
+                            No staff added yet
+                        </td>
+                    </tr>`;
+            }
+            calcOpTotal();
+        }
+
+        // ── CALCULATE TOTAL ──────────────────────────────────────────────
+        function calcOpTotal() {
+            var ot     = parseFloat(
+                document.getElementById('txtOTCharge').value)     || 0;
+            var surg   = parseFloat(
+                document.getElementById('txtSurgCharge').value)   || 0;
+            var anes   = parseFloat(
+                document.getElementById('txtAnesCharge').value)   || 0;
+            var actual = parseFloat(
+                document.getElementById('txtActualCharge').value) || 0;
+            var staffT = staffList.reduce((a, s) => a + s.charge, 0);
+
+            document.getElementById('opGrandTotal')
+                .innerText = (ot + surg + anes + actual + staffT).toFixed(2);
+        }
+
+        // ── SAVE OPERATION ───────────────────────────────────────────────
+        function saveOperation() {
+            var opSel = document.getElementById('ddlOperation');
+            if (!opSel.value) {
+                alert('Please select an operation'); return;
+            }
+            var opDate = document.getElementById('txtOpDate').value;
+            if (!opDate) {
+                alert('Please enter operation date'); return;
+            }
+
+            // Find surgeon + anesthetist from staff list for quick ref
+            var surgeonStaff =
+                staffList.find(s => s.staffType === 'Surgeon');
+            var anesStaff    =
+                staffList.find(s => s.staffType === 'Anesthetist');
+
+            var payload = {
+                ipdId:            ipdId,
+                operationId:      parseInt(opSel.value),
+                operationDate:    opDate,
+                surgeonId:        surgeonStaff?.doctorId   || null,
+                anesthesistId:    anesStaff?.doctorId      || null,
+                otCharge:         parseFloat(
+                    document.getElementById('txtOTCharge').value)     || 0,
+                surgeonCharge:    parseFloat(
+                    document.getElementById('txtSurgCharge').value)   || 0,
+                anesthesiaCharge: parseFloat(
+                    document.getElementById('txtAnesCharge').value)   || 0,
+                actualCharge:     parseFloat(
+                    document.getElementById('txtActualCharge').value) || 0,
+                notes:
+                    document.getElementById('txtOpNotes').value,
+                staff: staffList.map(s => ({
+                    staffType: s.staffType,
+                    doctorId:  s.doctorId,
+                    nurseId:   s.nurseId,
+                    staffName: s.staffName,
+                    charge:    s.charge
+                }))
+            };
+
+            fetch('/IPDOperation/SaveOperation', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    bootstrap.Modal.getInstance(
+                        document.getElementById('operationModal')).hide();
+                    loadOperations();
+                    toastr.success('Operation saved successfully!');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(err => alert('Error: ' + err));
+        }
+
+        // ── DELETE OPERATION ─────────────────────────────────────────────
+        function deleteOperation(id) {
+            if (!confirm('Delete this operation?')) return;
+            fetch('/IPDOperation/DeleteOperation', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ id: id, ipdId: ipdId })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    loadOperations();
+                    toastr.success('Operation deleted.');
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            });
+        }
+    </script>
+}
+ *@

@@ -1,0 +1,239 @@
+﻿@using WebApplicationSampleTest2.Models
+@model Patient
+@{
+    // ViewData["Title"] = "Create Patient";
+    // ViewData["Title"] = Model.isUpdate ? "Edit Patient" : "Create Patient";
+}
+@* <h4>@ViewData["Title"]</h4> *@
+
+<h4 class="card-title">
+    @(Model.isUpdate ? "Edit Patient" : "Edit Patient")
+</h4>
+<div class="row" onload="execute()">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4"></h4>
+
+                <form id="patientForm" class="custom-validation" novalidate asp-action="CreatePatientDetails" method="post" asp-controller="Patient">
+                    @Html.HiddenFor(model => model.Id, new { id = "Id" })
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">First Name</label>
+                                <input type="text" asp-for="@Model.FirstName" value="@Model.FirstName" class="form-control" id="FirstName" placeholder="Enter the First Name" required>
+                                 <small class="text-danger" id="errFirstName"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">Last Name</label>
+                                <input type="text" asp-for="@Model.LastName" value="@Model.LastName" class="form-control" id="LastName" placeholder="Enter the Last Name" required>
+                                <small class="text-danger" id="errLastName"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="hostType" class="form-label">Gender</label>
+                                <select asp-for="@Model.Gender" id="Gender" class="form-select" required>
+                                    <option selected disabled value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <small class="text-danger" id="errGender"></small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="PhoneNumber" class="form-label">Mobile Number</label>
+                                <input type="text" asp-for="@Model.PhoneNumber" value="@Model.PhoneNumber" class="form-control" data-parsley-pattern="/^(\+\d{1,3}[- ]?)?\d{10}$/" id="PhoneNumber" placeholder="Enter Mobile Number" required>
+                                <small class="text-danger" id="errPhoneNumber"></small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Address</label>
+                                 <textarea class="form-control" asp-for="Address" id="Address" placeholder="Enter Address" rows="3">
+                                 @Model.Address
+                               </textarea>
+                                <small class="text-danger" id="errAddress"></small>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="PhoneNumber" class="form-label">Age</label>
+                                <input type="text" asp-for="@Model.Age" value="@Model.Age" class="form-control" id="Age" placeholder="Enter Age" required>
+                                <small class="text-danger" id="errAge"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        @if (Model.isUpdate)
+                        {
+                            <button type="submit" class="btn btn-primary w-md">Update</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary w-md">Submit</button>
+                        }
+                        <a type="reset" class="btn btn-secondary waves-effect" asp-controller="Patient" asp-action="PatientList">
+                            Cancel
+                        </a>
+                    </div>
+                </form>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/assets/libs/jquery/jquery.min.js"></script>
+    
+    <script>
+        $(document).ready(function () {
+
+            let namePattern = /^[A-Za-z\s]+$/;
+
+            // ---------------- NAME REAL TIME ----------------
+            function allowTextOnly(inputId, errorId, fieldName) {
+
+                $("#" + inputId).on("input", function () {
+
+                    let value = $(this).val().replace(/[^A-Za-z\s]/g, '');
+                    $(this).val(value);
+
+                    if (value.trim() === "") {
+                        $("#" + errorId).text(fieldName + " is required");
+                    } else {
+                        $("#" + errorId).text("");
+                    }
+                });
+            }
+
+            allowTextOnly("FirstName", "errFirstName", "First Name");
+            allowTextOnly("LastName", "errLastName", "Last Name");
+
+
+            // ---------------- AGE ONLY NUMBERS ----------------
+            $("#Age").on("input", function () {
+
+                let value = $(this).val().replace(/[^0-9]/g, '');
+                $(this).val(value);
+
+                if (value === "" || value <= 0) {
+                    $("#errAge").text("Valid age is required");
+                    
+                }
+                else if (value < 0 || value > 120) {
+                     $("#errAge").text("Age must be between 0 and 120");
+                }
+                else {
+                    $("#errAge").text("");
+                }
+            });
+
+
+            // ---------------- PHONE ONLY NUMBERS ----------------
+            $("#PhoneNumber").on("input", function () {
+
+                let value = $(this).val().replace(/[^0-9]/g, '');
+                $(this).val(value);
+
+                if (value.length !== 10) {
+                    $("#errPhoneNumber").text("Mobile number must be 10 digits");
+                } else {
+                    $("#errPhoneNumber").text("");
+                }
+            });
+                    // ---------------- ADDRESS REAL TIME ----------------
+        $("#Address").on("input", function () {
+
+            let value = $(this).val();
+
+            // Allowed: letters, numbers, space, comma, dot, hyphen, slash
+            value = value.replace(/[^A-Za-z0-9\s,.\-\/]/g, '');
+            $(this).val(value);
+
+            if (value.trim() === "") {
+                $("#errAddress").text("Address is required");
+            }
+            else if (value.trim().length < 5) {
+                $("#errAddress").text("Address must be at least 5 characters");
+            }
+            else {
+                $("#errAddress").text("");
+            }
+        });
+
+            // ---------------- FORM SUBMIT ----------------
+            $("#patientForm").on("submit", function (e) {
+
+                let isValid = true;
+
+                // First Name
+                if ($("#FirstName").val().trim() === "") {
+                    $("#errFirstName").text("First Name is required");
+                    isValid = false;
+                }
+
+                // Last Name
+                if ($("#LastName").val().trim() === "") {
+                    $("#errLastName").text("Last Name is required");
+                    isValid = false;
+                }
+
+                // Gender
+                if ($("#Gender").val() === "") {
+                    $("#errGender").text("Gender is required");
+                    isValid = false;
+                }
+
+                // Age
+        let age = $("#Age").val();
+
+        if (age === "") {
+            $("#errAge").text("Age is required");
+            isValid = false;
+        }
+        else if (age < 0 || age > 120) {
+            $("#errAge").text("Age must be between 0 and 120");
+            isValid = false;
+        }
+                // Phone
+                let phone = $("#PhoneNumber").val();
+                if (phone.length !== 10) {
+                    $("#errPhoneNumber").text("Mobile number must be 10 digits");
+                    isValid = false;
+                }
+
+                        // Address
+        let address = $("#Address").val().trim();
+
+        if (address === "") {
+            $("#errAddress").text("Address is required");
+            isValid = false;
+        }
+        else if (address.length < 5) {
+            $("#errAddress").text("Address must be at least 5 characters");
+            isValid = false;
+        }
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+
+            });
+
+        });
+    </script>
+
+}

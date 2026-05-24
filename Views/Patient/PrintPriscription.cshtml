@@ -1,0 +1,413 @@
+﻿@* @model WebApplicationSampleTest2.Models.OPDAppointmentModel
+
+@{
+    ViewData["Title"] = "Print Prescription";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+
+                <form asp-action="Print" asp-controller="Patient" method="post">
+
+                    <!-- ✅ AppointmentId Hidden -->
+                    <input type="hidden" name="appointmentId" value="@Model" />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Hospital Name</label>
+                                <input type="text"
+                                       name="Hospital_Name"
+                                       value="ABC Hospital"
+                                       class="form-control"
+                                       required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Hospital Address</label>
+                                <input type="text"
+                                       name="Address"
+                                       value="Wagholi, Pune 412204"
+                                       class="form-control"
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Doctor Name</label>
+                                <input type="text"
+                                       name="DrName"
+                                       value="Dr. Ranjeet Shinde"
+                                       class="form-control"
+                                       required />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Doctor Education</label>
+                                <input type="text"
+                                       name="DrEducation"
+                                       value="MBBS MD"
+                                       class="form-control"
+                                       required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary w-md">
+                                Submit
+                            </button>
+                        </div>
+
+                        <div class="col-md-6 text-end">
+                            <a class="btn btn-secondary"
+                               asp-controller="HostList"
+                               asp-action="Index">
+                                Cancel
+                            </a>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div> *@
+@model WebApplicationSampleTest2.Models.PrescriptionVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Prescription</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            background: #fff;
+        }
+
+        .prescription-container {
+            width: 700px; /* prescription width */
+            margin: 0 auto; /* center horizontally */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .hospital-left {
+            display: flex;
+            align-items: center;
+        }
+
+            .hospital-left img {
+                height: 60px;
+                margin-right: 15px;
+            }
+
+        .hospital-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f4e79;
+        }
+
+        .doctor-right {
+            text-align: right;
+        }
+
+        hr {
+            margin: 15px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .patient-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .patient-box {
+            width: 48%;
+            background: #f5f5f5;
+            padding: 10px;
+        }
+
+        .row {
+            margin-bottom: 5px;
+        }
+
+        .medicine-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+            .medicine-table th {
+                background: #f0f0f0;
+                text-align: left;
+                padding: 8px;
+            }
+
+            .medicine-table td {
+                padding: 8px;
+                border-top: 1px solid #ddd;
+            }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-weight: bold;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 20px;
+            color: #777;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            background-color: #0d6efd; /* Blue color */
+            transition: background-color 0.3s ease;
+        }
+
+            .btn:hover {
+                background-color: #0b5ed7; /* Darker blue on hover */
+            }
+
+        .back-container {
+            width: 100%;
+            text-align: center;
+            margin-top: 15px;
+           
+        }
+
+        .back-link {
+            color: #6c757d;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+           
+        }
+
+            .back-link:hover {
+                color: #343a40;
+                letter-spacing: 1px;
+            }
+
+
+        @@media print {
+            .btn-container
+
+        {
+            display: none;
+        }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="prescription-container" id="prescriptionContent">
+            <!-- HEADER -->
+            <div class="top-header">
+                <div class="hospital-left">
+                    @if (!string.IsNullOrEmpty(Model.HospitalLogo))
+                    {
+                        <img src="@Url.Content("~/uploads/hospitals/" + Model.HospitalLogo)"
+                             alt="Hospital Logo"
+                             style="height:80px;" />
+                    }
+
+                    <div>
+                        <div class="hospital-name">@Model.HospitalName</div>
+                        <div>@Model.HospitalAddress</div>
+                        <div><strong>Email:</strong> @Model.HospitalEmail</div>
+                    </div>
+                </div>
+
+                <div class="doctor-right">
+                    <strong>DR.@Model.DoctorName</strong><br />
+                    <div>@Model.Education</div>
+                    <div>@Model.Specialization</div>
+                    <div><strong>Reg. No:</strong> @Model.HospitalRegistrationNo</div>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- PATIENT DETAILS -->
+            <div class="patient-section">
+                <div class="patient-box">
+                    <div class="row"><strong>Patient Name:</strong> @Model.PatientName</div>
+                    <div class="row"><strong>Age/Gender:</strong> @Model.Age Y / @Model.Gender</div>
+                </div>
+                <div class="patient-box">
+                    <div class="row"><strong>BP:</strong> @Model.BP mmHg</div>
+                    <div class="row"><strong>Pulse:</strong> @Model.Pulse /minute</div>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- INVESTIGATION -->
+            <div>
+                <div class="section-title">Investigation</div>
+                <div>@Model.Investigation</div>
+            </div>
+
+            <hr />
+
+            <!-- SYMPTOMS -->
+            <div>
+                <div class="section-title">Symptoms</div>
+                @if (Model.Symptoms != null && Model.Symptoms.Any())
+                {
+                    <ul>
+                        @foreach (var s in Model.Symptoms)
+                        {
+                            <li>@s.SymptomName</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <div>No symptoms recorded.</div>
+                }
+            </div>
+
+            <hr />
+
+            <!-- MEDICINES -->
+            <table class="medicine-table">
+                <thead>
+                    <tr>
+                        <th>Medicine</th>
+                        <th>Morning</th>
+                        <th>Afternoon</th>
+                        <th>Evening</th>
+                        <th>Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Medicines != null && Model.Medicines.Any())
+                    {
+                        foreach (var m in Model.Medicines)
+                        {
+                            <tr>
+                                <td>@m.MedicineName</td>
+                                <td>@(m.Morning == 1 ? "✔" : "")</td>
+                                <td>@(m.Afternoon == 1 ? "✔" : "")</td>
+                                <td>@(m.Evening == 1 ? "✔" : "")</td>
+                                <td>@m.Days</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+            <div style="margin-top:15px;">Take after food. Do not skip dose.</div>
+            <div style="margin-top:10px;"><strong>Advice:</strong> Take plenty of rest. Follow up after 7 days.</div>
+
+            <div class="signature">
+                @Model.DoctorName<br />
+                <span style="font-weight:normal;">Signature</span>
+            </div>
+
+            <div class="footer-note">
+                This is a computer generated prescription and does not require a signature.
+            </div>
+       </div>
+    </div>
+   
+
+    <!-- PRINT / DOWNLOAD BUTTONS -->
+    <div class="btn-container">
+        <button class="btn btn-primary w-md" onclick="window.print()">Print</button>
+        <button class="btn btn-primary w-md" onclick="downloadPDF()">Download PDF</button>
+    </div>
+    <div class="back-container">
+        <a asp-action="Index" asp-controller="OPDAppointment" class="back-link"> ← Back to</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+             function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const element = document.getElementById('prescriptionContent');
+
+            html2canvas(element, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+
+                const pageWidth = pdf.internal.pageSize.getWidth();
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = pageWidth;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                // First page
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                // Multi-page support
+                while (heightLeft > 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('Prescription.pdf');
+            }).catch(err => {
+                console.error("PDF generation error:", err);
+                alert("PDF generation failed. Try again!");
+            });
+        }
+    </script>
+
+</body>
+</html>
+

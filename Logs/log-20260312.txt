@@ -1,0 +1,151 @@
+2026-03-12 17:46:28.110 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=101
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+2026-03-12 17:46:29.112 +05:30 [ERR] Error in PatientBillingSummary. IPDId=101
+System.Exception: Error fetching patient billing summary.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+   --- End of inner exception stack trace ---
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 885
+   at WebApplicationSampleTest2.Controllers.IPDBillingController.PatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBillingController.cs:line 268
+2026-03-12 17:46:53.844 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=101
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+2026-03-12 17:46:55.015 +05:30 [ERR] Error in PatientBillingSummary. IPDId=101
+System.Exception: Error fetching patient billing summary.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+   --- End of inner exception stack trace ---
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 885
+   at WebApplicationSampleTest2.Controllers.IPDBillingController.PatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBillingController.cs:line 268
+2026-03-12 17:56:28.115 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=101
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+2026-03-12 17:56:31.163 +05:30 [ERR] Error in PatientBillingSummary. IPDId=101
+System.Exception: Error fetching patient billing summary.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+   --- End of inner exception stack trace ---
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 885
+   at WebApplicationSampleTest2.Controllers.IPDBillingController.PatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBillingController.cs:line 268
+2026-03-12 17:57:40.915 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=101
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+2026-03-12 17:57:42.899 +05:30 [ERR] Error in PatientBillingSummary. IPDId=101
+System.Exception: Error fetching patient billing summary.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+   --- End of inner exception stack trace ---
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 885
+   at WebApplicationSampleTest2.Controllers.IPDBillingController.PatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBillingController.cs:line 268
+2026-03-12 18:00:13.930 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=101
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+2026-03-12 18:00:14.165 +05:30 [ERR] Error in PatientBillingSummary. IPDId=101
+System.Exception: Error fetching patient billing summary.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+   --- End of inner exception stack trace ---
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 885
+   at WebApplicationSampleTest2.Controllers.IPDBillingController.PatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBillingController.cs:line 268
+2026-03-12 18:01:25.469 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=101
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+2026-03-12 18:02:39.484 +05:30 [ERR] Error in PatientBillingSummary. IPDId=101
+System.Exception: Error fetching patient billing summary.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital_management.bedallocations' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 738
+   --- End of inner exception stack trace ---
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 885
+   at WebApplicationSampleTest2.Controllers.IPDBillingController.PatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBillingController.cs:line 268
+2026-03-12 18:11:28.869 +05:30 [ERR] Error in GetPatientBillingSummary. IPDId=91
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'a.DoctorId' in 'on clause'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.IPDBillingRepository.GetPatientBillingSummary(Int32 ipdId) in C:\Users\Suruse Vaibhav\Documents\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBillingRepository.cs:line 742
+2026-03-12 19:06:38.727 +05:30 [ERR] Connection ID "18374686480476930125", Request ID "4000004e-0000-ff00-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpResponseStream.ValidateState(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.WrappingStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserScriptMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapWhenMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()

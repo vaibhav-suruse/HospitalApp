@@ -1,0 +1,9 @@
+2026-02-22 17:54:57.757 +05:30 [ERR] Error occurred in Hospital Index method
+System.DivideByZeroException: Attempted to divide by zero.
+   at WebApplicationSampleTest2.Controllers.HospitalController.About() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\HospitalController.cs:line 201
+2026-02-22 17:55:59.627 +05:30 [ERR] Error occurred in Hospital Index method
+System.DivideByZeroException: Attempted to divide by zero.
+   at WebApplicationSampleTest2.Controllers.HospitalController.About() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\HospitalController.cs:line 201
+2026-02-22 18:02:50.411 +05:30 [ERR] Test error logging from Index method
+2026-02-22 18:07:11.392 +05:30 [ERR] Test error logging from Index method
+2026-02-22 18:09:25.552 +05:30 [ERR] Test error logging from Index method

@@ -1,0 +1,155 @@
+﻿@model WebApplicationSampleTest2.Models.IPDNurseVitals
+
+<h4>Edit Nurse Vitals</h4>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" asp-for="VitalsId" />
+    <input type="hidden" asp-for="IPDId" />
+    <input type="hidden" asp-for="ParentHospitalId" />
+    <input type="hidden" asp-for="SubHospitalId" />
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <label>Date Time</label>
+            <input asp-for="RecordedDateTime" class="form-control" type="datetime-local" />
+            <span asp-validation-for="RecordedDateTime" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label>Temperature</label>
+            <input asp-for="Temperature" class="form-control" />
+            <span asp-validation-for="Temperature" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label>Pulse</label>
+            <input asp-for="Pulse" class="form-control" />
+            <span asp-validation-for="Pulse" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <label>Systolic</label>
+            <input asp-for="Systolic" class="form-control" />
+            <span asp-validation-for="Systolic" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <label>Diastolic</label>
+            <input asp-for="Diastolic" class="form-control" />
+            <span asp-validation-for="Diastolic" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <label>Respiration Rate</label>
+            <input asp-for="RespirationRate" class="form-control" />
+            <span asp-validation-for="RespirationRate" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <label>Oxygen Saturation</label>
+            <input asp-for="OxygenSaturation" class="form-control" />
+            <span asp-validation-for="OxygenSaturation" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <label>Notes</label>
+            <textarea asp-for="Notes" class="form-control"></textarea>
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mt-3">
+            <label>Nurse</label>
+            <select asp-for="NurseId"
+                    class="form-control"
+                    asp-items="ViewBag.Nurses">
+                <option value="">-- Select Nurse --</option>
+            </select>
+            <span asp-validation-for="NurseId" class="text-danger"></span>
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Update</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model WebApplicationSampleTest2.Models.IPDNurseVitals
+
+<h4>Edit Nurse Vitals</h4>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="VitalsId" />
+    <input type="hidden" asp-for="IPDId" />
+    <input type="hidden" asp-for="ParentHospitalId" />
+    <input type="hidden" asp-for="SubHospitalId" />
+
+    <!-- Keep same fields as Create -->
+
+    <div class="row">
+        <div class="col-md-4">
+            <label>Date Time</label>
+            <input asp-for="RecordedDateTime" class="form-control" type="datetime-local" />
+        </div>
+
+        <div class="col-md-4">
+            <label>Temperature</label>
+            <input asp-for="Temperature" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label>Pulse</label>
+            <input asp-for="Pulse" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mt-3">
+            <label>Systolic</label>
+            <input asp-for="Systolic" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mt-3">
+            <label>Diastolic</label>
+            <input asp-for="Diastolic" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mt-3">
+            <label>Respiration Rate</label>
+            <input asp-for="RespirationRate" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mt-3">
+            <label>Oxygen Saturation</label>
+            <input asp-for="OxygenSaturation" class="form-control" />
+        </div>
+
+        <div class="col-md-12 mt-3">
+            <label>Notes</label>
+            <textarea asp-for="Notes" class="form-control"></textarea>
+        </div>
+
+        <div class="col-md-4 mt-3">
+            <label>
+                <input asp-for="IsAbnormal" type="checkbox" />
+                Is Abnormal
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Update</button>
+</form> *@

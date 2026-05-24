@@ -1,0 +1,36 @@
+2026-04-02 01:51:28.849 +05:30 [ERR] Error while adding inventory for MedicineId: 0
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hm_db`.`batches`, CONSTRAINT `batches_ibfk_1` FOREIGN KEY (`MedicineId`) REFERENCES `store_medicines` (`MedicineId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.InventoryRepository.AddInventory(InventoryModel model) in C:\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 88
+2026-04-02 01:51:28.997 +05:30 [ERR] Error while adding inventory
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hm_db`.`batches`, CONSTRAINT `batches_ibfk_1` FOREIGN KEY (`MedicineId`) REFERENCES `store_medicines` (`MedicineId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.InventoryRepository.AddInventory(InventoryModel model) in C:\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 88
+   at WebApplicationSampleTest2.Controllers.InventoryController.Create(InventoryModel model) in C:\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 110
+2026-04-02 04:28:47.090 +05:30 [ERR] Connection ID "18302628895028936773", Request ID "40000046-0002-fe00-b63f-84710c7967bb": An unhandled exception was thrown by the application.
+System.OperationCanceledException: The operation was canceled.
+   at System.Threading.CancellationToken.ThrowOperationCanceledException()
+   at System.Threading.CancellationToken.ThrowIfCancellationRequested()
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpResponseStream.ValidateState(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpResponseStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.WrappingStream.WriteAsync(ReadOnlyMemory`1 source, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Watch.BrowserRefresh.BrowserScriptMiddleware.InvokeAsync(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Builder.Extensions.MapWhenMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContextOfT`1.ProcessRequestAsync()

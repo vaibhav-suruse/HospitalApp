@@ -1,0 +1,418 @@
+﻿@* Views/OPDBilling/GenerateBill.cshtml *@
+@model WebApplicationSampleTest2.Models.OPDBillVM
+@{
+    ViewData["Title"] = "OPD Bill";
+}
+
+<div class="container-fluid">
+
+    @* ── TOP BAR ── *@
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="mb-0">
+            <i class="fas fa-file-invoice-dollar me-2 text-primary"></i>
+            OPD Bill
+        </h4>
+        <a asp-controller="OPDAppointment" asp-action="Index"
+           class="btn btn-primary btn-sm">← Back</a>
+    </div>
+
+    @* ── PATIENT INFO BAR ── *@
+    <div class="alert alert-info py-2 mb-3">
+        <div class="row">
+            <div class="col-md-3">
+                <strong>Patient:</strong> @Model.PatientName
+            </div>
+            <div class="col-md-2">
+                <strong>Age/Sex:</strong> @Model.Age / @Model.Gender
+            </div>
+            <div class="col-md-3">
+                <strong>Doctor:</strong> Dr. @Model.DoctorName
+            </div>
+            <div class="col-md-2">
+                <strong>Date:</strong> @Model.AppointmentDate.ToString("dd-MM-yyyy")
+            </div>
+            <div class="col-md-2">
+                <strong>Status:</strong>
+                <span class="badge bg-info">@Model.AppointmentStatus</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+
+            @* ── CONSULTATION FEE ── *@
+            <div class="card border mb-3">
+                <div class="card-header bg-primary text-white d-flex justify-content-between">
+                    <span><i class="fas fa-user-md me-1"></i> Consultation Fee</span>
+                    <span id="totalConsultLbl">₹ 0.00</span>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row align-items-center">
+                        <div class="col-md-4">
+                            <label class="form-label">Dr. @Model.DoctorName</label>
+                            <small class="d-block text-muted">@Model.Specialization</small>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" id="txtConsultFee"
+                                   class="form-control"
+                                   value="0" min="0" step="0.01"
+                                   placeholder="Enter consultation fee"
+                                   onchange="recalculate()" />
+                        </div>
+                        <div class="col-md-4">
+                            <small class="text-muted">Or select from master:</small>
+                            <select id="ddlConsultMaster" class="form-control form-control-sm mt-1"
+                                    onchange="setConsultFromMaster()">
+                                <option value="">-- Select --</option>
+                                @foreach (var item in ViewBag.BillingMasterItems as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)
+                                {
+                                    <option value="@item.Value" data-amount="@item.Text.Split('₹').LastOrDefault()">
+                                        @item.Text
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @* ── MEDICINES ── *@
+            <div class="card border mb-3">
+                <div class="card-header bg-primary text-white d-flex justify-content-between">
+                    <span><i class="fas fa-pills me-1"></i> Medicines (from OPD)</span>
+                    <span id="totalMedLbl">₹ 0.00</span>
+                </div>
+                <div class="card-body p-2">
+                    @if (Model.Medicines != null && Model.Medicines.Any())
+                    {
+                        <table class="table table-sm mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Medicine</th>
+                                    <th>Type</th>
+                                    <th class="text-center">M</th>
+                                    <th class="text-center">A</th>
+                                    <th class="text-center">E</th>
+                                    <th>Days</th>
+                                    <th>Unit Price (₹)</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var m in Model.Medicines)
+                                {
+                                    <tr>
+                                        <td><strong>@m.MedicineName</strong></td>
+                                        <td>@(m.Type ?? "-")</td>
+                                        <td class="text-center">@(m.Morning ? "✔" : "-")</td>
+                                        <td class="text-center">@(m.Afternoon ? "✔" : "-")</td>
+                                        <td class="text-center">@(m.Evening ? "✔" : "-")</td>
+                                        <td>@(m.Days.HasValue? m.Days + "d" : "-")</td>
+                                        <td>
+                                            <input type="number"
+                                                   class="form-control form-control-sm med-price"
+                                                   value="0" min="0" step="0.01"
+                                                   style="width:100px;"
+                                                   onchange="recalculate()" />
+                                        </td>
+                                        <td class="med-total fw-bold">₹0.00</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="text-muted text-center py-2">No medicines in this OPD</div>
+                    }
+                </div>
+            </div>
+
+            @* ── PROCEDURE / OTHER CHARGES ── *@
+            <div class="card border mb-3">
+                <div class="card-header bg-primary d-flex justify-content-between">
+                    <span><i class="fas fa-plus-circle me-1"></i> Procedure / Other Charges</span>
+                    <span id="totalProcLbl">₹ 0.00</span>
+                </div>
+                <div class="card-body">
+                    <div class="row g-2 mb-2">
+                        <div class="col-md-4">
+                            <label class="form-label">From Master List</label>
+                            <select id="ddlProcMaster" class="form-control" onchange="onProcMasterSelect()">
+                                <option value="">-- Select Procedure --</option>
+                                @foreach (var item in ViewBag.BillingMasterItems as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">OR Custom Name</label>
+                            <input type="text" id="txtProcName" class="form-control" placeholder="e.g. Dressing" />
+                        </div>
+                        <div class="col-md-1">
+                            <label class="form-label">Qty</label>
+                            <input type="number" id="txtProcQty" class="form-control" value="1" min="1" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Amount (₹)</label>
+                            <input type="number" id="txtProcAmt" class="form-control" value="0" min="0" step="0.01" />
+                        </div>
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="button" class="btn btn-primary w-100" onclick="addProcedure()">
+                                + Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <table class="table table-sm">
+                        <thead class="table">
+                            <tr><th>#</th><th>Item</th><th>Qty</th><th>Unit</th><th>Total</th><th></th></tr>
+                        </thead>
+                        <tbody id="procBody">
+                            <tr id="noProcRow">
+                                <td colspan="6" class="text-center text-muted">No procedures added</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        @* ── RIGHT PANEL ── *@
+        <div class="col-md-4" id="billPanelContainer">
+            @await Html.PartialAsync("_OPDBillPanel", Model)
+        </div>
+    </div>
+</div>
+
+<script>
+    var appointmentId = @Model.AppointmentId;
+    var patientId     = @Model.PatientId;
+    var opdId         = @(Model.OPDId.HasValue? Model.OPDId.Value.ToString() : "null");
+    var procItems     = [];
+    var procCounter   = 0;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        recalculate();
+    });
+
+    function reloadPanel() {
+        fetch('/OPDBilling/GetBillPanel?appointmentId=' + appointmentId)
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+            document.getElementById('billPanelContainer').innerHTML = html;
+            recalculate();
+        })
+        .catch(function() { toastr.error('Failed to refresh panel.'); });
+    }
+
+    function setConsultFromMaster() {
+        var sel = document.getElementById('ddlConsultMaster');
+        var opt = sel.options[sel.selectedIndex];
+        if (opt && opt.value) {
+            var amt = parseFloat(opt.dataset.amount) || 0;
+            document.getElementById('txtConsultFee').value = amt;
+            recalculate();
+        }
+    }
+
+    function onProcMasterSelect() {
+        var sel = document.getElementById('ddlProcMaster');
+        var opt = sel.options[sel.selectedIndex];
+        if (opt && opt.value) {
+            var parts = opt.text.split('₹');
+            var amt = parts.length > 1 ? parseFloat(parts[1]) || 0 : 0;
+            document.getElementById('txtProcAmt').value = amt;
+            document.getElementById('txtProcName').value = '';
+        }
+    }
+
+    function addProcedure() {
+        var sel      = document.getElementById('ddlProcMaster');
+        var custom   = document.getElementById('txtProcName').value.trim();
+        var qty      = parseInt(document.getElementById('txtProcQty').value) || 1;
+        var amt      = parseFloat(document.getElementById('txtProcAmt').value) || 0;
+        var name     = '', masterId = null;
+
+        if (sel.value) {
+            masterId = parseInt(sel.value);
+            name = sel.options[sel.selectedIndex].text.split(' - ')[0];
+        } else if (custom) {
+            name = custom;
+        } else {
+            alert('Select from list or enter custom name');
+            return;
+        }
+        if (amt <= 0) { alert('Enter amount'); return; }
+
+        var total = qty * amt;
+        procCounter++;
+        procItems.push({ id: procCounter, masterId, name, qty, unit: amt, total });
+
+        var noRow = document.getElementById('noProcRow');
+        if (noRow) noRow.remove();
+
+        document.getElementById('procBody').insertAdjacentHTML('beforeend', `
+            <tr id="procRow_${procCounter}">
+                <td>${procCounter}</td><td>${name}</td><td>${qty}</td>
+                <td>₹${amt.toFixed(2)}</td><td>₹${total.toFixed(2)}</td>
+                <td><button type="button" class="btn btn-sm btn-danger"
+                    onclick="removeProc(${procCounter})">✕</button></td>
+            </tr>`);
+
+        sel.value = '';
+        document.getElementById('txtProcName').value = '';
+        document.getElementById('txtProcQty').value  = '1';
+        document.getElementById('txtProcAmt').value  = '0';
+        recalculate();
+    }
+
+    function removeProc(id) {
+        procItems = procItems.filter(function(x) { return x.id !== id; });
+        document.getElementById('procRow_' + id)?.remove();
+        recalculate();
+    }
+
+    function recalculate() {
+        var consult = parseFloat(document.getElementById('txtConsultFee')?.value) || 0;
+
+        var med = 0;
+        document.querySelectorAll('.med-price').forEach(function(el) {
+            var row   = el.closest('tr');
+            var price = parseFloat(el.value) || 0;
+            med += price;
+            var totEl = row.querySelector('.med-total');
+            if (totEl) totEl.innerText = '₹' + price.toFixed(2);
+        });
+
+        var proc = 0;
+        procItems.forEach(function(x) { proc += x.total; });
+
+        var subTotal = consult + med + proc;
+        var discPctEl = document.getElementById('txtDiscountPct');
+        var discPct  = discPctEl ? (parseFloat(discPctEl.value) || 0) : 0;
+        var discAmt  = subTotal * discPct / 100;
+        var total    = subTotal - discAmt;
+
+        var elMap = {
+            'totalConsultLbl': '₹ ' + consult.toFixed(2),
+            'totalMedLbl':     '₹ ' + med.toFixed(2),
+            'totalProcLbl':    '₹ ' + proc.toFixed(2),
+            'sumConsultation': '₹' + consult.toFixed(2),
+            'sumMedicines':    '₹' + med.toFixed(2),
+            'sumProcedures':   '₹' + proc.toFixed(2),
+            'sumOther':        '₹0.00',
+            'sumSubTotal':     '₹' + subTotal.toFixed(2),
+            'sumDiscount':     '-₹' + discAmt.toFixed(2),
+            'sumTotal':        '₹' + total.toFixed(2)
+        };
+        Object.keys(elMap).forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.innerText = elMap[id];
+        });
+    }
+
+    function saveBill() {
+        var consult = parseFloat(document.getElementById('txtConsultFee').value) || 0;
+
+        var med = 0;
+        document.querySelectorAll('.med-price').forEach(function(el) {
+            med += parseFloat(el.value) || 0;
+        });
+
+        var proc = 0;
+        procItems.forEach(function(x) { proc += x.total; });
+
+        var subTotal = consult + med + proc;
+        var discPctEl = document.getElementById('txtDiscountPct');
+        var discPct  = discPctEl ? (parseFloat(discPctEl.value) || 0) : 0;
+        var discAmt  = subTotal * discPct / 100;
+        var total    = subTotal - discAmt;
+
+        var items = procItems.map(function(x) {
+            return {
+                itemType:        'Procedure',
+                billingMasterId: x.masterId ? parseInt(x.masterId) : null,
+                itemName:        x.name,
+                quantity:        x.qty,
+                unitPrice:       x.unit,
+                totalPrice:      x.total
+            };
+        });
+
+        var btn = document.querySelector('button[onclick="saveBill()"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/OPDBilling/SaveBill', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                appointmentId:    appointmentId,
+                opdId:            opdId,
+                patientId:        patientId,
+                consultationFee:  consult,
+                medicineCharges:  med,
+                procedureCharges: proc,
+                otherCharges:     0,
+                subTotal:         subTotal,
+                discountPercent:  discPct,
+                discountAmount:   discAmt,
+                totalAmount:      total,
+                items:            items
+            })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                toastr.success('Bill generated successfully!');
+                reloadPanel();
+            } else {
+                toastr.error('Error: ' + data.message);
+                if (btn) btn.disabled = false;
+            }
+        })
+        .catch(function(err) {
+            toastr.error('Error: ' + err);
+            if (btn) btn.disabled = false;
+        });
+    }
+
+    function payBill(billId) {
+        var amt  = parseFloat(document.getElementById('txtPayAmount').value) || 0;
+        var mode = document.getElementById('ddlPayMode').value;
+        var ref  = document.getElementById('txtTransRef').value;
+
+        if (amt <= 0) { toastr.warning('Enter payment amount'); return; }
+
+        var btn = document.querySelector('button[onclick^="payBill"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/OPDBilling/PayBill', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                billId:         billId,
+                amount:         amt,
+                paymentMode:    mode,
+                transactionRef: ref
+            })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                toastr.success('Payment collected!');
+                reloadPanel();
+            } else {
+                toastr.error('Error: ' + data.message);
+                if (btn) btn.disabled = false;
+            }
+        })
+        .catch(function(err) {
+            toastr.error('Error: ' + err);
+            if (btn) btn.disabled = false;
+        });
+    }
+</script>

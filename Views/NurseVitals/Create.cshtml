@@ -1,0 +1,84 @@
+﻿@* Views/NurseVitals/Create.cshtml *@
+@model WebApplicationSampleTest2.Models.IPDNurseVitals
+@{
+    ViewData["Title"] = "Add Nurse Vitals";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <i class="fas fa-heartbeat me-1"></i>
+            Add Nurse Vitals
+        </div>
+        <div class="card-body">
+
+            <form asp-action="Create" method="post" id="vitalsForm">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <input type="hidden" asp-for="IPDId" />
+                <input type="hidden" asp-for="ParentHospitalId" />
+                <input type="hidden" asp-for="SubHospitalId" />
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Date & Time</label>
+                        <input asp-for="RecordedDateTime" class="form-control" type="datetime-local" />
+                        <span asp-validation-for="RecordedDateTime" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nurse</label>
+                        <select asp-for="NurseId" class="form-control" asp-items="ViewBag.Nurses">
+                            <option value="">-- Select Nurse --</option>
+                        </select>
+                        <span asp-validation-for="NurseId" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Temperature (°C)</label>
+                        <input asp-for="Temperature" class="form-control" placeholder="e.g.30" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Pulse (bpm)</label>
+                        <input asp-for="Pulse" class="form-control" placeholder="e.g. 72" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Systolic (mmHg)</label>
+                        <input asp-for="Systolic" class="form-control" placeholder="e.g. 120" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Diastolic (mmHg)</label>
+                        <input asp-for="Diastolic" class="form-control" placeholder="e.g. 80" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Respiration Rate</label>
+                        <input asp-for="RespirationRate" class="form-control" placeholder="e.g. 16" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Oxygen Saturation (%)</label>
+                        <input asp-for="OxygenSaturation" class="form-control" placeholder="e.g. 98" />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Notes</label>
+                        <textarea asp-for="Notes" class="form-control" rows="2"></textarea>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> Save Vitals
+                    </button>
+                    <a asp-controller="IPDAdmission"
+                       asp-action="Details"
+                       asp-route-id="@Model.IPDId"
+                       class="btn btn-secondary ms-2">
+                        Cancel
+                    </a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,19 @@
+2026-04-10 08:30:39.476 +05:30 [ERR] Error inserting medicine notification. Patient: 22
+System.ArgumentException: Parameter 'p_IPDId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.NotificationRepository.InsertNotification(MedicineNotificationModel model) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NotificationRepository.cs:line 46
+2026-04-10 08:33:41.384 +05:30 [ERR] Error inserting medicine notification. Patient: 22
+System.ArgumentException: Parameter 'p_IPDId' not found in the collection.
+   at MySql.Data.MySqlClient.MySqlParameterCollection.GetParameterFlexible(String parameterName, Boolean throwOnNotFound)
+   at MySql.Data.MySqlClient.StoredProcedure.GetAndFixParameter(String spName, MySqlSchemaRow param, Boolean realAsFloat, MySqlParameter returnParameter)
+   at MySql.Data.MySqlClient.StoredProcedure.CheckParameters(String spName)
+   at MySql.Data.MySqlClient.StoredProcedure.Resolve(Boolean preparing)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.NotificationRepository.InsertNotification(MedicineNotificationModel model) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NotificationRepository.cs:line 46

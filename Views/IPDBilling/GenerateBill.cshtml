@@ -1,0 +1,1467 @@
+﻿@model WebApplicationSampleTest2.Models.IPDBillVM
+@{
+    ViewData["Title"] = "Generate Bill";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+
+            @* ── TOP BAR ── *@
+            <div class="d-flex justify-content-between mb-3">
+                <h4>
+                    <i class="fas fa-file-invoice-dollar me-2"></i>
+                    IPD Bill
+                </h4>
+                <div>
+                    @if (Model.BillId.HasValue)
+                    {
+                        <a asp-action="PrintBill"
+                           asp-route-ipdId="@Model.IPDId"
+                           target="_blank"
+                           class="btn btn-primary btn-sm me-2">
+                            🖨 Print Bill
+                        </a>
+                    }
+                    <a asp-controller="IPDAdmission"
+                       asp-action="Details"
+                       asp-route-id="@Model.IPDId"
+                       class="btn btn-secondary btn-sm">
+                        ← Back
+                    </a>
+                </div>
+            </div>
+            <hr />
+
+            @* ── PATIENT INFO BAR ── *@
+            <div class="alert alert-info mb-3 py-2">
+                <div class="row">
+                    <div class="col-md-3"><strong>Patient:</strong> @Model.PatientName</div>
+                    <div class="col-md-2"><strong>Age/Sex:</strong> @Model.Age / @Model.Gender</div>
+                    <div class="col-md-3"><strong>IPD No:</strong> @Model.AdmissionNumber</div>
+                    <div class="col-md-2"><strong>Admitted:</strong> @Model.AdmissionDateTime.ToString("dd-MM-yyyy")</div>
+                    <div class="col-md-2">
+                        <strong>Days:</strong>
+                        <span class="badge bg-primary">@Model.TotalDays days</span>
+                    </div>
+                </div>
+            </div>
+
+            @* ── BILL BANNER ── *@
+            <div id="billBannerContainer">
+                @if (Model.BillId.HasValue)
+                {
+                    <div class="alert alert-success py-2 mb-3">
+                        <i class="fas fa-check-circle me-1"></i>
+                        <strong>Bill No: @Model.BillNumber</strong>
+                        &nbsp;|&nbsp; Status: <strong>@Model.PaymentStatus</strong>
+                        &nbsp;|&nbsp; Total: <strong>₹@Model.TotalAmount.ToString("0.00")</strong>
+                        &nbsp;|&nbsp; Paid: <strong>₹@Model.PaidAmount.ToString("0.00")</strong>
+                        &nbsp;|&nbsp; Due: <strong class="text-danger">₹@Model.DueAmount.ToString("0.00")</strong>
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    @* 1. BED CHARGES *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><i class="fas fa-bed me-1"></i> Bed Charges</span>
+                            <span id="totalBedLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Bed</th>
+                                        <th>Ward</th>
+                                        <th>Room</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Days</th>
+                                        <th>Rate/Day</th>
+                                        <th>Amount (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.BedCharges != null && Model.BedCharges.Any())
+                                    {
+                                        foreach (var b in Model.BedCharges)
+                                        {
+                                            <tr>
+                                                <td>@b.BedNumber</td>
+                                                <td>@b.WardName</td>
+                                                <td>@b.RoomNumber</td>
+                                                <td>@b.StartDateTime</td>
+                                                <td>@b.EndDateTime</td>
+                                                <td>@b.Days</td>
+                                                <td>₹@b.ChargesPerDay</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm bed-charge"
+                                                           value="@b.BedCharge"
+                                                           min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="8" class="text-center text-muted">No bed charges found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 2. DOCTOR VISITS *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><i class="fas fa-user-md me-1"></i> Doctor Visits</span>
+                            <span id="totalDocLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Date</th><th>Doctor</th><th>Type</th><th>Charge (₹)</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.DoctorVisits != null && Model.DoctorVisits.Any())
+                                    {
+                                        foreach (var d in Model.DoctorVisits)
+                                        {
+                                            <tr>
+                                                <td>@d.RoundDateTime</td>
+                                                <td>Dr. @d.DoctorName</td>
+                                                <td>@d.RoundType</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm doctor-charge"
+                                                           data-roundid="@d.RoundId"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="4" class="text-center text-muted">No doctor visits found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 3. MEDICINES *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><i class="fas fa-pills me-1"></i> Medicines (During Stay)</span>
+                            <span id="totalMedLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Medicine</th>
+                                        <th>Type</th>
+                                        <th>Dosage</th>
+                                        <th>Prescribed Qty</th>
+                                        <th>Actual Qty</th>
+                                        <th>Unit Price (₹)</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Medicines != null && Model.Medicines.Any())
+                                    {
+                                        foreach (var m in Model.Medicines)
+                                        {
+                                            var pQty = m.Days ?? 1;
+                                            <tr>
+                                                <td>@m.MedicineName</td>
+                                                <td>@m.Type</td>
+                                                <td>@(m.Dosage ?? "-")</td>
+                                                <td class="text-muted">@pQty</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm med-actualqty"
+                                                           value="@pQty" min="0"
+                                                           style="width:75px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm med-price"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:100px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                                <td class="med-total fw-bold">₹0.00</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="7" class="text-center text-muted">No medicines found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 4. INVESTIGATIONS *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary d-flex justify-content-between">
+                            <span><i class="fas fa-flask me-1"></i> Investigations / Lab</span>
+                            <span id="totalInvLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Type</th><th>Test</th><th>Status</th><th>Charge (₹)</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Investigations != null && Model.Investigations.Any())
+                                    {
+                                        foreach (var inv in Model.Investigations)
+                                        {
+                                            <tr>
+                                                <td>@inv.InvestigationType</td>
+                                                <td>@inv.TestName</td>
+                                                <td>@inv.Status</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm inv-charge"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="4" class="text-center text-muted">No investigations found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 5. DISCHARGE MEDICINES *@
+                    @if (Model.DischargeMedicines != null && Model.DischargeMedicines.Any())
+                    {
+                        <div class="card border mb-3">
+                            <div class="card-header bg-primary text-white d-flex justify-content-between">
+                                <span><i class="fas fa-prescription me-1"></i> Discharge Medicines</span>
+                                <span id="totalDischMedLbl">₹ 0.00</span>
+                            </div>
+                            <div class="card-body p-2">
+                                <table class="table table-sm mb-0">
+                                    <thead class="table-light">
+                                        <tr><th>Medicine</th><th>Days</th><th>Unit Price (₹)</th><th>Total</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var m in Model.DischargeMedicines)
+                                        {
+                                            <tr>
+                                                <td>@m.MedicineName</td>
+                                                <td>@(m.Days ?? 1)</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm dmed-price"
+                                                           data-days="@(m.Days ?? 1)"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                                <td class="dmed-total fw-bold">₹0.00</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+
+                    @* 6. NURSING CHARGES *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary d-flex justify-content-between">
+                            <span><i class="fas fa-user-nurse me-1"></i> Nursing Charges </span>
+                            <span id="totalNurseLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            @if (Model.NursingCharges != null && Model.NursingCharges.Any())
+                            {
+                                <table class="table table-sm mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Procedure</th>
+                                            <th>Type</th>
+                                            <th>Nurse</th>
+                                            <th>Qty</th>
+                                            <th class="text-end">Unit</th>
+                                            <th class="text-end">Amount (₹)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var n in Model.NursingCharges)
+                                        {
+                                            <tr>
+                                                <td>@n.ChargeDate</td>
+                                                <td><strong>@n.ChargeName</strong></td>
+                                                <td><span class="badge @(n.ChargeType == "PerDay" ? "bg-info" : "bg-secondary")">@n.ChargeType</span></td>
+                                                <td>@(n.NurseName ?? "-")</td>
+                                                <td>@n.Quantity</td>
+                                                <td class="text-end">₹@n.UnitCharge</td>
+                                                <td class="text-end">
+                                                    <input type="number"
+                                                           class="form-control form-control-sm nurse-charge"
+                                                           value="@n.TotalCharge"
+                                                           min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="text-muted text-center py-2">No nursing procedures recorded</div>
+                            }
+                        </div>
+                    </div>
+
+                    @* 7. OPERATION CHARGES *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><i class="fas fa-procedures me-1"></i> Operation / OT Charges </span>
+                            <span id="totalOpLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            @if (Model.Operations != null && Model.Operations.Any())
+                            {
+                                int opIdx = 1;
+                                foreach (var op in Model.Operations)
+                                {
+                                    <div class="border rounded p-2 mb-2">
+                                        <div class="d-flex justify-content-between">
+                                            <strong>@opIdx. @op.OperationName</strong>
+                                            <span class="text-muted small">@op.OperationDate</span>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3"><small class="text-muted">OT Charge</small><div>₹@op.OTCharge</div></div>
+                                            <div class="col-md-3"><small class="text-muted">Other</small><div>₹@op.ActualCharge</div></div>
+                                        </div>
+                                        @if (op.Staff != null && op.Staff.Any())
+                                        {
+                                            <table class="table table-sm mt-2 mb-0">
+                                                <thead class="table-light">
+                                                    <tr><th>Role</th><th>Name</th><th class="text-end">Charge</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var s in op.Staff)
+                                                    {
+                                                        <tr>
+                                                            <td><span class="badge bg-secondary">@s.StaffType</span></td>
+                                                            <td>@s.StaffName</td>
+                                                            <td class="text-end">₹@s.Charge</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        }
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <span class="text-muted small">Auto Total: <strong class="text-danger">₹@op.GrandTotal</strong></span>
+                                            <div class="d-flex align-items-center gap-2">
+                                                <small class="text-muted">Bill Amount (₹):</small>
+                                                <input type="number"
+                                                       class="form-control form-control-sm op-charge"
+                                                       value="@op.GrandTotal"
+                                                       min="0" step="0.01"
+                                                       style="width:120px;"
+                                                       onchange="recalculate()" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    opIdx++;
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-muted text-center py-2">No operations recorded</div>
+                            }
+                        </div>
+                    </div>
+
+                    @* 8. OTHER CHARGES *@
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><i class="fas fa-plus-circle me-1"></i> Other Charges</span>
+                            <span id="totalOtherLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-2 mb-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">From Master List</label>
+                                    <select id="ddlBillingMaster" class="form-control">
+                                        <option value="">-- Select Item --</option>
+                                        @foreach (var item in ViewBag.BillingMasterItems as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">OR Custom Name</label>
+                                    <input type="text" id="txtOtherName" class="form-control" placeholder="e.g. Oxygen" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Qty</label>
+                                    <input type="number" id="txtOtherQty" class="form-control" value="1" min="1" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Amount (₹)</label>
+                                    <input type="number" id="txtOtherAmt" class="form-control" value="0" min="0" step="0.01" />
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button type="button" class="btn btn-primary w-100" onclick="addOtherCharge()">+ Add</button>
+                                </div>
+                            </div>
+                            <table class="table table-sm">
+                                <thead class="table-light">
+                                    <tr><th>#</th><th>Item</th><th>Qty</th><th>Unit</th><th>Total</th><th></th></tr>
+                                </thead>
+                                <tbody id="otherChargesBody">
+                                    <tr id="noOtherRow">
+                                        <td colspan="6" class="text-center text-muted">No other charges added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                @* ── RIGHT SIDE — BILL SUMMARY PANEL (loaded via AJAX) ── *@
+                <div class="col-md-4" id="billPanelContainer">
+                    @await Html.PartialAsync("_BillSummaryPanel", Model)
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var ipdId        = @Model.IPDId;
+    var otherItems   = [];
+    var otherCounter = 0;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        recalculate();
+    });
+
+    // ── RELOAD ONLY THE RIGHT PANEL via AJAX ─────────────────────────────
+    function reloadPanel() {
+        fetch('/IPDBilling/GetBillPanel?ipdId=' + ipdId)
+        .then(function(r) { return r.text(); })
+        .then(function(html) {
+            document.getElementById('billPanelContainer').innerHTML = html;
+            fetch('/IPDBilling/GetBillBanner?ipdId=' + ipdId)
+            .then(function(r) { return r.text(); })
+            .then(function(bannerHtml) {
+                document.getElementById('billBannerContainer').innerHTML = bannerHtml;
+            });
+            recalculate();
+        })
+        .catch(function() {
+            toastr.error('Failed to refresh panel.');
+        });
+    }
+
+    function recalculate() {
+        // BED — editable input boxes
+        var bed = 0;
+        document.querySelectorAll('.bed-charge').forEach(function(el) {
+            bed += parseFloat(el.value) || 0;
+        });
+
+        // DOCTOR
+        var doc = 0;
+        document.querySelectorAll('.doctor-charge').forEach(function(el) {
+            doc += parseFloat(el.value) || 0;
+        });
+
+        // MEDICINES
+        var med = 0;
+        document.querySelectorAll('.med-price').forEach(function(el) {
+            var row  = el.closest('tr');
+            var aqEl = row.querySelector('.med-actualqty');
+            var qty  = parseFloat(aqEl ? aqEl.value : 1) || 0;
+            var price = parseFloat(el.value) || 0;
+            var total = price * qty;
+            med += total;
+            var totEl = row.querySelector('.med-total');
+            if (totEl) totEl.innerText = '₹' + total.toFixed(2);
+        });
+
+        // INVESTIGATIONS
+        var inv = 0;
+        document.querySelectorAll('.inv-charge').forEach(function(el) {
+            inv += parseFloat(el.value) || 0;
+        });
+
+        // DISCHARGE MEDICINES
+        var dmed = 0;
+        document.querySelectorAll('.dmed-price').forEach(function(el) {
+            var days  = parseInt(el.dataset.days) || 1;
+            var price = parseFloat(el.value) || 0;
+            var total = price * days;
+            dmed += total;
+            var row = el.closest('tr');
+            if (row) {
+                var totEl = row.querySelector('.dmed-total');
+                if (totEl) totEl.innerText = '₹' + total.toFixed(2);
+            }
+        });
+
+        // NURSING — editable input boxes
+        var nurse = 0;
+        document.querySelectorAll('.nurse-charge').forEach(function(el) {
+            nurse += parseFloat(el.value) || 0;
+        });
+
+        // OPERATIONS — editable input boxes
+        var op = 0;
+        document.querySelectorAll('.op-charge').forEach(function(el) {
+            op += parseFloat(el.value) || 0;
+        });
+
+        // OTHER
+        var other = 0;
+        otherItems.forEach(function(x) { other += x.total; });
+
+        var subTotal = bed + doc + med + inv + dmed + nurse + op + other;
+        var discPctEl = document.getElementById('txtDiscountPct');
+        var discPct  = discPctEl ? (parseFloat(discPctEl.value) || 0) : 0;
+        var discAmt  = subTotal * discPct / 100;
+        var total    = subTotal - discAmt;
+
+        var elMap = {
+            'totalBedLbl':   '₹ ' + bed.toFixed(2),
+            'totalDocLbl':   '₹ ' + doc.toFixed(2),
+            'totalMedLbl':   '₹ ' + med.toFixed(2),
+            'totalInvLbl':   '₹ ' + inv.toFixed(2),
+            'totalNurseLbl': '₹ ' + nurse.toFixed(2),
+            'totalOpLbl':    '₹ ' + op.toFixed(2),
+            'totalOtherLbl': '₹ ' + other.toFixed(2),
+            'sumBed':        '₹' + bed.toFixed(2),
+            'sumDoc':        '₹' + doc.toFixed(2),
+            'sumMed':        '₹' + med.toFixed(2),
+            'sumInv':        '₹' + inv.toFixed(2),
+            'sumDMed':       '₹' + dmed.toFixed(2),
+            'sumNurse':      '₹' + nurse.toFixed(2),
+            'sumOp':         '₹' + op.toFixed(2),
+            'sumOther':      '₹' + other.toFixed(2),
+            'sumSubTotal':   '₹' + subTotal.toFixed(2),
+            'sumDiscount':   '-₹' + discAmt.toFixed(2),
+            'sumTotal':      '₹' + total.toFixed(2)
+        };
+        Object.keys(elMap).forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) el.innerText = elMap[id];
+        });
+
+        var dmEl = document.getElementById('totalDischMedLbl');
+        if (dmEl) dmEl.innerText = '₹ ' + dmed.toFixed(2);
+    }
+
+    function addOtherCharge() {
+        var masterSel  = document.getElementById('ddlBillingMaster');
+        var customName = document.getElementById('txtOtherName').value.trim();
+        var qty  = parseInt(document.getElementById('txtOtherQty').value) || 1;
+        var amt  = parseFloat(document.getElementById('txtOtherAmt').value) || 0;
+        var name = '', masterId = null;
+
+        if (masterSel.value) {
+            masterId = masterSel.value;
+            name = masterSel.options[masterSel.selectedIndex].text.split(' - ')[0];
+            if (!amt) amt = parseFloat(
+                masterSel.options[masterSel.selectedIndex].text.split('₹')[1]) || 0;
+        } else if (customName) {
+            name = customName;
+        } else {
+            alert('Select from list or enter custom name');
+            return;
+        }
+        if (amt <= 0) { alert('Enter amount'); return; }
+
+        var total = qty * amt;
+        otherCounter++;
+        otherItems.push({ id: otherCounter, masterId, name, qty, unit: amt, total });
+
+        var noRow = document.getElementById('noOtherRow');
+        if (noRow) noRow.remove();
+
+        document.getElementById('otherChargesBody').insertAdjacentHTML('beforeend', `
+            <tr id="otherRow_${otherCounter}">
+                <td>${otherCounter}</td><td>${name}</td><td>${qty}</td>
+                <td>₹${amt.toFixed(2)}</td><td>₹${total.toFixed(2)}</td>
+                <td><button type="button" class="btn btn-sm btn-danger"
+                    onclick="removeOtherCharge(${otherCounter})">✕</button></td>
+            </tr>`);
+
+        masterSel.value = '';
+        document.getElementById('txtOtherName').value = '';
+        document.getElementById('txtOtherQty').value  = '1';
+        document.getElementById('txtOtherAmt').value  = '0';
+        recalculate();
+    }
+
+    function removeOtherCharge(id) {
+        otherItems = otherItems.filter(function(x) { return x.id !== id; });
+        document.getElementById('otherRow_' + id)?.remove();
+        recalculate();
+    }
+
+    function saveBill() {
+        // Read all values from editable input boxes
+        var bed = 0;
+        document.querySelectorAll('.bed-charge').forEach(function(el) { bed += parseFloat(el.value) || 0; });
+        var doc = 0;
+        document.querySelectorAll('.doctor-charge').forEach(function(el) { doc += parseFloat(el.value) || 0; });
+        var med = 0;
+        document.querySelectorAll('.med-price').forEach(function(el) {
+            var row = el.closest('tr');
+            var aqEl = row.querySelector('.med-actualqty');
+            var qty = parseFloat(aqEl ? aqEl.value : 1) || 0;
+            med += (parseFloat(el.value) || 0) * qty;
+        });
+        var inv = 0;
+        document.querySelectorAll('.inv-charge').forEach(function(el) { inv += parseFloat(el.value) || 0; });
+        var dmed = 0;
+        document.querySelectorAll('.dmed-price').forEach(function(el) {
+            var days = parseInt(el.dataset.days) || 1;
+            dmed += (parseFloat(el.value) || 0) * days;
+        });
+        var nurse = 0;
+        document.querySelectorAll('.nurse-charge').forEach(function(el) { nurse += parseFloat(el.value) || 0; });
+        var op = 0;
+        document.querySelectorAll('.op-charge').forEach(function(el) { op += parseFloat(el.value) || 0; });
+        var other = 0;
+        otherItems.forEach(function(x) { other += x.total; });
+
+        var subTotal = bed + doc + med + inv + dmed + nurse + op + other;
+        var discPctEl = document.getElementById('txtDiscountPct');
+        var discPct = discPctEl ? (parseFloat(discPctEl.value) || 0) : 0;
+        var discAmt = subTotal * discPct / 100;
+        var total = subTotal - discAmt;
+
+        var items = otherItems.map(function(x) {
+            return {
+                itemType: 'Other',
+                billingMasterId: x.masterId ? parseInt(x.masterId) : null,
+                itemName: x.name, quantity: x.qty,
+                unitPrice: x.unit, totalPrice: x.total
+            };
+        });
+
+        var btn = document.querySelector('button[onclick="saveBill()"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/IPDBilling/SaveBill', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ipdId: ipdId,
+                bedCharges: bed, doctorCharges: doc,
+                medicineCharges: med, investigationCharges: inv,
+                dischargeCharges: dmed, nursingCharges: nurse,
+                operationCharges: op, otherCharges: other,
+                subTotal: subTotal, discountPercent: discPct,
+                discountAmount: discAmt, totalAmount: total,
+                items: items
+            })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                toastr.success('Bill generated successfully!');
+                reloadPanel();
+            } else {
+                toastr.error('Error: ' + data.message);
+                if (btn) btn.disabled = false;
+            }
+        })
+        .catch(function(err) {
+            toastr.error('Error: ' + err);
+            if (btn) btn.disabled = false;
+        });
+    }
+
+    function addPayment(billId) {
+        var amt  = parseFloat(document.getElementById('txtPayAmt').value) || 0;
+        var mode = document.getElementById('ddlPayMode').value;
+        var ref  = document.getElementById('txtTransRef').value;
+
+        if (amt <= 0) { toastr.warning('Please enter payment amount'); return; }
+
+        var btn = document.querySelector('button[onclick^="addPayment"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/IPDBilling/AddPayment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                billId: billId, ipdId: ipdId,
+                amount: amt, paymentMode: mode, transactionRef: ref
+            })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data.success) {
+                toastr.success('Payment recorded!');
+                reloadPanel();
+            } else {
+                toastr.error('Error: ' + data.message);
+                if (btn) btn.disabled = false;
+            }
+        })
+        .catch(function(err) {
+            toastr.error('Error: ' + err);
+            if (btn) btn.disabled = false;
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @model WebApplicationSampleTest2.Models.IPDBillVM
+@{
+    ViewData["Title"] = "Generate Bill";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+
+         
+            <div class="d-flex justify-content-between mb-3">
+                <h4>
+                    <i class="fas fa-file-invoice-dollar me-2"></i>
+                    IPD Bill
+                </h4>
+                <div>
+                    @if (Model.BillId.HasValue)
+                    {
+                        <a asp-action="PrintBill"
+                           asp-route-ipdId="@Model.IPDId"
+                           target="_blank"
+                           class="btn btn-success btn-sm me-2">
+                            🖨 Print Bill
+                        </a>
+                    }
+                    <a asp-controller="IPDAdmission"
+                       asp-action="Details"
+                       asp-route-id="@Model.IPDId"
+                       class="btn btn-secondary btn-sm">
+                        ← Back
+                    </a>
+                </div>
+            </div>
+            <hr />
+
+           
+            <div class="alert alert-info mb-3 py-2">
+                <div class="row">
+                    <div class="col-md-3">
+                        <strong>Patient:</strong> @Model.PatientName
+                    </div>
+                    <div class="col-md-2">
+                        <strong>Age/Sex:</strong> @Model.Age / @Model.Gender
+                    </div>
+                    <div class="col-md-3">
+                        <strong>IPD No:</strong> @Model.AdmissionNumber
+                    </div>
+                    <div class="col-md-2">
+                        <strong>Admitted:</strong>
+                        @Model.AdmissionDateTime.ToString("dd-MM-yyyy")
+                    </div>
+                    <div class="col-md-2">
+                        <strong>Days:</strong>
+                        <span class="badge bg-primary">
+                            @Model.TotalDays days
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            @* ── BILL BANNER ── 
+            <div id="billBannerContainer">
+                @if (Model.BillId.HasValue)
+                {
+                    <div class="alert alert-success py-2 mb-3">
+                        <i class="fas fa-check-circle me-1"></i>
+                        <strong>Bill No: @Model.BillNumber</strong>
+                        &nbsp;|&nbsp; Status: <strong>@Model.PaymentStatus</strong>
+                        &nbsp;|&nbsp; Total: <strong>₹@Model.TotalAmount.ToString("0.00")</strong>
+                        &nbsp;|&nbsp; Paid: <strong>₹@Model.PaidAmount.ToString("0.00")</strong>
+                        &nbsp;|&nbsp; Due: <strong class="text-danger">₹@Model.DueAmount.ToString("0.00")</strong>
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+
+                    @* 1. BED CHARGES 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between">
+                            <span><i class="fas fa-bed me-1"></i> Bed Charges</span>
+                            <span id="totalBedLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Bed</th>
+                                        <th>Ward</th>
+                                        <th>Room</th>
+                                        <th>From</th>
+                                        <th>To</th>
+                                        <th>Days</th>
+                                        <th>Rate/Day</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.BedCharges != null && Model.BedCharges.Any())
+                                    {
+                                        foreach (var b in Model.BedCharges)
+                                        {
+                                            <tr>
+                                                <td>@b.BedNumber</td>
+                                                <td>@b.WardName</td>
+                                                <td>@b.RoomNumber</td>
+                                                <td>@b.StartDateTime</td>
+                                                <td>@b.EndDateTime</td>
+                                                <td>@b.Days</td>
+                                                <td>₹@b.ChargesPerDay</td>
+                                                <td><strong>₹@b.BedCharge</strong></td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="8" class="text-center text-muted">No bed charges found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 2. DOCTOR VISITS 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-info text-white d-flex justify-content-between">
+                            <span><i class="fas fa-user-md me-1"></i> Doctor Visits</span>
+                            <span id="totalDocLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Date</th><th>Doctor</th><th>Type</th><th>Charge (₹)</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.DoctorVisits != null && Model.DoctorVisits.Any())
+                                    {
+                                        foreach (var d in Model.DoctorVisits)
+                                        {
+                                            <tr>
+                                                <td>@d.RoundDateTime</td>
+                                                <td>Dr. @d.DoctorName</td>
+                                                <td>@d.RoundType</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm doctor-charge"
+                                                           data-roundid="@d.RoundId"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="4" class="text-center text-muted">No doctor visits found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 3. MEDICINES 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-success text-white d-flex justify-content-between">
+                            <span><i class="fas fa-pills me-1"></i> Medicines (During Stay)</span>
+                            <span id="totalMedLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Medicine</th>
+                                        <th>Type</th>
+                                        <th>Dosage</th>
+                                        <th>Prescribed Qty</th>
+                                        <th>Actual Qty</th>
+                                        <th>Unit Price (₹)</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Medicines != null && Model.Medicines.Any())
+                                    {
+                                        foreach (var m in Model.Medicines)
+                                        {
+                                            var pQty = m.Days ?? 1;
+                                            <tr>
+                                                <td>@m.MedicineName</td>
+                                                <td>@m.Type</td>
+                                                <td>@(m.Dosage ?? "-")</td>
+                                                <td class="text-muted">@pQty</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm med-actualqty"
+                                                           value="@pQty" min="0"
+                                                           style="width:75px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm med-price"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:100px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                                <td class="med-total fw-bold">₹0.00</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="7" class="text-center text-muted">No medicines found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 4. INVESTIGATIONS 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-warning d-flex justify-content-between">
+                            <span><i class="fas fa-flask me-1"></i> Investigations / Lab</span>
+                            <span id="totalInvLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-sm mb-0">
+                                <thead class="table-light">
+                                    <tr><th>Type</th><th>Test</th><th>Status</th><th>Charge (₹)</th></tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.Investigations != null && Model.Investigations.Any())
+                                    {
+                                        foreach (var inv in Model.Investigations)
+                                        {
+                                            <tr>
+                                                <td>@inv.InvestigationType</td>
+                                                <td>@inv.TestName</td>
+                                                <td>@inv.Status</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm inv-charge"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr><td colspan="4" class="text-center text-muted">No investigations found</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    @* 5. DISCHARGE MEDICINES 
+                    @if (Model.DischargeMedicines != null && Model.DischargeMedicines.Any())
+                    {
+                        <div class="card border mb-3">
+                            <div class="card-header bg-secondary text-white d-flex justify-content-between">
+                                <span><i class="fas fa-prescription me-1"></i> Discharge Medicines</span>
+                                <span id="totalDischMedLbl">₹ 0.00</span>
+                            </div>
+                            <div class="card-body p-2">
+                                <table class="table table-sm mb-0">
+                                    <thead class="table-light">
+                                        <tr><th>Medicine</th><th>Days</th><th>Unit Price (₹)</th><th>Total</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var m in Model.DischargeMedicines)
+                                        {
+                                            <tr>
+                                                <td>@m.MedicineName</td>
+                                                <td>@(m.Days ?? 1)</td>
+                                                <td>
+                                                    <input type="number"
+                                                           class="form-control form-control-sm dmed-price"
+                                                           data-days="@(m.Days ?? 1)"
+                                                           value="0" min="0" step="0.01"
+                                                           style="width:110px;"
+                                                           onchange="recalculate()" />
+                                                </td>
+                                                <td class="dmed-total fw-bold">₹0.00</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    }
+
+                    @* 6. NURSING CHARGES 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-warning d-flex justify-content-between">
+                            <span><i class="fas fa-user-nurse me-1"></i> Nursing Charges <small class="ms-1">(Auto from vitals)</small></span>
+                            <span id="totalNurseLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            @if (Model.NursingCharges != null && Model.NursingCharges.Any())
+                            {
+                                <table class="table table-sm mb-0">
+                                    <thead class="table-light">
+                                        <tr><th>Date</th><th>Procedure</th><th>Type</th><th>Nurse</th><th>Qty</th><th class="text-end">Unit</th><th class="text-end">Total</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var n in Model.NursingCharges)
+                                        {
+                                            <tr>
+                                                <td>@n.ChargeDate</td>
+                                                <td><strong>@n.ChargeName</strong></td>
+                                                <td><span class="badge @(n.ChargeType == "PerDay" ? "bg-info" : "bg-secondary")">@n.ChargeType</span></td>
+                                                <td>@(n.NurseName ?? "-")</td>
+                                                <td>@n.Quantity</td>
+                                                <td class="text-end">₹@n.UnitCharge</td>
+                                                <td class="text-end"><strong>₹@n.TotalCharge</strong></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                            else
+                            {
+                                <div class="text-muted text-center py-2">No nursing procedures recorded</div>
+                            }
+                        </div>
+                    </div>
+
+                    @* 7. OPERATION CHARGES 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-danger text-white d-flex justify-content-between">
+                            <span><i class="fas fa-procedures me-1"></i> Operation / OT Charges <small class="ms-1">(Auto from operations)</small></span>
+                            <span id="totalOpLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body p-2">
+                            @if (Model.Operations != null && Model.Operations.Any())
+                            {
+                                int opIdx = 1;
+                                foreach (var op in Model.Operations)
+                                {
+                                    <div class="border rounded p-2 mb-2">
+                                        <div class="d-flex justify-content-between">
+                                            <strong>@opIdx. @op.OperationName</strong>
+                                            <span class="text-muted small">@op.OperationDate</span>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-md-3"><small class="text-muted">OT Charge</small><div>₹@op.OTCharge</div></div>
+                                            <div class="col-md-3"><small class="text-muted">Surgeon</small><div>₹@op.SurgeonCharge</div></div>
+                                            <div class="col-md-3"><small class="text-muted">Anesthesia</small><div>₹@op.AnesthesiaCharge</div></div>
+                                            <div class="col-md-3"><small class="text-muted">Other</small><div>₹@op.ActualCharge</div></div>
+                                        </div>
+                                        @if (op.Staff != null && op.Staff.Any())
+                                        {
+                                            <table class="table table-sm mt-2 mb-0">
+                                                <thead class="table-light">
+                                                    <tr><th>Role</th><th>Name</th><th class="text-end">Charge</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var s in op.Staff)
+                                                    {
+                                                        <tr>
+                                                            <td><span class="badge bg-secondary">@s.StaffType</span></td>
+                                                            <td>@s.StaffName</td>
+                                                            <td class="text-end">₹@s.Charge</td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        }
+                                        <div class="text-end mt-1"><strong class="text-danger">Total: ₹@op.GrandTotal</strong></div>
+                                    </div>
+                                    opIdx++;
+                                }
+                            }
+                            else
+                            {
+                                <div class="text-muted text-center py-2">No operations recorded</div>
+                            }
+                        </div>
+                    </div>
+
+                    @* 8. OTHER CHARGES 
+                    <div class="card border mb-3">
+                        <div class="card-header bg-dark text-white d-flex justify-content-between">
+                            <span><i class="fas fa-plus-circle me-1"></i> Other Charges</span>
+                            <span id="totalOtherLbl">₹ 0.00</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-2 mb-2">
+                                <div class="col-md-4">
+                                    <label class="form-label">From Master List</label>
+                                    <select id="ddlBillingMaster" class="form-control">
+                                        <option value="">-- Select Item --</option>
+                                        @foreach (var item in ViewBag.BillingMasterItems as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>)
+                                        {
+                                            <option value="@item.Value">@item.Text</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">OR Custom Name</label>
+                                    <input type="text" id="txtOtherName" class="form-control" placeholder="e.g. Oxygen" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Qty</label>
+                                    <input type="number" id="txtOtherQty" class="form-control" value="1" min="1" />
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="form-label">Amount (₹)</label>
+                                    <input type="number" id="txtOtherAmt" class="form-control" value="0" min="0" step="0.01" />
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button type="button" class="btn btn-dark w-100" onclick="addOtherCharge()">+ Add</button>
+                                </div>
+                            </div>
+                            <table class="table table-sm">
+                                <thead class="table-light">
+                                    <tr><th>#</th><th>Item</th><th>Qty</th><th>Unit</th><th>Total</th><th></th></tr>
+                                </thead>
+                                <tbody id="otherChargesBody">
+                                    <tr id="noOtherRow">
+                                        <td colspan="6" class="text-center text-muted">No other charges added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                @* ── RIGHT SIDE — BILL SUMMARY PANEL (loaded via AJAX) ── 
+                <div class="col-md-4" id="billPanelContainer">
+                    @await Html.PartialAsync("_BillSummaryPanel", Model)
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var ipdId        = @Model.IPDId;
+    var bedTotal     = @Model.TotalBedCharges;
+    var nurseTotal   = @Model.TotalNursingCharges;
+    var opTotal      = @Model.TotalOperationCharges;
+    var otherItems   = [];
+    var otherCounter = 0;
+
+    document.addEventListener('DOMContentLoaded', function () {
+        recalculate();
+    });
+
+    // ── RELOAD ONLY THE RIGHT PANEL via AJAX ──────────────────────────────
+    function reloadPanel() {
+         fetch('/IPDBilling/GetBillPanel?ipdId=' + ipdId)
+         .then(function(r) { return r.text(); })
+         .then(function(html) {
+             document.getElementById('billPanelContainer').innerHTML = html;
+             fetch('/IPDBilling/GetBillBanner?ipdId=' + ipdId)
+             .then(function(r) { return r.text(); })
+             .then(function(bannerHtml) {
+                 document.getElementById('billBannerContainer').innerHTML = bannerHtml;
+             });
+             recalculate();
+         })
+         .catch(function() {
+             toastr.error('Failed to refresh panel.');
+         });
+     }
+
+    function recalculate() {
+        var bed = bedTotal;
+
+        var doc = 0;
+        document.querySelectorAll('.doctor-charge').forEach(el =>
+            doc += parseFloat(el.value) || 0);
+
+        var med = 0;
+        document.querySelectorAll('.med-price').forEach(el => {
+            var row   = el.closest('tr');
+            var aqEl  = row.querySelector('.med-actualqty');
+            var qty   = parseFloat(aqEl ? aqEl.value : 1) || 0;
+            var price = parseFloat(el.value) || 0;
+            var total = price * qty;
+            med += total;
+            var totEl = row.querySelector('.med-total');
+            if (totEl) totEl.innerText = '₹' + total.toFixed(2);
+        });
+
+        var inv = 0;
+        document.querySelectorAll('.inv-charge').forEach(el =>
+            inv += parseFloat(el.value) || 0);
+
+        var dmed = 0;
+        document.querySelectorAll('.dmed-price').forEach(el => {
+            var days  = parseInt(el.dataset.days) || 1;
+            var price = parseFloat(el.value) || 0;
+            var total = price * days;
+            dmed += total;
+            var row = el.closest('tr');
+            if (row) {
+                var totEl = row.querySelector('.dmed-total');
+                if (totEl) totEl.innerText = '₹' + total.toFixed(2);
+            }
+        });
+
+        var other = 0;
+        otherItems.forEach(x => other += x.total);
+
+        var subTotal = bed + doc + med + inv + dmed + nurseTotal + opTotal + other;
+        var discPctEl = document.getElementById('txtDiscountPct');
+        var discPct  = discPctEl ? (parseFloat(discPctEl.value) || 0) : 0;
+        var discAmt  = subTotal * discPct / 100;
+        var total    = subTotal - discAmt;
+
+        var elMap = {
+            'totalBedLbl':  '₹ ' + bed.toFixed(2),
+            'totalDocLbl':  '₹ ' + doc.toFixed(2),
+            'totalMedLbl':  '₹ ' + med.toFixed(2),
+            'totalInvLbl':  '₹ ' + inv.toFixed(2),
+            'totalNurseLbl':'₹ ' + nurseTotal.toFixed(2),
+            'totalOpLbl':   '₹ ' + opTotal.toFixed(2),
+            'totalOtherLbl':'₹ ' + other.toFixed(2),
+            'sumBed':       '₹' + bed.toFixed(2),
+            'sumDoc':       '₹' + doc.toFixed(2),
+            'sumMed':       '₹' + med.toFixed(2),
+            'sumInv':       '₹' + inv.toFixed(2),
+            'sumDMed':      '₹' + dmed.toFixed(2),
+            'sumNurse':     '₹' + nurseTotal.toFixed(2),
+            'sumOp':        '₹' + opTotal.toFixed(2),
+            'sumOther':     '₹' + other.toFixed(2),
+            'sumSubTotal':  '₹' + subTotal.toFixed(2),
+            'sumDiscount':  '-₹' + discAmt.toFixed(2),
+            'sumTotal':     '₹' + total.toFixed(2)
+        };
+        Object.keys(elMap).forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.innerText = elMap[id];
+        });
+
+        var dmEl = document.getElementById('totalDischMedLbl');
+        if (dmEl) dmEl.innerText = '₹ ' + dmed.toFixed(2);
+    }
+
+    function addOtherCharge() {
+        var masterSel  = document.getElementById('ddlBillingMaster');
+        var customName = document.getElementById('txtOtherName').value.trim();
+        var qty  = parseInt(document.getElementById('txtOtherQty').value) || 1;
+        var amt  = parseFloat(document.getElementById('txtOtherAmt').value) || 0;
+        var name = '', masterId = null;
+
+        if (masterSel.value) {
+            masterId = masterSel.value;
+            name = masterSel.options[masterSel.selectedIndex].text.split(' - ')[0];
+            if (!amt) amt = parseFloat(
+                masterSel.options[masterSel.selectedIndex].text.split('₹')[1]) || 0;
+        } else if (customName) {
+            name = customName;
+        } else {
+            alert('Select from list or enter custom name');
+            return;
+        }
+        if (amt <= 0) { alert('Enter amount'); return; }
+
+        var total = qty * amt;
+        otherCounter++;
+        otherItems.push({ id: otherCounter, masterId, name, qty, unit: amt, total });
+
+        var noRow = document.getElementById('noOtherRow');
+        if (noRow) noRow.remove();
+
+        document.getElementById('otherChargesBody').insertAdjacentHTML('beforeend', `
+            <tr id="otherRow_${otherCounter}">
+                <td>${otherCounter}</td><td>${name}</td><td>${qty}</td>
+                <td>₹${amt.toFixed(2)}</td><td>₹${total.toFixed(2)}</td>
+                <td><button type="button" class="btn btn-sm btn-danger"
+                    onclick="removeOtherCharge(${otherCounter})">✕</button></td>
+            </tr>`);
+
+        masterSel.value = '';
+        document.getElementById('txtOtherName').value = '';
+        document.getElementById('txtOtherQty').value  = '1';
+        document.getElementById('txtOtherAmt').value  = '0';
+        recalculate();
+    }
+
+    function removeOtherCharge(id) {
+        otherItems = otherItems.filter(x => x.id !== id);
+        document.getElementById('otherRow_' + id)?.remove();
+        recalculate();
+    }
+
+    function saveBill() {
+        var bed = bedTotal;
+        var doc = 0;
+        document.querySelectorAll('.doctor-charge').forEach(function (el) {
+            doc += parseFloat(el.value) || 0;
+        });
+        var med = 0;
+        document.querySelectorAll('.med-price').forEach(function (el) {
+            var row = el.closest('tr');
+            var aqEl = row.querySelector('.med-actualqty');
+            var qty = parseFloat(aqEl ? aqEl.value : 1) || 0;
+            med += (parseFloat(el.value) || 0) * qty;
+        });
+        var inv = 0;
+        document.querySelectorAll('.inv-charge').forEach(function (el) {
+            inv += parseFloat(el.value) || 0;
+        });
+        var dmed = 0;
+        document.querySelectorAll('.dmed-price').forEach(function (el) {
+            var days = parseInt(el.dataset.days) || 1;
+            dmed += (parseFloat(el.value) || 0) * days;
+        });
+        var other = 0;
+        otherItems.forEach(function (x) { other += x.total; });
+
+        var subTotal = bed + doc + med + inv + dmed + nurseTotal + opTotal + other;
+        var discPctEl = document.getElementById('txtDiscountPct');
+        var discPct = discPctEl ? (parseFloat(discPctEl.value) || 0) : 0;
+        var discAmt = subTotal * discPct / 100;
+        var total = subTotal - discAmt;
+
+        var items = otherItems.map(function (x) {
+            return {
+                itemType: 'Other',
+                billingMasterId: x.masterId ? parseInt(x.masterId) : null,
+                itemName: x.name, quantity: x.qty,
+                unitPrice: x.unit, totalPrice: x.total
+            };
+        });
+
+        var btn = document.querySelector('button[onclick="saveBill()"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/IPDBilling/SaveBill', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                ipdId: ipdId,
+                bedCharges: bed, doctorCharges: doc,
+                medicineCharges: med, investigationCharges: inv,
+                dischargeCharges: dmed, nursingCharges: nurseTotal,
+                operationCharges: opTotal, otherCharges: other,
+                subTotal: subTotal, discountPercent: discPct,
+                discountAmount: discAmt, totalAmount: total,
+                items: items
+            })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.success) {
+                toastr.success('Bill generated successfully!');
+                reloadPanel();
+            } else {
+                toastr.error('Error: ' + data.message);
+                if (btn) btn.disabled = false;
+            }
+        })
+        .catch(function (err) {
+            toastr.error('Error: ' + err);
+            if (btn) btn.disabled = false;
+        });
+    }
+
+    function addPayment(billId) {
+        var amt  = parseFloat(document.getElementById('txtPayAmt').value) || 0;
+        var mode = document.getElementById('ddlPayMode').value;
+        var ref  = document.getElementById('txtTransRef').value;
+
+        if (amt <= 0) { toastr.warning('Please enter payment amount'); return; }
+
+        var btn = document.querySelector('button[onclick^="addPayment"]');
+        if (btn) btn.disabled = true;
+
+        fetch('/IPDBilling/AddPayment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                billId: billId, ipdId: ipdId,
+                amount: amt, paymentMode: mode, transactionRef: ref
+            })
+        })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+            if (data.success) {
+                toastr.success('Payment recorded!');
+                reloadPanel();
+            } else {
+                toastr.error('Error: ' + data.message);
+                if (btn) btn.disabled = false;
+            }
+        })
+        .catch(function (err) {
+            toastr.error('Error: ' + err);
+            if (btn) btn.disabled = false;
+        });
+    }
+</script> *@

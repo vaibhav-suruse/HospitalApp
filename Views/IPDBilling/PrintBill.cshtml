@@ -1,0 +1,908 @@
+﻿@model WebApplicationSampleTest2.Models.IPDBillVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>IPD Bill - @Model.AdmissionNumber</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #222;
+            background: #fff;
+            padding: 20px;
+        }
+        .container { width: 800px; margin: 0 auto; }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #1f4e79;
+            margin-bottom: 10px;
+        }
+        .hospital-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1f4e79;
+        }
+        .hospital-sub { font-size: 11px; color: #555; margin-top: 2px; }
+        .bill-title   { text-align: right; }
+        .bill-title h2 {
+            font-size: 22px;
+            color: #1f4e79;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .bill-title p { font-size: 11px; color: #777; margin-top: 3px; }
+        .bill-no {
+            font-size: 14px !important;
+            font-weight: bold !important;
+            color: #1f4e79 !important;
+        }
+
+        /* PATIENT BAR */
+        .patient-bar {
+            background: #1f4e79;
+            color: white;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 5px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin: 10px 0;
+        }
+        .patient-bar span strong { color: #cce5ff; }
+
+        /* STATUS */
+        .status-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        .status-paid    { background:#d4edda; color:#155724; }
+        .status-partial { background:#fff3cd; color:#856404; }
+        .status-unpaid  { background:#f8d7da; color:#721c24; }
+
+        /* SECTION */
+        .section { margin-bottom: 10px; }
+        .section-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #1f4e79;
+            background: #e8f0fe;
+            padding: 4px 10px;
+            border-left: 4px solid #1f4e79;
+            margin-bottom: 5px;
+        }
+
+        /* TABLES */
+        .bill-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+        .bill-table th {
+            background: #f0f4ff;
+            padding: 5px 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .bill-table td {
+            padding: 5px 8px;
+            border: 1px solid #eee;
+        }
+        .bill-table tr:nth-child(even) td { background: #fafafa; }
+        .text-right  { text-align: right; }
+        .text-center { text-align: center; }
+
+        /* OPERATION BOX */
+        .op-box {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+        .op-box-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            color: #1f4e79;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+        }
+
+        /* TOTALS BOX */
+        .totals-box {
+            width: 300px;
+            margin-left: auto;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .totals-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 12px;
+        }
+        .totals-row.total-final {
+            background: #1f4e79;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 8px 12px;
+        }
+        .totals-row.discount { color: #dc3545; }
+        .totals-row.paid     { color: #28a745; }
+        .totals-row.due      { color: #dc3545; font-weight: bold; }
+
+        /* PAYMENT TABLE */
+        .pay-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+        .pay-table th {
+            background: #e8f0fe;
+            padding: 5px 8px;
+            border: 1px solid #ddd;
+        }
+        .pay-table td { padding: 5px 8px; border: 1px solid #eee; }
+
+        /* SIGNATURE */
+        .signature-area {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 10px;
+        }
+        .sig-box      { text-align: center; width: 180px; }
+        .sig-line {
+            border-top: 1px solid #333;
+            margin-bottom: 4px;
+            padding-top: 4px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #888;
+            margin-top: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 8px;
+        }
+
+        /* BUTTONS */
+        .btn-bar {
+            width: 800px;
+            margin: 15px auto;
+            text-align: center;
+        }
+        .btn {
+            padding: 10px 25px;
+            margin: 5px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .btn-print { background: #1f4e79; }
+        .btn-pdf   { background: #28a745; }
+        .btn-back  { background: #6c757d; }
+
+        @@media print {
+            .btn-bar { display: none; }
+            body { padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="billContent">
+
+    @* ── HOSPITAL HEADER ── *@
+    <div class="header">
+        <div>
+            @if (!string.IsNullOrEmpty(ViewBag.HospitalLogo as string))
+            {
+                <img src="/uploads/hospitals/@ViewBag.HospitalLogo"
+                     style="height:60px;margin-bottom:5px;display:block;" />
+            }
+            <div class="hospital-name">@ViewBag.HospitalName</div>
+            <div class="hospital-sub">@ViewBag.HospitalAddress</div>
+            <div class="hospital-sub">
+                📞 @ViewBag.HospitalPhone &nbsp;|&nbsp;
+                ✉ @ViewBag.HospitalEmail
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.HospitalRegNo as string))
+            {
+                <div class="hospital-sub">
+                    Reg No: @ViewBag.HospitalRegNo
+                </div>
+            }
+        </div>
+        <div class="bill-title">
+            <h2>INVOICE</h2>
+            <p class="bill-no">
+                Bill No: @ViewBag.BillNumber
+            </p>
+            <p>Date: @DateTime.Now.ToString("dd-MM-yyyy")</p>
+            <p>
+                Status:
+                <span class="status-badge
+                    @(Model.PaymentStatus == "Paid"    ? "status-paid"    :
+                      Model.PaymentStatus == "Partial" ? "status-partial" :
+                                                         "status-unpaid")">
+                    @Model.PaymentStatus
+                </span>
+            </p>
+        </div>
+    </div>
+
+    @* ── PATIENT BAR ── *@
+    <div class="patient-bar">
+        <span><strong>Patient:</strong> @Model.PatientName</span>
+        <span><strong>Age/Sex:</strong> @Model.Age Y / @Model.Gender</span>
+        <span><strong>Phone:</strong> @Model.PhoneNumber</span>
+        <span><strong>IPD No:</strong> @Model.AdmissionNumber</span>
+        <span>
+            <strong>Admitted:</strong>
+            @Model.AdmissionDateTime.ToString("dd-MM-yyyy")
+        </span>
+        <span><strong>Days:</strong> @Model.TotalDays</span>
+    </div>
+
+    @* ── 1. BED CHARGES ── *@
+    @if (Model.BedCharges != null && Model.BedCharges.Any())
+    {
+        <div class="section">
+            <div class="section-title">🛏 Bed Charges</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Bed</th><th>Ward</th>
+                        <th>Room</th><th>From</th><th>To</th>
+                        <th>Days</th><th>Rate/Day</th>
+                        <th class="text-right">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int bi = 1; decimal bedT = 0; }
+                    @foreach (var b in Model.BedCharges)
+                    {
+                        bedT += b.BedCharge;
+                        <tr>
+                            <td>@bi</td>
+                            <td><strong>@b.BedNumber</strong></td>
+                            <td>@b.WardName</td>
+                            <td>@b.RoomNumber</td>
+                            <td>@b.StartDateTime.ToString("dd-MM-yyyy")</td>
+                            <td>@b.EndDateTime.ToString("dd-MM-yyyy")</td>
+                            <td>@b.Days</td>
+                            <td>₹@b.ChargesPerDay.ToString("0.00")</td>
+                            <td class="text-right">
+                                <strong>
+                                    ₹@b.BedCharge.ToString("0.00")
+                                </strong>
+                            </td>
+                        </tr>
+                        bi++;
+                    }
+                    <tr style="background:#e8f0fe;">
+                        <td colspan="8" class="text-right">
+                            <strong>Bed Total:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>₹@bedT.ToString("0.00")</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @* ── 2. DOCTOR VISITS ── *@
+    @if (Model.DoctorVisits != null
+         && Model.DoctorVisits.Any(d => d.VisitCharge > 0))
+    {
+        <div class="section">
+            <div class="section-title">👨‍⚕️ Doctor Visits</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Date & Time</th>
+                        <th>Doctor</th><th>Type</th>
+                        <th class="text-right">Charge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int di = 1; decimal docT = 0; }
+                    @foreach (var d in Model.DoctorVisits
+                        .Where(x => x.VisitCharge > 0))
+                    {
+                        docT += d.VisitCharge;
+                        <tr>
+                            <td>@di</td>
+                            <td>
+                                @d.RoundDateTime
+                                    .ToString("dd-MM-yyyy HH:mm")
+                            </td>
+                            <td>Dr. @d.DoctorName</td>
+                            <td>@d.RoundType</td>
+                            <td class="text-right">
+                                ₹@d.VisitCharge.ToString("0.00")
+                            </td>
+                        </tr>
+                        di++;
+                    }
+                    <tr style="background:#e8f0fe;">
+                        <td colspan="4" class="text-right">
+                            <strong>Doctor Total:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>₹@docT.ToString("0.00")</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @* ── 3. MEDICINES ── *@
+    @if (Model.Medicines != null
+         && Model.Medicines.Any(m => m.TotalPrice > 0))
+    {
+        <div class="section">
+            <div class="section-title">💊 Medicines (During Stay)</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Medicine</th><th>Type</th>
+                        @* <th>Actual Qty</th><th>Unit Price</th> *@
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int mi = 1; decimal medT = 0; }
+                    @foreach (var m in Model.Medicines
+                        .Where(x => x.TotalPrice > 0))
+                    {
+                        medT += m.TotalPrice;
+                        <tr>
+                            <td>@mi</td>
+                            <td><strong>@m.MedicineName</strong></td>
+                            <td>@m.Type</td>
+                            @* <td>@m.ActualQty</td> *@
+                            <td>₹@m.UnitPrice.ToString("0.00")</td>
+                            <td class="text-right">
+                                ₹@m.TotalPrice.ToString("0.00")
+                            </td>
+                        </tr>
+                        mi++;
+                    }
+                    <tr style="background:#e8f0fe;">
+                        <td colspan="5" class="text-right">
+                            <strong>Medicine Total:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>₹@medT.ToString("0.00")</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @* ── 4. INVESTIGATIONS ── *@
+    @if (Model.Investigations != null
+         && Model.Investigations.Any(i => i.Charge > 0))
+    {
+        <div class="section">
+            <div class="section-title">🔬 Investigations / Lab</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Type</th><th>Test</th>
+                        <th>Priority</th><th>Status</th>
+                        <th class="text-right">Charge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int ii = 1; decimal invT = 0; }
+                    @foreach (var inv in Model.Investigations
+                        .Where(x => x.Charge > 0))
+                    {
+                        invT += inv.Charge;
+                        <tr>
+                            <td>@ii</td>
+                            <td>@inv.InvestigationType</td>
+                            <td><strong>@inv.TestName</strong></td>
+                            <td>@inv.Priority</td>
+                            <td>@inv.Status</td>
+                            <td class="text-right">
+                                ₹@inv.Charge.ToString("0.00")
+                            </td>
+                        </tr>
+                        ii++;
+                    }
+                    <tr style="background:#e8f0fe;">
+                        <td colspan="5" class="text-right">
+                            <strong>Investigation Total:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>₹@invT.ToString("0.00")</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @* ── 5. DISCHARGE MEDICINES ── *@
+    @if (Model.DischargeMedicines != null
+         && Model.DischargeMedicines.Any(m => m.TotalPrice > 0))
+    {
+        <div class="section">
+            <div class="section-title">📋 Discharge Medicines</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Medicine</th>
+                        <th>Days</th><th>Unit Price</th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int dmi = 1; decimal dmT = 0; }
+                    @foreach (var m in Model.DischargeMedicines
+                        .Where(x => x.TotalPrice > 0))
+                    {
+                        dmT += m.TotalPrice;
+                        <tr>
+                            <td>@dmi</td>
+                            <td><strong>@m.MedicineName</strong></td>
+                            <td>@(m.Days ?? 1)</td>
+                            <td>₹@m.UnitPrice.ToString("0.00")</td>
+                            <td class="text-right">
+                                ₹@m.TotalPrice.ToString("0.00")
+                            </td>
+                        </tr>
+                        dmi++;
+                    }
+                    <tr style="background:#e8f0fe;">
+                        <td colspan="4" class="text-right">
+                            <strong>Discharge Medicine Total:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>₹@dmT.ToString("0.00")</strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @* ── 6. NURSING CHARGES ── *@
+    @if (Model.NursingCharges != null && Model.NursingCharges.Any())
+    {
+        <div class="section">
+            <div class="section-title">🩺 Nursing Charges</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Date</th><th>Procedure</th>
+                        <th>Type</th><th>Nurse</th>
+                        <th>Qty</th><th>Unit</th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int ni = 1; decimal nursingT = 0; }
+                    @foreach (var n in Model.NursingCharges)
+                    {
+                        nursingT += n.TotalCharge;
+                        <tr>
+                            <td>@ni</td>
+                            <td>
+                                @n.ChargeDate.ToString("dd-MM-yyyy")
+                            </td>
+                            <td><strong>@n.ChargeName</strong></td>
+                            <td>@n.ChargeType</td>
+                            <td>@(n.NurseName ?? "-")</td>
+                            <td>@n.Quantity</td>
+                            <td>₹@n.UnitCharge.ToString("0.00")</td>
+                            <td class="text-right">
+                                ₹@n.TotalCharge.ToString("0.00")
+                            </td>
+                        </tr>
+                        ni++;
+                    }
+                    <tr style="background:#e8f0fe;">
+                        <td colspan="7" class="text-right">
+                            <strong>Nursing Total:</strong>
+                        </td>
+                        <td class="text-right">
+                            <strong>
+                                ₹@nursingT.ToString("0.00")
+                            </strong>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    }
+
+    @* ── 7. OPERATIONS ── *@
+    @if (Model.Operations != null && Model.Operations.Any())
+    {
+        <div class="section">
+            <div class="section-title">🏥 Operation / OT Charges</div>
+            @{ decimal opGrandT = 0; int opi = 1; }
+            @foreach (var op in Model.Operations)
+            {
+                var opT = op.ActualCharge     +
+                          op.AnesthesiaCharge +
+                          op.SurgeonCharge    +
+                          op.OTCharge         +
+                          op.TotalStaffCharge;
+                opGrandT += opT;
+                <div class="op-box">
+                    <div class="op-box-header">
+                        <span>
+                            @opi. @op.OperationName
+                        </span>
+                        <span style="font-weight:normal;color:#555;">
+                            @op.OperationDate
+                               
+                        </span>
+                    </div>
+                    <table class="bill-table">
+                        <tbody>
+                            @if (op.OTCharge > 0)
+                            {
+                                <tr>
+                                    <td>OT Charges</td>
+                                    <td class="text-right">
+                                        ₹@op.OTCharge.ToString("0.00")
+                                    </td>
+                                </tr>
+                            }
+                            @if (op.SurgeonCharge > 0)
+                            {
+                                <tr>
+                                    <td>
+                                        Surgeon
+                                        @(op.SurgeonName != null
+                                            ? "— " + op.SurgeonName
+                                            : "")
+                                    </td>
+                                    <td class="text-right">
+                                        ₹@op.SurgeonCharge
+                                            .ToString("0.00")
+                                    </td>
+                                </tr>
+                            }
+                            @if (op.AnesthesiaCharge > 0)
+                            {
+                                <tr>
+                                    <td>
+                                        Anesthesia
+                                        @(op.AnesthesistName != null
+                                            ? "— " + op.AnesthesistName
+                                            : "")
+                                    </td>
+                                    <td class="text-right">
+                                        ₹@op.AnesthesiaCharge
+                                            .ToString("0.00")
+                                    </td>
+                                </tr>
+                            }
+                            @if (op.ActualCharge > 0)
+                            {
+                                <tr>
+                                    <td>Other Charges</td>
+                                    <td class="text-right">
+                                        ₹@op.ActualCharge
+                                            .ToString("0.00")
+                                    </td>
+                                </tr>
+                            }
+                            @if (op.Staff != null && op.Staff.Any())
+                            {
+                                @foreach (var s in op.Staff)
+                                {
+                                    <tr>
+                                        <td>
+                                            @s.StaffType
+                                            — @s.StaffName
+                                        </td>
+                                        <td class="text-right">
+                                            ₹@s.Charge.ToString("0.00")
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            <tr style="background:#fde8e8;">
+                                <td class="text-right">
+                                    <strong>Operation Total:</strong>
+                                </td>
+                                <td class="text-right">
+                                    <strong>₹@opT.ToString("0.00")</strong>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                opi++;
+            }
+        </div>
+    }
+
+    @* ── 8. OTHER CHARGES ── *@
+    @if (Model.OtherItems != null && Model.OtherItems.Any())
+    {
+        <div class="section">
+            <div class="section-title">➕ Other Charges</div>
+            <table class="bill-table">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Item</th>
+                        <th>Qty</th><th>Unit Price</th>
+                        <th class="text-right">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int oi = 1; decimal otherT = 0; }
+                    @foreach (var item in Model.OtherItems)
+                    {
+                        otherT += item.TotalPrice;
+                        <tr>
+                            <td>@oi</td>
+                            <td><strong>@item.ItemName</strong></td>
+                            <td>@item.Quantity</td>
+                            <td>₹@item.UnitPrice.ToString("0.00")</td>
+                                <td class="text-right">
+                                    ₹@item.TotalPrice.ToString("0.00")
+                                </td>
+                            </tr>
+                            oi++;
+                        }
+                        <tr style="background:#e8f0fe;">
+                            <td colspan="4" class="text-right">
+                                <strong>Other Total:</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong>₹@otherT.ToString("0.00")</strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        @* ── 9. TOTALS BOX ── *@
+        <div class="totals-box">
+            <div class="totals-row">
+                <span>🛏 Bed Charges</span>
+                <span>₹@Model.TotalBedCharges.ToString("0.00")</span>
+            </div>
+            @if (Model.TotalDoctorCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>👨‍⚕️ Doctor Visits</span>
+                    <span>₹@Model.TotalDoctorCharges.ToString("0.00")</span>
+                </div>
+            }
+            @if (Model.TotalMedicineCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>💊 Medicines</span>
+                    <span>
+                        ₹@Model.TotalMedicineCharges.ToString("0.00")
+                    </span>
+                </div>
+            }
+            @if (Model.TotalInvestigationCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>🔬 Investigations</span>
+                    <span>
+                        ₹@Model.TotalInvestigationCharges.ToString("0.00")
+                    </span>
+                </div>
+            }
+            @if (Model.TotalDischargeMedCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>📋 Discharge Medicines</span>
+                    <span>
+                        ₹@Model.TotalDischargeMedCharges.ToString("0.00")
+                    </span>
+                </div>
+            }
+            @if (Model.TotalNursingCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>🩺 Nursing</span>
+                    <span>
+                        ₹@Model.TotalNursingCharges.ToString("0.00")
+                    </span>
+                </div>
+            }
+            @if (Model.TotalOperationCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>🏥 Operations</span>
+                    <span>
+                        ₹@Model.TotalOperationCharges.ToString("0.00")
+                    </span>
+                </div>
+            }
+            @if (Model.TotalOtherCharges > 0)
+            {
+                <div class="totals-row">
+                    <span>➕ Other Charges</span>
+                    <span>
+                        ₹@Model.TotalOtherCharges.ToString("0.00")
+                    </span>
+                </div>
+            }
+            <div class="totals-row"
+                 style="font-weight:bold;background:#f0f4ff;">
+                <span>Sub Total</span>
+                <span>₹@Model.SubTotal.ToString("0.00")</span>
+            </div>
+            @if (Model.DiscountAmount > 0)
+            {
+                <div class="totals-row discount">
+                    <span>
+                        Discount (@Model.DiscountPercent.ToString("0.##")%)
+                    </span>
+                    <span>-₹@Model.DiscountAmount.ToString("0.00")</span>
+                </div>
+            }
+            <div class="totals-row total-final">
+                <span>TOTAL AMOUNT</span>
+                <span>₹@Model.TotalAmount.ToString("0.00")</span>
+            </div>
+            @if (Model.PaidAmount > 0)
+            {
+                <div class="totals-row paid">
+                    <span>Paid Amount</span>
+                    <span>₹@Model.PaidAmount.ToString("0.00")</span>
+                </div>
+            }
+            <div class="totals-row due">
+                <span>Balance Due</span>
+                <span>₹@Model.DueAmount.ToString("0.00")</span>
+            </div>
+        </div>
+
+        @* ── 10. PAYMENT HISTORY ── *@
+        @if (Model.Payments != null && Model.Payments.Any())
+        {
+            <div class="section" style="margin-top:15px;">
+                <div class="section-title">💰 Payment History</div>
+                <table class="pay-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Mode</th>
+                            <th>Reference</th>
+                            <th class="text-right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int pi = 1;
+                        }
+                        @foreach (var p in Model.Payments)
+                        {
+                            <tr>
+                                <td>@pi</td>
+                                <td>
+                                    @p.PaymentDate
+                                   
+                                </td>
+                                <td>@p.PaymentMode</td>
+                                <td>@(p.TransactionRef ?? "-")</td>
+                                <td class="text-right">
+                                    <strong>
+                                        ₹@p.Amount.ToString("0.00")
+                                    </strong>
+                                </td>
+                            </tr>
+                            pi++;
+                        }
+                        <tr style="background:#e8f0fe;">
+                            <td colspan="4" class="text-right">
+                                <strong>Total Paid:</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong>
+                                    ₹@Model.PaidAmount.ToString("0.00")
+                                </strong>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+
+        @* ── SIGNATURE ── *@
+        <div class="signature-area">
+            <div class="sig-box">
+                <div class="sig-line"></div>
+                <div>Patient / Attendant Signature</div>
+            </div>
+            <div class="sig-box">
+                <div class="sig-line"></div>
+                <div>Cashier</div>
+            </div>
+            <div class="sig-box">
+                <div class="sig-line"></div>
+                <div>Authorized Signatory</div>
+            </div>
+        </div>
+
+        @* ── FOOTER ── *@
+        <div class="footer">
+            <p>
+                This is a computer-generated bill.
+                Thank you for choosing @ViewBag.HospitalName.
+            </p>
+            <p>
+                Generated on:
+                @DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
+            </p>
+        </div>
+
+    </div>
+
+    @* ── PRINT / PDF BUTTONS ── *@
+    <div class="btn-bar">
+        <button class="btn btn-print" onclick="window.print()">
+            🖨 Print Bill
+        </button>
+        <button class="btn btn-pdf" onclick="savePDF()">
+            📄 Save as PDF
+        </button>
+        <button class="btn btn-back"
+                onclick="window.close()">
+            ✕ Close
+        </button>
+    </div>
+
+    <script>
+        function savePDF() {
+            window.print();
+        }
+
+        // Auto trigger print if opened as popup
+        window.onload = function () {
+            // Optional: auto print
+            // window.print();
+        };
+    </script>
+
+</body>
+</html>

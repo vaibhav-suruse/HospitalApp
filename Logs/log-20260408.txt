@@ -1,0 +1,41 @@
+2026-04-08 13:52:18.785 +05:30 [ERR] Error while loading inventory page
+System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at WebApplicationSampleTest2.Repository.InventoryRepository.GetAllInventory(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.InventoryController.Index(String search, Int32 page) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 37
+2026-04-08 14:00:15.592 +05:30 [ERR] Error while loading inventory page
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'hospital.store_medicines' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at WebApplicationSampleTest2.Repository.InventoryRepository.GetAllInventory(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 35
+   at WebApplicationSampleTest2.Controllers.InventoryController.Index(String search, Int32 page) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 37
+2026-04-08 14:09:29.324 +05:30 [ERR] Error while loading inventory page
+System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at WebApplicationSampleTest2.Repository.InventoryRepository.GetAllInventory(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.InventoryController.Index(String search, Int32 page) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 37
+2026-04-08 14:16:31.815 +05:30 [ERR] Error while loading inventory page
+System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at WebApplicationSampleTest2.Repository.InventoryRepository.GetAllInventory(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.InventoryController.Index(String search, Int32 page) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 41
+2026-04-08 14:20:04.791 +05:30 [ERR] Error while loading inventory page
+System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at WebApplicationSampleTest2.Repository.InventoryRepository.GetAllInventory(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.InventoryController.Index(String search, Int32 page) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 34
+2026-04-08 14:20:15.475 +05:30 [ERR] Error while loading inventory page
+System.InvalidCastException: Object cannot be cast from DBNull to other types.
+   at System.DBNull.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ToInt32(Object value)
+   at WebApplicationSampleTest2.Repository.InventoryRepository.GetAllInventory(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\InventoryRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.InventoryController.Index(String search, Int32 page) in C:\Users\Suruse Vaibhav\Downloads\Test\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\InventoryController.cs:line 34

@@ -1,0 +1,753 @@
+2026-02-27 00:40:02.639 +05:30 [ERR] Error in Allocate POST
+System.IndexOutOfRangeException: Could not find specified column in results: Floor
+   at MySql.Data.MySqlClient.ResultSet.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.get_Item(String name)
+   at WebApplicationSampleTest2.Repository.BedService.BedRepository.GetAllBed(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\BedService.cs:line 255
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-27 01:01:04.932 +05:30 [ERR] Error in Allocate POST
+System.IndexOutOfRangeException: Could not find specified column in results: Floor
+   at MySql.Data.MySqlClient.ResultSet.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.get_Item(String name)
+   at WebApplicationSampleTest2.Repository.BedService.BedRepository.GetAllBed(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\BedService.cs:line 255
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-27 01:11:16.376 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 0, BedId: 11
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 37
+2026-02-27 01:11:16.506 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 37
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 85
+2026-02-27 01:12:45.458 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-7-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 01:12:45.781 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-7-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-27 01:12:50.575 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-7-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 01:12:50.672 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-7-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-27 01:12:51.642 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-7-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 01:12:51.738 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-7-1' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-27 01:14:53.799 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 0, BedId: 8
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 37
+2026-02-27 01:16:00.235 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy)
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model)
+2026-02-27 01:30:24.750 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Connections.ConnectionResetException: The client has disconnected
+ ---> System.Runtime.InteropServices.COMException (0x800704CD): An operation was attempted on a nonexistent network connection. (0x800704CD)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.IIS.Core.IO.AsyncIOOperation.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadBody()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadAsync(Memory`1 memory, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpRequestStream.ReadAsyncInternal(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.IO.Pipelines.StreamPipeReader.<ReadInternalAsync>g__Core|39_0(StreamPipeReader reader, Nullable`1 minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.WebUtilities.FormPipeReader.ReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.Features.FormFeature.InnerReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenStore.GetRequestTokensAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.ValidateRequestAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.ValidateAntiforgeryTokenAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 01:30:24.750 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Connections.ConnectionResetException: The client has disconnected
+ ---> System.Runtime.InteropServices.COMException (0x800704CD): An operation was attempted on a nonexistent network connection. (0x800704CD)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.IIS.Core.IO.AsyncIOOperation.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadBody()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadAsync(Memory`1 memory, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpRequestStream.ReadAsyncInternal(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.IO.Pipelines.StreamPipeReader.<ReadInternalAsync>g__Core|39_0(StreamPipeReader reader, Nullable`1 minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.WebUtilities.FormPipeReader.ReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.Features.FormFeature.InnerReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenStore.GetRequestTokensAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.ValidateRequestAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.ValidateAntiforgeryTokenAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 01:30:24.750 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Connections.ConnectionResetException: The client has disconnected
+ ---> System.Runtime.InteropServices.COMException (0x800704CD): An operation was attempted on a nonexistent network connection. (0x800704CD)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.IIS.Core.IO.AsyncIOOperation.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadBody()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadAsync(Memory`1 memory, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpRequestStream.ReadAsyncInternal(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.IO.Pipelines.StreamPipeReader.<ReadInternalAsync>g__Core|39_0(StreamPipeReader reader, Nullable`1 minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.WebUtilities.FormPipeReader.ReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.Features.FormFeature.InnerReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenStore.GetRequestTokensAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.ValidateRequestAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.ValidateAntiforgeryTokenAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 01:30:24.750 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Connections.ConnectionResetException: The client has disconnected
+ ---> System.Runtime.InteropServices.COMException (0x800704CD): An operation was attempted on a nonexistent network connection. (0x800704CD)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.IIS.Core.IO.AsyncIOOperation.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadBody()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadAsync(Memory`1 memory, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpRequestStream.ReadAsyncInternal(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.IO.Pipelines.StreamPipeReader.<ReadInternalAsync>g__Core|39_0(StreamPipeReader reader, Nullable`1 minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.WebUtilities.FormPipeReader.ReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.Features.FormFeature.InnerReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenStore.GetRequestTokensAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.ValidateRequestAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.ValidateAntiforgeryTokenAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 01:30:24.750 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Connections.ConnectionResetException: The client has disconnected
+ ---> System.Runtime.InteropServices.COMException (0x800704CD): An operation was attempted on a nonexistent network connection. (0x800704CD)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.IIS.Core.IO.AsyncIOOperation.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadBody()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadAsync(Memory`1 memory, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpRequestStream.ReadAsyncInternal(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.IO.Pipelines.StreamPipeReader.<ReadInternalAsync>g__Core|39_0(StreamPipeReader reader, Nullable`1 minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.WebUtilities.FormPipeReader.ReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.Features.FormFeature.InnerReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenStore.GetRequestTokensAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.ValidateRequestAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.ValidateAntiforgeryTokenAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 01:41:46.284 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 01:41:46.625 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-27 01:41:48.633 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 01:41:48.742 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-27 02:21:18.846 +05:30 [ERR] The view 'Save' was not found. Searched locations: ["/Views/IPDBedAllocation/Save.cshtml","/Views/Shared/Save.cshtml"]
+2026-02-27 02:21:18.910 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view 'Save' was not found. The following locations were searched:
+/Views/IPDBedAllocation/Save.cshtml
+/Views/Shared/Save.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 02:31:34.689 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 02:31:34.787 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 187
+2026-02-27 02:31:40.643 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 02:32:00.975 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 187
+2026-02-27 02:32:13.621 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-27 02:33:14.565 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 187
+2026-02-27 02:53:36.622 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 86, BedId: 8
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'OperationalStatus' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy)
+2026-02-27 02:53:36.652 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Data truncated for column 'OperationalStatus' at row 1
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy)
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model)
+2026-02-27 06:17:59.337 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 87, BedId: 9
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'oldBedId' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+2026-02-27 06:17:59.472 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'oldBedId' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-27 06:20:17.220 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 87, BedId: 4
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'oldBedId' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+2026-02-27 06:28:46.523 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unknown column 'oldBedId' in 'field list'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-27 06:28:49.367 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.AspNetCore.Connections.ConnectionResetException: The client has disconnected
+ ---> System.Runtime.InteropServices.COMException (0x800704CD): An operation was attempted on a nonexistent network connection. (0x800704CD)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.IIS.Core.IO.AsyncIOOperation.GetResult(Int16 token)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadBody()
+   at System.IO.Pipelines.Pipe.GetReadResult(ReadResult& result)
+   at System.IO.Pipelines.Pipe.ReadAsync(CancellationToken token)
+   at System.IO.Pipelines.Pipe.DefaultPipeReader.ReadAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.IISHttpContext.ReadAsync(Memory`1 memory, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.IIS.Core.HttpRequestStream.ReadAsyncInternal(Memory`1 buffer, CancellationToken cancellationToken)
+   at System.IO.Pipelines.StreamPipeReader.<ReadInternalAsync>g__Core|39_0(StreamPipeReader reader, Nullable`1 minimumSize, CancellationTokenSource tokenSource, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.WebUtilities.FormPipeReader.ReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Http.Features.FormFeature.InnerReadFormAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgeryTokenStore.GetRequestTokensAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Antiforgery.DefaultAntiforgery.ValidateRequestAsync(HttpContext httpContext)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.Filters.ValidateAntiforgeryTokenAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|19_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 06:28:49.477 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 87, BedId: 11
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+2026-02-27 06:28:49.506 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-27 06:29:46.703 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 87, BedId: 15
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+2026-02-27 06:30:28.543 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 39
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-27 06:50:50.448 +05:30 [ERR] Error allocating bed for IPDId 88
+MySql.Data.MySqlClient.MySqlException (0x80004005): Field 'AllocatedBy' doesn't have a default value
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateBed(Int32 ipdId, Int32 newBedId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 192
+2026-02-27 06:50:50.567 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Field 'AllocatedBy' doesn't have a default value
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateBed(Int32 ipdId, Int32 newBedId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 192
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 94
+2026-02-27 07:06:00.207 +05:30 [ERR] Error allocating bed for IPDId 89
+MySql.Data.MySqlClient.MySqlException (0x80004005): Field 'AllocatedBy' doesn't have a default value
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateBed(Int32 ipdId, Int32 newBedId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 192
+2026-02-27 13:20:45.608 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'WebApplicationSampleTest2.Repository.INurse' while attempting to activate 'WebApplicationSampleTest2.Controllers.NurseController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean hasDefaultValue, Object key)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerActivatorProvider.<>c__DisplayClass4_0.<CreateActivator>b__0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 13:23:08.097 +05:30 [ERR] Error in GetAll nurses for HospitalId: 1, SubHospitalId: 9
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-1QMDBT30' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.GetAll(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 37
+2026-02-27 13:24:37.003 +05:30 [ERR] Error inserting nurse for HospitalId: 0, SubHospitalId: null
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-1QMDBT30' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.Insert(NurseModel nurse) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 128
+2026-02-27 13:24:37.170 +05:30 [ERR] Error in GetAll nurses for HospitalId: 1, SubHospitalId: 9
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-1QMDBT30' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.GetAll(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 37
+2026-02-27 17:41:26.882 +05:30 [ERR] The partial view '_SymptomsPartial' was not found. Searched locations: ["/Views/Patient/_SymptomsPartial.cshtml","/Views/Shared/_SymptomsPartial.cshtml"]
+2026-02-27 17:41:27.129 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view '_SymptomsPartial' was not found. The following locations were searched:
+/Views/Patient/_SymptomsPartial.cshtml
+/Views/Shared/_SymptomsPartial.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.PartialViewResultExecutor.ExecuteAsync(ActionContext context, PartialViewResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 17:41:27.458 +05:30 [ERR] The partial view '_SymptomsPartial' was not found. Searched locations: ["/Views/Patient/_SymptomsPartial.cshtml","/Views/Shared/_SymptomsPartial.cshtml"]
+2026-02-27 17:41:27.477 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view '_SymptomsPartial' was not found. The following locations were searched:
+/Views/Patient/_SymptomsPartial.cshtml
+/Views/Shared/_SymptomsPartial.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.PartialViewResultExecutor.ExecuteAsync(ActionContext context, PartialViewResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 17:44:10.638 +05:30 [ERR] The partial view '_SymptomsPartial' was not found. Searched locations: ["/Views/Patient/_SymptomsPartial.cshtml","/Views/Shared/_SymptomsPartial.cshtml"]
+2026-02-27 17:44:10.683 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view '_SymptomsPartial' was not found. The following locations were searched:
+/Views/Patient/_SymptomsPartial.cshtml
+/Views/Shared/_SymptomsPartial.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.PartialViewResultExecutor.ExecuteAsync(ActionContext context, PartialViewResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 17:44:10.731 +05:30 [ERR] The partial view '_SymptomsPartial' was not found. Searched locations: ["/Views/Patient/_SymptomsPartial.cshtml","/Views/Shared/_SymptomsPartial.cshtml"]
+2026-02-27 17:44:10.767 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The view '_SymptomsPartial' was not found. The following locations were searched:
+/Views/Patient/_SymptomsPartial.cshtml
+/Views/Shared/_SymptomsPartial.cshtml
+   at Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult.EnsureSuccessful(IEnumerable`1 originalLocations)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.PartialViewResultExecutor.ExecuteAsync(ActionContext context, PartialViewResult result)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-27 17:56:04.883 +05:30 [ERR] Error in GetAll nurses for HospitalId: 1, SubHospitalId: 9
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-TSPSERA5' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.GetAll(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 37
+2026-02-27 17:56:59.514 +05:30 [ERR] Error inserting nurse for HospitalId: 0, SubHospitalId: null
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-TSPSERA5' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.Insert(NurseModel nurse) in C:\Users\Suruse Vaibhav\Downloads\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 128
+2026-02-27 17:56:59.748 +05:30 [ERR] Error in GetAll nurses for HospitalId: 1, SubHospitalId: 9
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-TSPSERA5' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.GetAll(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 37
+2026-02-27 17:57:08.961 +05:30 [ERR] Error in GetAll nurses for HospitalId: 1, SubHospitalId: 9
+MySql.Data.MySqlClient.MySqlException (0x80004005): Host 'LAPTOP-TSPSERA5' is not allowed to connect to this MySQL server
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.Open()
+   at MySql.Data.MySqlClient.Driver.Open()
+   at MySql.Data.MySqlClient.Driver.Create(MySqlConnectionStringBuilder settings)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnection()
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriver()
+   at MySql.Data.MySqlClient.MySqlPool.GetConnection()
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at WebApplicationSampleTest2.Repository.NurseRepository.GetAll(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 37
+2026-02-27 18:09:05.902 +05:30 [ERR] Error inserting nurse for HospitalId: 0, SubHospitalId: null
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`nurse`, CONSTRAINT `fk_nurse_parenthospital` FOREIGN KEY (`ParentHospitalId`) REFERENCES `hospital` (`Id`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.NurseRepository.Insert(NurseModel nurse) in C:\Users\Suruse Vaibhav\Downloads\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\NurseRepository .cs:line 129

@@ -1,0 +1,348 @@
+﻿@using WebApplicationSampleTest2.Models
+@model OPD
+@{
+    ViewData["Title"] = "Welcome Patient OPD";
+
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4"></h4>
+
+                <form class="custom-validation" novalidate asp-action="AddOPD" asp-controller="Patient" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="AppointmentId" />
+                    <input type="hidden" asp-for="PatientId" />
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" id="SymptomsJson" name="SymptomsJson" />
+                    <input type="hidden" id="MedicinesJson" name="MedicinesJson" />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="dllselectsymptoms" class="form-label">Select Symptoms</label>
+                                <select id="dllselectsymptomsdsdsdsds" class="form-select">
+                                    <option selected disabled value="0">Select Symptoms</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6" style="margin-top:25px">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" onclick="SaveSymptoms()">Add Symptoms</button>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="Symptomslist">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">BP</label>
+                                <input type="text" asp-for="@Model.BP" value="@Model.BP" class="form-control" id="BP" placeholder="Enter the BP" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">Pulse</label>
+                                <input type="text" asp-for="@Model.Pulse" class="form-control" id="pulse" placeholder="Enter the pulse" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">Investigation </label>
+                                <textarea class="form-control" asp-for="@Model.Investigation" value="@Model.Investigation" id="Address" placeholder="Enter Investigation" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary w-md">Update Till Investigation</button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="formrow-firstname-input" class="form-label">ReportDetail </label>
+                                <textarea class="form-control" asp-for="@Model.ReportDetail" value="@Model.ReportDetail" id="Address" placeholder="Enter ReportDetail" rows="5"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                < <label for="ReportFile" class="form-label">Report Upload</label>
+                                <input type="file" class="form-control" asp-for="ReportFile" id="ReportFile" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="dllselectsymptoms" class="form-label">Treatment</label>
+                                <select id="ddlMedicines" class="form-select">
+                                    <option selected disabled value="0">Select Medicines</option>
+
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">Morning</label>
+                                <input type="text" value="Y" class="form-control" id="Morning" placeholder="Enter the Morning Dose" required>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">Afternoon</label>
+                                <input type="text" value="Y" class="form-control" id="Afternoon" placeholder="Enter the Afternoon" required>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">Evening</label>
+                                <input type="text" value="Y" class="form-control" id="Evening" placeholder="Enter the Evening" required>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="profile_Name" class="form-label">Days</label>
+                                <input type="number" id="txtDays" class="form-control" placeholder="Enter Days of Medicine" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-6" style="margin-top:25px">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" onclick="SaveMedicines()">Add Medicines</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12" id="Medicineslist">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" id="Date">
+                            <label class="form-label">Next Follow-up Date</label>
+                            <input asp-for="NextAppointmentDate" type="date" min="@DateTime.Today.ToString("yyyy-MM-dd")" class="form-control" />
+                        </div>
+                    </div><br />
+                    @* <div>
+                        <button type="submit" class="btn btn-primary w-md">save Patient</button>
+                    </div> *@
+                    <div>
+                        @if (Model.Id > 0) // If OPD exists
+                        {
+                            <button type="submit" class="btn btn-success w-md">Update OPD</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary w-md">Save OPD</button>
+                        }
+                    </div>
+
+                </form>
+            </div>
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
+    <!-- end col -->
+</div>
+
+@section Scripts {
+    <script src="~/assets/libs/jquery/jquery.min.js"></script>
+    <script src="~/js/ShowNotification.js"></script>
+
+    <script>
+        $(function() {
+            // ------------------- URLs -------------------
+            var getSymptomsUrl = '@Url.Action("GetAllSymptoms", "Patient")';
+            var getMedicinesUrl = '@Url.Action("GetAllMedicines", "Patient")';
+
+            // ------------------- Populate Dropdowns -------------------
+            $.getJSON(getSymptomsUrl, function(data) {
+                var ddl = $('#dllselectsymptomsdsdsdsds');
+                ddl.empty();
+                ddl.append('<option selected disabled value="0">Select Symptoms</option>');
+                $.each(data, function(i, s) {
+                    ddl.append('<option value="' + s.id + '">' + s.name + '</option>');
+                });
+            });
+
+            $.getJSON(getMedicinesUrl, function(data) {
+                var ddl = $('#ddlMedicines');
+                ddl.empty();
+                ddl.append('<option selected disabled value="0">Select Medicines</option>');
+                $.each(data, function(i, m) {
+                    ddl.append('<option value="' + m.id + '">' + m.name + '</option>');
+                });
+            });
+
+            // ------------------- Add Symptom -------------------
+
+            var SymptomsArray = [];
+                    @if (Model.Id > 0)
+        {
+                    <text>
+                        $.get('/Patient/LoadExistingSymptoms', { opdId: @Model.Id }, function (data) {
+                               $("#Symptomslist").html(data);
+                                       SymptomsArray = [];
+
+                $("#Symptomslist tbody tr").each(function () {
+
+                    var id = parseInt($(this).find(".btn-delete-symptom").data("id"));
+
+                    SymptomsArray.push(id);
+                });
+
+                $("#SymptomsJson").val(JSON.stringify(SymptomsArray));
+
+                console.log("Loaded Existing Symptoms:", SymptomsArray);
+                        });
+                    </text>
+        }
+
+            window.SaveSymptoms = function() {
+                var selectedValue = $("#dllselectsymptomsdsdsdsds").val();
+                if (!selectedValue) return;
+                     selectedValue = parseInt(selectedValue);
+
+        if (!SymptomsArray.includes(selectedValue)) {
+            SymptomsArray.push(selectedValue);
+        }
+
+                  $("#SymptomsJson").val(JSON.stringify(SymptomsArray));
+
+
+        console.log("Symptoms:", SymptomsArray);
+
+                $.get('/Patient/SaveSymtons', { Command: selectedValue }, function(data) {
+                    $("#Symptomslist").html(data); // partial view replaces container content
+                });
+            };
+
+            // ------------------- Delete Symptom -------------------
+            window.deletepreAuthCommand = function(command) {
+                        command = parseInt(command);
+
+                SymptomsArray = SymptomsArray.filter(x => x !== command);
+
+            // 🔥 Update hidden input immediately
+            $("#SymptomsJson").val(JSON.stringify(SymptomsArray));
+
+        console.log("After delete Symptoms:", SymptomsArray);
+
+                $.get('/Patient/DeleteSymtons', { Command: command }, function(data) {
+                    $("#Symptomslist").html(data);
+                });
+            };
+
+
+         var MedicinesArray = [];
+          // ------------------- update Medicine -------------------
+        @if (Model.Id > 0)
+        {
+                    <text>
+                        $.get('/Patient/LoadExistingMedicines', { opdId: @Model.Id }, function (data) {
+                                $("#Medicineslist").html(data);
+                                        // Read existing rows and push into array
+                MedicinesArray = [];
+
+                $("#Medicineslist tbody tr").each(function () {
+                    var id = parseInt($(this).find(".btn-delete-medicine").data("id"));
+
+                    var morning = $(this).find("td:eq(1)").text().trim() === "Y" ? "1" : "0";
+                    var afternoon = $(this).find("td:eq(2)").text().trim() === "Y" ? "1" : "0";
+                    var evening = $(this).find("td:eq(3)").text().trim() === "Y" ? "1" : "0";
+                    var days = parseInt($(this).find("td:eq(4)").text().trim());
+
+                    MedicinesArray.push({
+                        MedicineId: id,
+                        Morning: morning,
+                        Afternoon: afternoon,
+                        Evening: evening,
+                        Days: days
+                    });
+                });
+
+                $("#MedicinesJson").val(JSON.stringify(MedicinesArray));
+
+                console.log("Loaded Existing Medicines:", MedicinesArray);
+                        });
+                    </text>
+        }
+
+          // ------------------- Add Medicine -------------------
+        window.SaveMedicines = function () {
+            var selectedId = $("#ddlMedicines").val();
+            if (!selectedId) return;
+
+            selectedId = parseInt(selectedId);
+
+            var med = {
+                MedicineId: selectedId,
+                Morning: $("#Morning").val() === "Y" ? "1" : "0",
+                Afternoon: $("#Afternoon").val() === "Y" ? "1" : "0",
+                Evening: $("#Evening").val() === "Y" ? "1" : "0",
+                Days: parseInt($('#txtDays').val()) || 1
+            };
+            // Avoid duplicates
+            if (!MedicinesArray.some(m => m.MedicineId === selectedId)) {
+                MedicinesArray.push(med);
+            }
+
+            // 🔥 Update hidden input immediately
+            $("#MedicinesJson").val(JSON.stringify(MedicinesArray));
+
+            console.log("Medicines:", MedicinesArray);
+
+            $.get('/Patient/SaveMedicines', {
+                Command: selectedId,
+                _Morning: med.Morning,
+                _Afternoon: med.Afternoon,
+                _Evening: med.Evening,
+                _Days: med.Days
+
+            }, function (data) {
+                $("#Medicineslist").html(data);
+            });
+        };
+
+            // ------------------- Delete Medicine -------------------
+                     $(document).on('click', '.btn-delete-medicine', function () {
+            var id = parseInt($(this).data('id'));
+
+            MedicinesArray = MedicinesArray.filter(m => m.MedicineId !== id);
+
+            // 🔥 Update hidden input immediately
+            $("#MedicinesJson").val(JSON.stringify(MedicinesArray));
+
+            console.log("After delete Medicines:", MedicinesArray);
+
+            $.get('/Patient/DeleteMedicines', { Command: id }, function (data) {
+                $("#Medicineslist").html(data);
+            });
+        });
+
+                $("form").on("submit", function () {
+            // Ensure the latest arrays are sent to server
+            $("#SymptomsJson").val(JSON.stringify(SymptomsArray));
+            $("#MedicinesJson").val(JSON.stringify(MedicinesArray));
+        });
+
+        });
+    </script>
+}

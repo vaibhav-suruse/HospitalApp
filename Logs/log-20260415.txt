@@ -1,0 +1,19 @@
+2026-04-15 15:22:10.102 +05:30 [ERR] Error while deleting IPD Admission ID: 109
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-27-0' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.DeleteIPDAdmission(Int32 ipdId, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\2026413\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 282
+2026-04-15 15:22:10.423 +05:30 [ERR] Error deleting IPD Admission ID: 109
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-27-0' for key 'ipdadmission.UQ_ActiveAdmission'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.DeleteIPDAdmission(Int32 ipdId, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Suruse Vaibhav\Downloads\2026413\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 282
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Delete(Int32 id) in C:\Users\Suruse Vaibhav\Downloads\2026413\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 275

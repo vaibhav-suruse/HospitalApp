@@ -1,0 +1,618 @@
+2026-02-26 00:43:49.027 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdadmission`, CONSTRAINT `fk_ipd_opd` FOREIGN KEY (`OPDVisitId`) REFERENCES `opdmaster` (`Id`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 00:43:49.261 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdadmission`, CONSTRAINT `fk_ipd_opd` FOREIGN KEY (`OPDVisitId`) REFERENCES `opdmaster` (`Id`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 184
+2026-02-26 00:46:23.274 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdadmission`, CONSTRAINT `fk_ipd_opd` FOREIGN KEY (`OPDVisitId`) REFERENCES `opdmaster` (`Id`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 00:46:23.382 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdadmission`, CONSTRAINT `fk_ipd_opd` FOREIGN KEY (`OPDVisitId`) REFERENCES `opdmaster` (`Id`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 184
+2026-02-26 15:29:13.594 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: Unable to resolve service for type 'WebApplicationSampleTest2.Repository.IIPDBedAllocation' while attempting to activate 'WebApplicationSampleTest2.Controllers.IPDBedAllocationController'.
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.ThrowHelperUnableToResolveService(Type type, Type requiredBy)
+   at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean hasDefaultValue, Object key)
+   at lambda_method(Closure , IServiceProvider , Object[] )
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass5_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-26 15:55:05.706 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at AspNetCoreGeneratedDocument.Views_IPDBedAllocation_Create.ExecuteAsync() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Views\IPDBedAllocation\Create.cshtml:line 4
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-26 15:59:27.827 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: 'WebApplicationSampleTest2.Models.Room' does not contain a definition for 'RoomName'
+   at CallSite.Target(Closure , CallSite , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute1[T0,TRet](CallSite site, T0 arg0)
+   at AspNetCoreGeneratedDocument.Views_IPDBedAllocation_Create.ExecuteAsync() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Views\IPDBedAllocation\Create.cshtml:line 15
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-26 16:05:04.556 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.CSharp.RuntimeBinder.RuntimeBinderException: Cannot perform runtime binding on a null reference
+   at CallSite.Target(Closure , CallSite , Object , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at AspNetCoreGeneratedDocument.Views_IPDBedAllocation_Create.ExecuteAsync() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Views\IPDBedAllocation\Create.cshtml:line 19
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-26 16:12:09.580 +05:30 [ERR] Error in AllocateOrTransferBed. IPDId: 0, BedId: 0
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 37
+2026-02-26 16:12:09.963 +05:30 [ERR] Error in Allocate POST
+MySql.Data.MySqlClient.MySqlException (0x80004005): Cannot add or update a child row: a foreign key constraint fails (`hospital_management`.`ipdbedallocation`, CONSTRAINT `fk_alloc_ipd` FOREIGN KEY (`IPDId`) REFERENCES `ipdadmission` (`IPDId`))
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDBedAllocationRepository.AllocateOrTransferBed(Int32 ipdId, Int32 newBedId, Int32 allocatedBy) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDBedAllocationRepository.cs:line 37
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 102
+2026-02-26 17:33:56.015 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:33:56.474 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:33:58.082 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:33:58.180 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:33:58.634 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:33:58.726 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:33:58.859 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:33:58.955 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:33:59.075 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:33:59.179 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:43:23.612 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:43:23.995 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:19.117 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:19.476 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:21.880 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:21.977 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:23.347 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:23.448 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:23.587 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:23.684 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:23.802 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:23.890 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:24.007 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:24.109 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:48:24.215 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 17:48:24.298 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 17:49:29.943 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at CallSite.Target(Closure , CallSite , Dictionary`2 , Object )
+   at System.Dynamic.UpdateDelegates.UpdateAndExecute2[T0,T1,TRet](CallSite site, T0 arg0, T1 arg1)
+   at AspNetCoreGeneratedDocument.Views_IPDBedAllocation_Create.<>c__DisplayClass10_0.<<ExecuteAsync>b__0>d.MoveNext() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Views\IPDBedAllocation\Create.cshtml:line 24
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at AspNetCoreGeneratedDocument.Views_IPDBedAllocation_Create.ExecuteAsync() in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Views\IPDBedAllocation\Create.cshtml:line 4
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|29_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|24_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location where exception was thrown ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Session.SessionMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2026-02-26 18:25:15.606 +05:30 [ERR] Error in Allocate POST
+System.IndexOutOfRangeException: Could not find specified column in results: Floor
+   at MySql.Data.MySqlClient.ResultSet.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.get_Item(String name)
+   at WebApplicationSampleTest2.Repository.BedService.BedRepository.GetAllBed(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\BedService.cs:line 255
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-26 18:25:27.226 +05:30 [ERR] Error in Allocate POST
+System.IndexOutOfRangeException: Could not find specified column in results: Floor
+   at MySql.Data.MySqlClient.ResultSet.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.get_Item(String name)
+   at WebApplicationSampleTest2.Repository.BedService.BedRepository.GetAllBed(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\BedService.cs:line 255
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-26 18:59:29.358 +05:30 [ERR] Error in Allocate POST
+System.IndexOutOfRangeException: Could not find specified column in results: Floor
+   at MySql.Data.MySqlClient.ResultSet.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.get_Item(String name)
+   at WebApplicationSampleTest2.Repository.BedService.BedRepository.GetAllBed(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\BedService.cs:line 255
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-26 22:53:41.135 +05:30 [ERR] Error in Allocate POST
+System.IndexOutOfRangeException: Could not find specified column in results: Floor
+   at MySql.Data.MySqlClient.ResultSet.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.GetOrdinal(String name)
+   at MySql.Data.MySqlClient.MySqlDataReader.get_Item(String name)
+   at WebApplicationSampleTest2.Repository.BedService.BedRepository.GetAllBed(Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\BedService.cs:line 255
+   at WebApplicationSampleTest2.Controllers.IPDBedAllocationController.Create(IPDBedAllocationModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDBedAllocationController.cs:line 89
+2026-02-26 22:54:42.220 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 22:54:42.328 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 22:54:43.969 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 22:54:44.090 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 22:54:44.181 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 22:54:44.256 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '1-9-47852' for key 'ipdadmission.UQ_AdmissionNumber'
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
+2026-02-26 23:59:49.547 +05:30 [ERR] Error while adding IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Column 'AdmissionNumber' cannot be null
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+2026-02-26 23:59:49.940 +05:30 [ERR] Error saving IPD Admission
+MySql.Data.MySqlClient.MySqlException (0x80004005): Column 'AdmissionNumber' cannot be null
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacket()
+   at MySql.Data.MySqlClient.NativeDriver.GetResult(Int32& affectedRow, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.GetResult(Int32 statementId, Int32& affectedRows, Int64& insertedId)
+   at MySql.Data.MySqlClient.Driver.NextResult(Int32 statementId, Boolean force)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResult()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader(CommandBehavior behavior)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at WebApplicationSampleTest2.Repository.IPDAdmissionRepository.AddIPDAdmission(IPDAdmissionModel model, Int32 hospitalId, Nullable`1 subHospitalId) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Repository\IPDAdmissionRepository .cs:line 51
+   at WebApplicationSampleTest2.Controllers.IPDAdmissionController.Create(IPDAdmissionModel model) in C:\Users\Soham\OneDrive\Desktop\NewProjectUsing Ai\WebApplicationSampleTest2\WebApplicationSampleTest2\WebApplicationSampleTest2\Controllers\IPDAdmissionController.cs:line 185
