@@ -22,6 +22,10 @@ namespace WebApplicationSampleTest2.Controllers
         {
             return View();
         }
+        public IActionResult Test()
+        {
+            return Content("Test works! No database needed.");
+        }
 
         public IActionResult Privacy()
         {
