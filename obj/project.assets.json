@@ -3308,11 +3308,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj",
+      "projectUniqueName": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj",
       "projectName": "WebApplicationSampleTest2",
-      "projectPath": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj",
+      "projectPath": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2.csproj",
       "packagesPath": "C:\\Users\\Suruse Vaibhav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\obj\\",
+      "outputPath": "C:\\Users\\Suruse Vaibhav\\Downloads\\2026413\\WebApplicationSampleTest2\\WebApplicationSampleTest2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

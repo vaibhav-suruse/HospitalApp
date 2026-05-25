@@ -228,7 +228,7 @@ namespace WebApplicationSampleTest2.Repository
                 using (var conn = new MySqlConnection(_connectionString))
                 {
                     conn.Open();
-                    using (var cmd = new MySqlCommand("sp_GetMainHospitals", conn))
+                    using (var cmd = new MySqlCommand("sp_getmainhospitals", conn))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
 
